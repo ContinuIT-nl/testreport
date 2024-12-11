@@ -11,8 +11,8 @@
     "publish-npm": "npm publish --access public"
   },
   "imports": {
-    "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^0.1.0",
-    "@std/assert": "jsr:@std/assert@^1.0.8"
+    "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^1.0.0",
+    "@std/assert": "jsr:@std/assert@^1.0.9"
   },
   "exports": "./src/mod.ts",
   "publish": {
