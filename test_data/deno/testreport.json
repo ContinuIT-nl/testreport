@@ -1,0 +1,10 @@
+{
+  "test_results": {
+    "junit": ["test_data/deno/junit.xml"],
+    "coverage": ["test_data/deno/cov.lcov"]
+  },
+  "output": {
+    "markdown": "test_output/deno_test_results.md", 
+    "manifest": "test_output/deno_manifest.json"
+  }
+}

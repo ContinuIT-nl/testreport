@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="deno test" tests="30" failures="0" errors="0" time="1.995">
+    <testsuite name="./test/example.test.ts" tests="2" disabled="0" errors="0" failures="0">
+        <testcase name="example_names_only" classname="./test/example.test.ts" time="0.003" line="7" col="6">
+        </testcase>
+        <testcase name="example_objects" classname="./test/example.test.ts" time="0.002" line="22" col="6">
+        </testcase>
+    </testsuite>
+    <testsuite name="./test/unEntity.test.ts" tests="1" disabled="0" errors="0" failures="0">
+        <testcase name="unEntity" classname="./test/unEntity.test.ts" time="0.000" line="4" col="6">
+        </testcase>
+    </testsuite>
+    <testsuite name="./test/xmlAnalyser.test.ts" tests="1" disabled="0" errors="0" failures="0">
+        <testcase name="xmlAnalyser" classname="./test/xmlAnalyser.test.ts" time="0.001" line="4" col="6">
+        </testcase>
+    </testsuite>
+    <testsuite name="./test/xmlEventsBuilder.test.ts" tests="2" disabled="0" errors="0" failures="0">
+        <testcase name="xmlEventBuilder-base" classname="./test/xmlEventsBuilder.test.ts" time="0.000" line="5" col="6">
+        </testcase>
+        <testcase name="xmlEventBuilder-specials" classname="./test/xmlEventsBuilder.test.ts" time="0.000" line="44" col="6">
+        </testcase>
+    </testsuite>
+    <testsuite name="./test/xmlScanner.test.ts" tests="24" disabled="0" errors="0" failures="0">
+        <testcase name="xmlScanner-events" classname="./test/xmlScanner.test.ts" time="0.001" line="5" col="6">
+        </testcase>
+        <testcase name="xmlScanner-performance" classname="./test/xmlScanner.test.ts" time="1.450" line="43" col="6">
+        </testcase>
+        <testcase name="xml-declaration" classname="./test/xmlScanner.test.ts" time="0.000" line="61" col="6">
+        </testcase>
+        <testcase name="comment" classname="./test/xmlScanner.test.ts" time="0.000" line="78" col="6">
+        </testcase>
+        <testcase name="cdata" classname="./test/xmlScanner.test.ts" time="0.000" line="83" col="6">
+        </testcase>
+        <testcase name="processing-instruction" classname="./test/xmlScanner.test.ts" time="0.000" line="88" col="6">
+        </testcase>
+        <testcase name="invalid-xml-no-closing-tag" classname="./test/xmlScanner.test.ts" time="0.000" line="95" col="6">
+        </testcase>
+        <testcase name="invalid-xml-non-comment" classname="./test/xmlScanner.test.ts" time="0.000" line="101" col="6">
+        </testcase>
+        <testcase name="invalid-xml-no-root-element" classname="./test/xmlScanner.test.ts" time="0.000" line="106" col="6">
+        </testcase>
+        <testcase name="invalid-xml-xmldeclaration-not-at-start" classname="./test/xmlScanner.test.ts" time="0.000" line="112" col="6">
+        </testcase>
+        <testcase name="invalid-xml-multiple-root-elements" classname="./test/xmlScanner.test.ts" time="0.000" line="117" col="6">
+        </testcase>
+        <testcase name="invalid-xml-invalid-element-name" classname="./test/xmlScanner.test.ts" time="0.000" line="123" col="6">
+        </testcase>
+        <testcase name="invalid-xml-unmatched-tag" classname="./test/xmlScanner.test.ts" time="0.000" line="128" col="6">
+        </testcase>
+        <testcase name="invalid-xml-unquoted-attribute" classname="./test/xmlScanner.test.ts" time="0.000" line="134" col="6">
+        </testcase>
+        <testcase name="invalid-xml-unclosed-attribute" classname="./test/xmlScanner.test.ts" time="0.000" line="139" col="6">
+        </testcase>
+        <testcase name="invalid-xml-processing-instruction" classname="./test/xmlScanner.test.ts" time="0.000" line="147" col="6">
+        </testcase>
+        <testcase name="invalid-xml-comment" classname="./test/xmlScanner.test.ts" time="0.000" line="155" col="6">
+        </testcase>
+        <testcase name="invalid-xml-cdata" classname="./test/xmlScanner.test.ts" time="0.000" line="163" col="6">
+        </testcase>
+        <testcase name="invalid-xml-unknown-character" classname="./test/xmlScanner.test.ts" time="0.000" line="169" col="6">
+        </testcase>
+        <testcase name="special-characters" classname="./test/xmlScanner.test.ts" time="0.000" line="182" col="6">
+        </testcase>
+        <testcase name="doctype-not-supported" classname="./test/xmlScanner.test.ts" time="0.000" line="187" col="6">
+        </testcase>
+        <testcase name="emoticons" classname="./test/xmlScanner.test.ts" time="0.000" line="192" col="6">
+        </testcase>
+        <testcase name="trailing-whitespace" classname="./test/xmlScanner.test.ts" time="0.000" line="197" col="6">
+        </testcase>
+        <testcase name="unqoute" classname="./test/xmlScanner.test.ts" time="0.000" line="202" col="6">
+        </testcase>
+    </testsuite>
+</testsuites>

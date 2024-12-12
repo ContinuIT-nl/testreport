@@ -1,2 +1,4 @@
 test_results/cov.lcov
 test_results/junit.xml
+coverage/
+test_output/

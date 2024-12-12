@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="9" failures="0" errors="0" time="1.494">
+  <testsuite name="Test" errors="0" failures="0" skipped="0" timestamp="2024-12-10T14:35:19" time="1.081" tests="2">
+    <testcase classname="Test Test all log levels" name="Test Test all log levels" time="0.006">
+    </testcase>
+    <testcase classname="Test Test boring default log" name="Test Test boring default log" time="0.009">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Telemetry" errors="0" failures="0" skipped="0" timestamp="2024-12-10T14:35:19" time="1.089" tests="7">
+    <testcase classname="Test Telemetry Test all log levels" name="Test Telemetry Test all log levels" time="0.007">
+    </testcase>
+    <testcase classname="Test Telemetry Test log level respect" name="Test Telemetry Test log level respect" time="0.001">
+    </testcase>
+    <testcase classname="Test Telemetry New context on top of root context" name="Test Telemetry New context on top of root context" time="0.001">
+    </testcase>
+    <testcase classname="Test Telemetry call function logs entering and leaving" name="Test Telemetry call function logs entering and leaving" time="0.001">
+    </testcase>
+    <testcase classname="Test Telemetry call function logs execution time" name="Test Telemetry call function logs execution time" time="0">
+    </testcase>
+    <testcase classname="Test Telemetry call function handles errors and logs them" name="Test Telemetry call function handles errors and logs them" time="0.007">
+    </testcase>
+    <testcase classname="Test Telemetry call function uses callInfo" name="Test Telemetry call function uses callInfo" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>
