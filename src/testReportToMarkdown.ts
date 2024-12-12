@@ -1,8 +1,6 @@
 import type { TestCaseState, TestSuites } from './junit_parser.ts';
 import type { LcovFile, LcovSummary } from './lcov_parser.ts';
-import { buildMarkdownTable, markdownTitle, percentage } from './markdownUtils.ts';
-
-const extractFilename = (path: string) => path.split('/').at(-1) || path;
+import { buildMarkdownTable, extractFilename, markdownTitle, percentage } from './markdownUtils.ts';
 
 const testState = (state: TestCaseState) => state === 'PASSED' ? '✅' : state === 'FAILED' ? '❌' : '⚠️';
 

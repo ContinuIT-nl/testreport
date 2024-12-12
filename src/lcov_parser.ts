@@ -1,3 +1,5 @@
+import { extractFilename } from './markdownUtils.ts';
+
 export type LcovFile = {
   title: string;
   filename: string;
@@ -53,50 +55,47 @@ export const lcovParser = (lcov: string): LcovFile[] => {
       currentFile.title = data[0];
     },
     'SF': (data: string[]) => {
-      let filename = data[0];
-      // todo: better way to handle this?
       // Filename is a fullpath, but what's needed is a path relative to the root.
-      filename = filename.replace(/\\/g, '/');
-      currentFile.filename = filename.split('/').at(-1) ?? '';
+      currentFile.filename = extractFilename(data[0]);
     },
 
     // Function stats
     'FNF': (data: string[]) => {
-      currentFile.functionsFound = parseInt(data[0]);
+      currentFile.functionsFound = Number.parseInt(data[0]);
     },
     'FNH': (data: string[]) => {
-      currentFile.functionsHit = parseInt(data[0]);
+      currentFile.functionsHit = Number.parseInt(data[0]);
     },
     'FN': (data: string[]) => {
       currentFile.functions.set(data[1], {
         name: data[1],
-        line: parseInt(data[0]),
+        line: Number.parseInt(data[0]),
         hits: 0,
       });
     },
     'FNDA': (data: string[]) => {
       const func = currentFile.functions.get(data[1]);
-      if (func) func.hits = parseInt(data[0]);
+      if (func) func.hits = Number.parseInt(data[0]);
     },
 
     // Branch stats
     'BRF': (data: string[]) => {
-      currentFile.branchesFound = parseInt(data[0]);
+      currentFile.branchesFound = Number.parseInt(data[0]);
     },
     'BRH': (data: string[]) => {
-      currentFile.branchesHit = parseInt(data[0]);
+      currentFile.branchesHit = Number.parseInt(data[0]);
     },
 
     // Line stats
     'LF': (data: string[]) => {
-      currentFile.linesFound = parseInt(data[0]);
+      currentFile.linesFound = Number.parseInt(data[0]);
     },
     'LH': (data: string[]) => {
-      currentFile.linesHit = parseInt(data[0]);
+      currentFile.linesHit = Number.parseInt(data[0]);
     },
     'DA': (data: string[]) => {
-      const line = parseInt(data[0]);
-      const hits = parseInt(data[1]);
+      const line = Number.parseInt(data[0]);
+      const hits = Number.parseInt(data[1]);
       currentFile.lines[line] = hits;
     },
 
@@ -113,7 +112,7 @@ export const lcovParser = (lcov: string): LcovFile[] => {
     const colonIndex = line.indexOf(':');
     const type = line.substring(0, colonIndex === -1 ? undefined : colonIndex);
     const dataString = colonIndex === -1 ? '' : line.substring(colonIndex + 1);
-    const data = (dataString ?? '').split(',');
+    const data = dataString.split(',');
     typeProcessors[type]?.(data);
   }
   return result;

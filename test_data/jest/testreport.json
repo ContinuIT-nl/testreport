@@ -1,10 +1,10 @@
 {
-    "test_results": {
-      "junit": ["test_data/jest/report.xml"],
-      "coverage": ["test_data/jest/lcov.info"]
-    },
-    "output": {
-      "markdown": "test_output/jest_test_results.md",
-      "manifest": "test_output/jest_manifest.json"
-    }
+  "test_results": {
+    "junit": ["test_data/jest/report.xml"],
+    "coverage": ["test_data/jest/lcov.info"]
+  },
+  "output": {
+    "markdown": "test_output/jest_test_results.md",
+    "manifest": "test_output/jest_manifest.json"
   }
+}

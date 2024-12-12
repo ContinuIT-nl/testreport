@@ -4,7 +4,7 @@
     "coverage": ["test_data/deno/cov.lcov"]
   },
   "output": {
-    "markdown": "test_output/deno_test_results.md", 
+    "markdown": "test_output/deno_test_results.md",
     "manifest": "test_output/deno_manifest.json"
   }
 }

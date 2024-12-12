@@ -65,11 +65,11 @@ export function createJUnitParser() {
 
   // Events for parsing the JUnit XML file.
   // Testsuites level
-  addAttributeEvent(events, 'testsuites', 'name', (value) => testSuites.name = value);
-  addAttributeEvent(events, 'testsuites', 'tests', (value) => testSuites.tests = parseInt(value));
-  addAttributeEvent(events, 'testsuites', 'failures', (value) => testSuites.failures = parseInt(value));
-  addAttributeEvent(events, 'testsuites', 'errors', (value) => testSuites.errors = parseInt(value));
-  addAttributeEvent(events, 'testsuites', 'time', (value) => testSuites.time = parseFloat(value));
+  addAttributeEvent(events, 'testsuites', 'name', (value: string) => testSuites.name = value);
+  addAttributeEvent(events, 'testsuites', 'tests', (value: string) => testSuites.tests = parseInt(value));
+  addAttributeEvent(events, 'testsuites', 'failures', (value: string) => testSuites.failures = parseInt(value));
+  addAttributeEvent(events, 'testsuites', 'errors', (value: string) => testSuites.errors = parseInt(value));
+  addAttributeEvent(events, 'testsuites', 'time', (value: string) => testSuites.time = parseFloat(value));
 
   // TestSuite level
   const testSuiteEvents = addElement(events, 'testsuites/testsuite');
@@ -79,11 +79,11 @@ export function createJUnitParser() {
   testSuiteEvents.tagclose = () => {
     testSuites.testSuites.push(activeTestSuite);
   };
-  addAttributeEvent(testSuiteEvents, null, 'name', (value) => activeTestSuite.name = value);
-  addAttributeEvent(testSuiteEvents, null, 'tests', (value) => activeTestSuite.tests = parseInt(value));
-  addAttributeEvent(testSuiteEvents, null, 'disabled', (value) => activeTestSuite.disabled = parseInt(value));
-  addAttributeEvent(testSuiteEvents, null, 'errors', (value) => activeTestSuite.errors = parseInt(value));
-  addAttributeEvent(testSuiteEvents, null, 'failures', (value) => activeTestSuite.failures = parseInt(value));
+  addAttributeEvent(testSuiteEvents, null, 'name', (value: string) => activeTestSuite.name = value);
+  addAttributeEvent(testSuiteEvents, null, 'tests', (value: string) => activeTestSuite.tests = parseInt(value));
+  addAttributeEvent(testSuiteEvents, null, 'disabled', (value: string) => activeTestSuite.disabled = parseInt(value));
+  addAttributeEvent(testSuiteEvents, null, 'errors', (value: string) => activeTestSuite.errors = parseInt(value));
+  addAttributeEvent(testSuiteEvents, null, 'failures', (value: string) => activeTestSuite.failures = parseInt(value));
 
   // TestCase level
   const testCaseEvents = addElement(events, 'testsuites/testsuite/testcase');
@@ -93,11 +93,11 @@ export function createJUnitParser() {
   testCaseEvents.tagclose = () => {
     activeTestSuite.testCases.push(activeTestCase);
   };
-  addAttributeEvent(testCaseEvents, null, 'name', (value) => activeTestCase.name = value);
-  addAttributeEvent(testCaseEvents, null, 'classname', (value) => activeTestCase.classname = value);
-  addAttributeEvent(testCaseEvents, null, 'time', (value) => activeTestCase.time = parseFloat(value));
-  addAttributeEvent(testCaseEvents, null, 'line', (value) => activeTestCase.line = parseInt(value));
-  addAttributeEvent(testCaseEvents, null, 'col', (value) => activeTestCase.col = parseInt(value));
+  addAttributeEvent(testCaseEvents, null, 'name', (value: string) => activeTestCase.name = value);
+  addAttributeEvent(testCaseEvents, null, 'classname', (value: string) => activeTestCase.classname = value);
+  addAttributeEvent(testCaseEvents, null, 'time', (value: string) => activeTestCase.time = parseFloat(value));
+  addAttributeEvent(testCaseEvents, null, 'line', (value: string) => activeTestCase.line = parseInt(value));
+  addAttributeEvent(testCaseEvents, null, 'col', (value: string) => activeTestCase.col = parseInt(value));
   addElement(testCaseEvents, 'skipped').tagopen = () => activeTestCase.state = 'SKIPPED';
   addElement(testCaseEvents, 'failure').tagopen = () => activeTestCase.state = 'FAILED';
 
