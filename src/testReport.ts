@@ -1,38 +1,22 @@
 import { createJUnitParser, type TestSuites } from './junit_parser.ts';
-import { createLcovSummary, type LcovFile, lcovParser } from './lcov_parser.ts';
+import { createLcovSummary, type LcovFile, lcovParser, type LcovSummary } from './lcov_parser.ts';
 import { convertTestresultsToMarkdown } from './testReportToMarkdown.ts';
 import { convertTestresultsToManifest } from './testReportToManifest.ts';
-import { z } from 'npm:zod';
+import { type TestReportConfig, testReportConfigSchema } from './testReportConfig.ts';
+import { createBadgeSvg } from './createBadgeSvg.ts';
 
-const reportDefinitionSchema = z.object({
-  test_results: z.object({
-    junit: z.array(z.string()),
-    coverage: z.array(z.string()),
-  }),
-  output: z.object({
-    markdown: z.string(),
-    manifest: z.string(),
-  }),
-});
-
-type ReportDefinition = z.infer<typeof reportDefinitionSchema>;
-
-export async function createTestReport(reportDefinitionFilename: string) {
-  // Get the definition file and validate it's content
-  const definitionText = await Deno.readTextFile(reportDefinitionFilename);
-  const definition = reportDefinitionSchema.parse(JSON.parse(definitionText));
-
+async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites> {
   // Load all JUnit files and convert and merge them
   const jUnitParser = createJUnitParser();
+
   const junitData: TestSuites[] = [];
-  for (const junitFilename of definition.test_results.junit) {
+  for (const junitFilename of reportConfig.test_results.junit) {
     const junitBytes = await Deno.readFile(junitFilename);
     const xmlData = new TextDecoder().decode(junitBytes);
     junitData.push(jUnitParser(xmlData));
   }
-
   // Combine all JUnit data
-  const combinedJUnitData: TestSuites = junitData.reduce((acc, data) => {
+  return junitData.reduce((acc, data) => {
     acc.tests += data.tests;
     acc.failures += data.failures;
     acc.errors += data.errors;
@@ -40,26 +24,75 @@ export async function createTestReport(reportDefinitionFilename: string) {
     acc.testSuites.push(...data.testSuites);
     return acc;
   }, { name: '', tests: 0, failures: 0, errors: 0, time: 0, testSuites: [] });
+}
+
+function createTestBadge(jUnitData: TestSuites): string {
+  const disabled = jUnitData.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
+  const errors = jUnitData.errors + jUnitData.failures;
+  const passed = jUnitData.tests - disabled - errors;
+  const status = 
+    passed === jUnitData.tests ? `${passed}/${jUnitData.tests} passed` :
+    errors ? `${errors}/${jUnitData.tests} failed` :
+    `${disabled}/${jUnitData.tests} disabled`;
+  const color = passed === jUnitData.tests ? '#3C1' : errors ? '#900' : '#FF0';
+  return createBadgeSvg({
+    label: 'tests',
+    message: status,
+    labelColor: '#555',
+    messageColor: color,
+    rounded: true
+  });
+}
+
+function createCoverageBadge(lcovSummary: LcovSummary): string {
+  const coveragePercentage = (lcovSummary.linesHit / lcovSummary.linesFound) * 100; // todo: add branches
+  return createBadgeSvg({
+    label: 'coverage',
+    message: `${coveragePercentage}%`,
+    labelColor: '#555',
+    messageColor: coveragePercentage >= 80 ? '#3C1' : '#900', // todo: parameterize thresholds
+    rounded: true
+  });
+}
+
+export async function createTestReport(reportDefinitionFilename: string) {
+  // Get the config file and validate it's content
+  const reportConfigText = await Deno.readTextFile(reportDefinitionFilename);
+  const reportConfig = testReportConfigSchema.parse(JSON.parse(reportConfigText));
 
   // Load all LCOV files and convert and merge them
   const lcovDatas: LcovFile[] = [];
-  for (const lcovFilename of definition.test_results.coverage) {
+  for (const lcovFilename of reportConfig.test_results.coverage) {
     const lcovBytes = await Deno.readFile(lcovFilename);
     const lcovData = new TextDecoder().decode(lcovBytes);
     lcovDatas.push(...lcovParser(lcovData));
   }
 
+  const jUnitData = await getJUnitData(reportConfig);
+
   // Create LCOV file summary
   const lcovSummary = createLcovSummary(lcovDatas);
+
   // Run the performance test
-  if (definition.output.markdown) {
-    const markdown = convertTestresultsToMarkdown(reportDefinitionFilename, combinedJUnitData, lcovDatas, lcovSummary);
-    await Deno.writeTextFile(definition.output.markdown, markdown);
+  if (reportConfig.output.markdown) {
+    const markdown = convertTestresultsToMarkdown(reportDefinitionFilename, jUnitData, lcovDatas, lcovSummary);
+    await Deno.writeTextFile(reportConfig.output.markdown, markdown);
   }
 
   // Output the manifest file
-  if (definition.output.manifest) {
-    const manifest = convertTestresultsToManifest(reportDefinitionFilename, combinedJUnitData, lcovDatas, lcovSummary);
-    await Deno.writeTextFile(definition.output.manifest, manifest);
+  if (reportConfig.output.manifest) {
+    const manifest = convertTestresultsToManifest(reportDefinitionFilename, jUnitData, lcovDatas, lcovSummary);
+    await Deno.writeTextFile(reportConfig.output.manifest, manifest);
+  }
+
+  // Output the badges
+  if (reportConfig.output.testBadge) {
+    const testBadge = createTestBadge(jUnitData);
+    await Deno.writeTextFile(reportConfig.output.testBadge, testBadge);
+  }
+
+  if (reportConfig.output.coverageBadge) {
+    const coverageBadge = createCoverageBadge(lcovSummary);
+    await Deno.writeTextFile(reportConfig.output.coverageBadge, coverageBadge);
   }
 }

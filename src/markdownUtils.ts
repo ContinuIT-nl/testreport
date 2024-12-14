@@ -31,6 +31,10 @@ export const padString = (str: string, alignment: Alignment, width: number) => {
   }
 };
 
+const TABLESTART = '| ';
+const TABLEEND = ' |';
+const TABLESEP = ' | ';
+
 export const buildMarkdownTable = (headers: string[], alignment: Alignment[], data: string[][]): string[] => {
   const maxWidths = new Array(headers.length).fill(3);
   for (let i = 0; i < headers.length; i++) maxWidths[i] = Math.max(maxWidths[i], strLenCodePoints(headers[i]));
@@ -39,10 +43,10 @@ export const buildMarkdownTable = (headers: string[], alignment: Alignment[], da
     for (let i = 0; i < len; i++) maxWidths[i] = Math.max(maxWidths[i], strLenCodePoints(row[i]));
   }
   return [
-    `| ${headers.map((s, i) => s.padEnd(maxWidths[i])).join(' | ')} |`,
-    `| ${maxWidths.map((w, i) => alignmentStr(alignment[i] ?? 'default', w)).join(' | ')} |`,
+    TABLESTART + headers.map((s, i) => s.padEnd(maxWidths[i])).join(TABLESEP) + TABLEEND,
+    TABLESTART + maxWidths.map((w, i) => alignmentStr(alignment[i], w)).join(TABLESEP) + TABLEEND,
     ...data.map((row) =>
-      `| ${row.map((s, i) => padString(s, alignment[i] ?? 'default', maxWidths[i] ?? 3)).join(' | ')} |`
+      TABLESTART + row.map((s, i) => padString(s, alignment[i], maxWidths[i])).join(TABLESEP) + TABLEEND
     ),
     '',
   ];
@@ -52,4 +56,4 @@ export const markdownTitle = (title: string, level: number = 1) => [`${'#'.repea
 
 export const percentage = (value: number, total: number) => value ? `${((value / total) * 100).toFixed(1)}%` : '';
 
-export const extractFilename = (filename: string) => filename.replace(/\\/g, '/').split('/').at(-1) || filename;
+export const extractFilename = (filename: string) => filename.replace(/\\/g, '/').split('/').at(-1)!;

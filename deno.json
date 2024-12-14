@@ -7,7 +7,8 @@
   "author": "ContinuIT BV, The Netherlands",
   "tasks": {
     "test": "deno test -RSW --coverage --clean --junit-path test_results/junit.xml  && deno coverage --lcov --output=test_results/cov.lcov && deno run -RW ./src/testreport.ts",
-    "test_deno": "deno run -RW ./src/mod.ts"
+    "test_deno": "deno run -RW ./src/mod.ts ",
+    "test_deno_check": "deno run -RW ./src/mod.ts --check"
   },
   "imports": {
     "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^1.0.0",
