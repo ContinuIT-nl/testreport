@@ -7,8 +7,14 @@
   "author": "ContinuIT BV, The Netherlands",
   "tasks": {
     "test": "deno test -RSW --coverage --clean --junit-path test_results/junit.xml  && deno coverage --lcov --output=test_results/cov.lcov && deno run -RW ./src/testreport.ts",
-    "test_deno": "deno run -RW ./src/mod.ts ",
-    "test_deno_check": "deno run -RW ./src/mod.ts --check"
+    "test_deno_success": "deno run -RW ./src/mod.ts test_data/deno_success/testreport.json",
+    "test_deno_disabled": "deno run -RW ./src/mod.ts test_data/deno_disabled/testreport.json",
+    "test_deno_failed": "deno run -RW ./src/mod.ts test_data/deno_failed/testreport.json",
+    "test_deno_check_success": "deno run -RW ./src/mod.ts --check test_data/deno_success/testreport.json",
+    "test_deno_check_disabled": "deno run -RW ./src/mod.ts --check test_data/deno_disabled/testreport.json",
+    "test_deno_check_failed": "deno run -RW ./src/mod.ts --check test_data/deno_failed/testreport.json",
+    "test_deno": "deno task test_deno_success && deno task test_deno_disabled && deno task test_deno_failed",
+    "test_deno_check": "deno task test_deno_check_success && deno task test_deno_check_disabled && deno task test_deno_check_failed"
   },
   "imports": {
     "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^1.0.0",
