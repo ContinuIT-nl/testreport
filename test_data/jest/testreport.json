@@ -4,7 +4,7 @@
     "coverage": ["test_data/jest/lcov.info"]
   },
   "output": {
-    "markdown": "test_output/jest_test_results.md",
-    "manifest": "test_output/jest_manifest.json"
+    "markdown": "test_output/jest/jest_test_results.md",
+    "manifest": "test_output/jest/jest_manifest.json"
   }
 }

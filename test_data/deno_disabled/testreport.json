@@ -1,0 +1,12 @@
+{
+  "test_results": {
+    "junit": ["test_data/deno_disabled/junit.xml"],
+    "coverage": ["test_data/deno_disabled/cov.lcov"]
+  },
+  "output": {
+    "markdown": "test_output/deno_disabled/deno_test_results.md",
+    "manifest": "test_output/deno_disabled/deno_manifest.json",
+    "testBadge": "test_output/deno_disabled/deno_test_badge.svg",
+    "coverageBadge": "test_output/deno_disabled/deno_coverage_badge.svg"
+  }
+}
