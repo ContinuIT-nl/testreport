@@ -1,4 +1,4 @@
-// Widths of the characters in the font Verdana 11pt as bytes encoded in base64.
+// Widths of the characters in the font Verdana 110pt as bytes encoded in base64.
 const verdanaWidthsBase64 = 
   'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnKzJaRnhQHjIyRlooMigyRkZGRkZGRkZGRjIy' +
   'WlpaPG5LS01VRj9VUy4yTD1dUldCV0xLRFFLbktESzIyMlpGRkJFOUVCJ0VGHiZBHm5GQ0VFLzkrRkFa' +
@@ -143,12 +143,25 @@ const verdanaWidthsBase64 =
 
 const widths = atob(verdanaWidthsBase64).split('').map(c => c.charCodeAt(0));
 const missingWidth = widths['x'.charCodeAt(0)];
+// todo: collect info from kern table to get kerning information
 
-export const getWidth = (str: string) => 
-  str.split('').reduce((acc, char) => {
-    const code = char.charCodeAt(0);
-    return acc + (widths[code] ?? missingWidth);
-  }, 0);
+export const getWidthVerdana110 = (str: string) => {
+  let i = 0;
+  let width = 0;
+  const l = str.length;
+  while (i < l) {
+    const code = str.charCodeAt(i);
+    if (code >= 0xD800 && code <= 0xDBFF) { // first part of a surrogate pair
+      width += missingWidth;
+    } else if (code >= 0xDC00 && code <= 0xDFFF) { // second part of a surrogate pair
+      // do nothing
+    } else {
+      width += (widths[code] ?? missingWidth);
+    }
+    i++;
+  }
+  return width;
+};
 
 export type BadgeSvgOptions = {
   label: string;
@@ -170,11 +183,11 @@ const emitText = (svg: string[], text: string, width: number, x: number) => {
 
 export const createBadgeSvg = (options: BadgeSvgOptions) => {
   const { label, message, labelColor, messageColor, rounded } = options;
-  const labelWidth = getWidth(label);
-  const messageWidth = message ? getWidth(message) : 0;
-  const width = labelWidth + messageWidth + 4 * margin;
+  const labelWidth = getWidthVerdana110(label);
+  const messageWidth = message ? getWidthVerdana110(message) : 0;
+  const width = labelWidth + messageWidth + (messageWidth ? 4 : 2) * margin;
   const height = 200;
-  const ariaLabel = `${label}${message ? ' ' : ''}${message}`; // todo: escape
+  const ariaLabel = `${label}${message ? ' ' : ''}${message ?? ''}`;
 
   // svg header and title
   const svg = [ '<svg xmlns="http://www.w3.org/2000/svg" role="img" ',
@@ -196,7 +209,7 @@ export const createBadgeSvg = (options: BadgeSvgOptions) => {
   svg.push('</g>');
 
   // text
-  svg.push(`<g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">`);
+  svg.push(`<g aria-hidden="true" fill="#fff" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">`);
   emitText(svg, label, labelWidth, margin);
   if (message) emitText(svg, message, messageWidth, 3 * margin - shift * 0.5 + labelWidth);
   svg.push('</g>');

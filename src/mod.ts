@@ -1,13 +1,13 @@
 import { createTestReport } from './testReport.ts';
-
+import { getArguments, exit } from './dependencies.ts';
 
 function checkTestReport(_configFile: string) {
   console.log('Checking test report');
 }
 
 if (import.meta.main) {
-  const args = Deno.args;
-  console.log(args);
+  const args = getArguments();
+  console.log(args.join(', '));
   const check = args.includes('--check');
   const configFile = args[0];
   try {
@@ -18,6 +18,6 @@ if (import.meta.main) {
     }
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
-    Deno.exit(1);
+    exit(1);
   }
 }
