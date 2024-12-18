@@ -1,4 +1,4 @@
-import { extractFilename } from './markdownUtils.ts';
+import { extractFilename } from './miscUtils.ts';
 
 export type LcovFile = {
   title: string;

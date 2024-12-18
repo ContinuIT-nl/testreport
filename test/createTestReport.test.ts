@@ -1,4 +1,4 @@
-import { createTestReport } from '../src/testReport.ts';
+import { createTestReport } from '../src/createTestReport.ts';
 
 Deno.test('testReport_deno_success', async () => {
   const testReport = await createTestReport('./test_data/deno_success/testreport.json');

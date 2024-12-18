@@ -1,9 +1,6 @@
-import { createTestReport } from './testReport.ts';
-import { exit, getArguments } from './dependencies.ts';
-
-function checkTestReport(_configFile: string) {
-  console.log('Checking test report'); // todo: implement this.
-}
+import { createTestReport } from './createTestReport.ts';
+import { exit, getArguments } from './utilities/dependencies.ts';
+import { checkTestReport } from './checkTestReport.ts';
 
 if (import.meta.main) {
   const args = getArguments();

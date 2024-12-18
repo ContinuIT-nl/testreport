@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "ContinuIT BV, The Netherlands",
   "tasks": {
-    "test": "deno test -RSW --coverage --clean --junit-path test_results/junit.xml  && deno coverage --lcov --output=test_results/cov.lcov && deno run -RW ./src/testreport.ts",
+    "test": "deno test -RSW --coverage --clean --junit-path test_results/junit.xml  && deno coverage --lcov --output=test_results/cov.lcov && deno run -RW ./src/createTestreport.ts",
     "test_deno_success": "deno run -RW ./src/mod.ts test_data/deno_success/testreport.json",
     "test_deno_disabled": "deno run -RW ./src/mod.ts test_data/deno_disabled/testreport.json",
     "test_deno_failed": "deno run -RW ./src/mod.ts test_data/deno_failed/testreport.json",

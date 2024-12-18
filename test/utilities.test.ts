@@ -1,4 +1,5 @@
-import { buildMarkdownTable, extractFilename, markdownTitle } from '../src/markdownUtils.ts';
+import { buildMarkdownTable, markdownTitle } from '../src/utilities/markdownUtils.ts';
+import { extractFilename } from '../src/utilities/miscUtils.ts';
 import { assertEquals } from '@std/assert';
 
 const testTable = [

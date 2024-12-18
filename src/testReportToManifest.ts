@@ -1,6 +1,6 @@
-import type { TestSuites } from './junit_parser.ts';
-import type { LcovFile, LcovSummary } from './lcov_parser.ts';
-import { percentage } from './markdownUtils.ts';
+import type { TestSuites } from './utilities/junit_parser.ts';
+import type { LcovFile, LcovSummary } from './utilities/lcov_parser.ts';
+import { percentage } from './utilities/miscUtils.ts';
 
 export const convertTestresultsToManifest = (
   xmlFilename: string,

@@ -1,6 +1,7 @@
-import type { TestCaseState, TestSuites } from './junit_parser.ts';
-import type { LcovFile, LcovSummary } from './lcov_parser.ts';
-import { buildMarkdownTable, extractFilename, markdownTitle, percentage } from './markdownUtils.ts';
+import type { TestCaseState, TestSuites } from './utilities/junit_parser.ts';
+import type { LcovFile, LcovSummary } from './utilities/lcov_parser.ts';
+import { buildMarkdownTable, markdownTitle } from './utilities/markdownUtils.ts';
+import { extractFilename, percentage } from './utilities/miscUtils.ts';
 
 const testState = (state: TestCaseState) => state === 'PASSED' ? '✅' : state === 'FAILED' ? '❌' : '⚠️';
 

@@ -1,10 +1,10 @@
-import { createJUnitParser, type TestSuites } from './junit_parser.ts';
-import { createLcovSummary, type LcovFile, lcovParser, type LcovSummary } from './lcov_parser.ts';
+import { createJUnitParser, type TestSuites } from './utilities/junit_parser.ts';
+import { createLcovSummary, type LcovFile, lcovParser, type LcovSummary } from './utilities/lcov_parser.ts';
 import { convertTestresultsToMarkdown } from './testReportToMarkdown.ts';
 import { convertTestresultsToManifest } from './testReportToManifest.ts';
 import { type TestReportConfig, testReportConfigSchema } from './testReportConfig.ts';
 import { createBadgeSvg } from './createBadgeSvg.ts';
-import { readFile, writeFile } from './dependencies.ts';
+import { readFile, writeFile } from './utilities/dependencies.ts';
 
 async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites> {
   // Load all JUnit files and convert and merge them
@@ -40,7 +40,7 @@ function createTestBadge(jUnitData: TestSuites, reportConfig: TestReportConfig):
     ? `${errors}/${total} failed`
     : `${disabled}/${total} disabled`;
   const color = passed === total ? '#3C1' : errors ? '#900' : '#880'; // todo: constants
-  
+
   return createBadgeSvg({
     label: reportConfig.constants.test_label,
     message: status,
