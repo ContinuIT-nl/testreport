@@ -47,7 +47,6 @@ export const testReportConfigSchema = z.object({
      */
     test_rounded: z.boolean().default(true),
 
-
     /**
      * Label for the coverage badge.
      * Default value is 'coverage'.
@@ -78,7 +77,11 @@ export const testReportConfigSchema = z.object({
      * Default value is true.
      */
     coverage_rounded: z.boolean().default(true),
-
+    /**
+     * Threshold for the coverage badge to turn green.
+     * Default value is 80.
+     */
+    coverage_threshold: z.number().default(80),
   }).default({
     test_label: 'tests',
     test_label_color: defaultLabelColor,
@@ -93,6 +96,7 @@ export const testReportConfigSchema = z.object({
     coverage_message_color_failed: defaultFailedColor,
     coverage_message_color_disabled: defaultDisabledColor,
     coverage_rounded: true,
+    coverage_threshold: 80,
   }),
   /**
    * Output configuration for the test report.

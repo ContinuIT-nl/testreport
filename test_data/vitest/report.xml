@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="2" failures="0" errors="0" time="0.305">
+    <testsuite name="index.test.mjs" timestamp="2024-12-17T14:19:27.948Z" hostname="CONTINUIT-RAH-3" tests="2" failures="0" errors="0" skipped="0" time="0.0021071">
+        <testcase classname="index.test.mjs" name="add" time="0.001147">
+        </testcase>
+        <testcase classname="index.test.mjs" name="subtract" time="0.000181">
+        </testcase>
+    </testsuite>
+</testsuites>

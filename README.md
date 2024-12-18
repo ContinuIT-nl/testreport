@@ -53,8 +53,8 @@ testreport testreport.json
 
 In the above example the test report will be created in the `testresults` directory.
 Normally you would reference the test report from the README.md file and the badges from the repository page.
-The folder `testdata` with the JUnit XML file and the LCOV file should not be checked into the repository. 
-In your CI pipeline you can run the testreport utility and check if the test report is up to date with the current test results.  
+The folder `testdata` with the JUnit XML file and the LCOV file should not be checked into the repository.
+In your CI pipeline you can run the testreport utility and check if the test report is up to date with the current test results.
 
 ```bash
 testreport testreport.json --check

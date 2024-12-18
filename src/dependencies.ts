@@ -10,5 +10,3 @@ export const readFile: ReadFile = rf;
 export const writeFile: WriteFile = wf;
 export const getArguments: GetArguments = () => process.argv.slice(2);
 export const exit: Exit = (code: number) => process.exit(code);
-
-

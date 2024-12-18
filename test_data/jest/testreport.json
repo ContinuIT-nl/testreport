@@ -5,6 +5,8 @@
   },
   "output": {
     "markdown": "test_output/jest/jest_test_results.md",
-    "manifest": "test_output/jest/jest_manifest.json"
+    "manifest": "test_output/jest/jest_manifest.json",
+    "testBadge": "test_output/jest/jest_test_badge.svg",
+    "coverageBadge": "test_output/jest/jest_coverage_badge.svg"
   }
 }

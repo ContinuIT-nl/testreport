@@ -12,6 +12,7 @@ async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites>
 
   const junitData: TestSuites[] = [];
   for (const junitFilename of reportConfig.test_results.junit) {
+    // todo: read error means an error
     const junitBytes = await readFile(junitFilename);
     const xmlData = new TextDecoder().decode(junitBytes);
     junitData.push(jUnitParser(xmlData));
@@ -27,46 +28,60 @@ async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites>
   }, { name: '', tests: 0, failures: 0, errors: 0, time: 0, testSuites: [] });
 }
 
-// todo: handle totoal === 0
+// todo: handle total === 0
 function createTestBadge(jUnitData: TestSuites, reportConfig: TestReportConfig): string {
   const total = jUnitData.tests;
   const disabled = jUnitData.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
   const errors = jUnitData.errors + jUnitData.failures;
   const passed = total - disabled - errors;
-  const status = 
-    passed === total ? `${passed}/${total} passed` :
-    errors ? `${errors}/${total} failed` :
-    `${disabled}/${total} disabled`;
-  const color = passed === total ? '#3C1' : errors ? '#900' : '#880';
+  const status = passed === total
+    ? `${passed}/${total} passed`
+    : errors
+    ? `${errors}/${total} failed`
+    : `${disabled}/${total} disabled`;
+  const color = passed === total ? '#3C1' : errors ? '#900' : '#880'; // todo: constants
+  
   return createBadgeSvg({
     label: reportConfig.constants.test_label,
     message: status,
     labelColor: reportConfig.constants.test_label_color,
     messageColor: color,
-    rounded: reportConfig.constants.test_rounded
+    rounded: reportConfig.constants.test_rounded,
   });
 }
 
 function createCoverageBadge(lcovSummary: LcovSummary, reportConfig: TestReportConfig): string {
-  const coveragePercentage = (lcovSummary.linesHit / lcovSummary.linesFound) * 100; // todo: add branches
+  const coverageByLines = lcovSummary.linesFound ? (lcovSummary.linesHit / lcovSummary.linesFound) * 100 : undefined;
+  const coverageByBranches = lcovSummary.branchesFound
+    ? (lcovSummary.branchesHit / lcovSummary.branchesFound) * 100
+    : undefined;
+  const coveragePercentage = coverageByBranches === undefined
+    ? coverageByLines
+    : coverageByLines === undefined
+    ? coverageByBranches
+    : Math.min(coverageByLines, coverageByBranches);
+  const coveragePercentageText = coveragePercentage !== undefined ? `${coveragePercentage.toFixed(1)}%` : 'N/A';
+
   return createBadgeSvg({
     label: reportConfig.constants.coverage_label,
-    message: `${coveragePercentage.toFixed(1)}%`,
+    message: coveragePercentageText,
     labelColor: reportConfig.constants.coverage_label_color,
-    messageColor: coveragePercentage >= 80 ? '#3C1' : '#900', // todo: parameterize thresholds, colors
-    rounded: reportConfig.constants.coverage_rounded
+    messageColor: coveragePercentage !== undefined && coveragePercentage >= reportConfig.constants.coverage_threshold
+      ? reportConfig.constants.coverage_message_color_ok
+      : reportConfig.constants.coverage_message_color_failed,
+    rounded: reportConfig.constants.coverage_rounded,
   });
 }
 
-export async function createTestReport(reportDefinitionFilename: string) {
-  // Get the config file and validate it's content
+async function loadReportConfig(reportDefinitionFilename: string): Promise<TestReportConfig> {
   const reportConfigBytes = await readFile(reportDefinitionFilename);
   const reportConfigText = new TextDecoder().decode(reportConfigBytes);
-  const reportConfig = testReportConfigSchema.parse(JSON.parse(reportConfigText));
+  return testReportConfigSchema.parse(JSON.parse(reportConfigText));
+}
 
-  // Load all LCOV files and convert and merge them
+async function loadLcovData(lcovFilenames: string[]): Promise<LcovFile[]> {
   const lcovDatas: LcovFile[] = [];
-  for (const lcovFilename of reportConfig.test_results.coverage) {
+  for (const lcovFilename of lcovFilenames) {
     try {
       const lcovBytes = await readFile(lcovFilename);
       const lcovData = new TextDecoder().decode(lcovBytes);
@@ -75,38 +90,34 @@ export async function createTestReport(reportDefinitionFilename: string) {
       console.error(`Error reading LCOV file ${lcovFilename}: ${error}`);
     }
   }
+  return lcovDatas;
+}
 
+async function exportOutput(filename: string | undefined, createData: () => string) {
+  if (!filename) return;
+  const utf8Encoder = new TextEncoder();
+  const dataBytes = utf8Encoder.encode(createData());
+  await writeFile(filename, dataBytes);
+}
+
+export async function createTestReport(reportDefinitionFilename: string) {
+  // Get the config file and validate it's content
+  const reportConfig = await loadReportConfig(reportDefinitionFilename);
+
+  // Load all LCOV and JUnit files
+  const lcovDatas = await loadLcovData(reportConfig.test_results.coverage);
+  const lcovSummary = createLcovSummary(lcovDatas);
   const jUnitData = await getJUnitData(reportConfig);
 
-  // Create LCOV file summary
-  const lcovSummary = createLcovSummary(lcovDatas);
-
-  const utf8Encoder = new TextEncoder();
-
-  // Run the performance test
-  if (reportConfig.output.markdown) {
-    const markdown = convertTestresultsToMarkdown(reportDefinitionFilename, jUnitData, lcovDatas, lcovSummary);
-    const markdownBytes = utf8Encoder.encode(markdown);
-    await writeFile(reportConfig.output.markdown, markdownBytes);
-  }
-
-  // Output the manifest file
-  if (reportConfig.output.manifest) {
-    const manifest = convertTestresultsToManifest(reportDefinitionFilename, jUnitData, lcovDatas, lcovSummary);
-    const manifestBytes = utf8Encoder.encode(manifest);
-    await writeFile(reportConfig.output.manifest, manifestBytes);
-  }
-
-  // Output the badges
-  if (reportConfig.output.testBadge) {
-    const testBadge = createTestBadge(jUnitData, reportConfig);
-    const testBadgeBytes = utf8Encoder.encode(testBadge);
-    await writeFile(reportConfig.output.testBadge, testBadgeBytes);
-  }
-
-  if (reportConfig.output.coverageBadge) {
-    const coverageBadge = createCoverageBadge(lcovSummary, reportConfig);
-    const coverageBadgeBytes = utf8Encoder.encode(coverageBadge);
-    await writeFile(reportConfig.output.coverageBadge, coverageBadgeBytes);
-  }
+  // Create the outputs
+  await exportOutput(
+    reportConfig.output.markdown,
+    () => convertTestresultsToMarkdown(reportDefinitionFilename, jUnitData, lcovDatas, lcovSummary),
+  );
+  await exportOutput(
+    reportConfig.output.manifest,
+    () => convertTestresultsToManifest(reportDefinitionFilename, jUnitData, lcovDatas, lcovSummary),
+  );
+  await exportOutput(reportConfig.output.testBadge, () => createTestBadge(jUnitData, reportConfig));
+  await exportOutput(reportConfig.output.coverageBadge, () => createCoverageBadge(lcovSummary, reportConfig));
 }

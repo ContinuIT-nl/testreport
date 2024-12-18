@@ -4,17 +4,12 @@ import { buildMarkdownTable, extractFilename, markdownTitle, percentage } from '
 
 const testState = (state: TestCaseState) => state === 'PASSED' ? '✅' : state === 'FAILED' ? '❌' : '⚠️';
 
-export const convertTestresultsToMarkdown = (
-  xmlFilename: string,
-  jUnitResults: TestSuites,
-  lcovResults: LcovFile[],
-  lcovSummary: LcovSummary,
-) => {
+function getTestResultSummary(jUnitResults: TestSuites) {
   const skipped = jUnitResults.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
   const success = jUnitResults.tests - jUnitResults.failures - jUnitResults.errors - skipped;
 
   // Testresult summary
-  const testResultSummary = buildMarkdownTable(
+  return buildMarkdownTable(
     [
       '☑ Tests',
       `${testState('PASSED')} Success`,
@@ -29,8 +24,10 @@ export const convertTestresultsToMarkdown = (
       skipped.toLocaleString(),
     ], ['', percentage(skipped, jUnitResults.tests), '', '']],
   );
+}
 
-  const codeCoverageSummary = buildMarkdownTable(
+function getCodeCoverageSummary(lcovSummary: LcovSummary) {
+  return buildMarkdownTable(
     ['☰ Lines', 'ᛘ Branches'],
     ['right', 'right'],
     [[
@@ -38,7 +35,9 @@ export const convertTestresultsToMarkdown = (
       percentage(lcovSummary.branchesHit, lcovSummary.branchesFound),
     ]],
   );
+}
 
+function getTestDetails(jUnitResults: TestSuites) {
   const testDetailRows: string[][] = [];
 
   for (const testSuite of jUnitResults.testSuites) {
@@ -51,13 +50,15 @@ export const convertTestresultsToMarkdown = (
     }
   }
 
-  const testDetails = buildMarkdownTable(
+  return buildMarkdownTable(
     ['✓✓ Test Suite', '☑ Test', 'State'],
     ['default', 'default', 'default'],
     testDetailRows,
   );
+}
 
-  const codeCoverageDetails = buildMarkdownTable(
+function getCodeCoverageDetails(lcovResults: LcovFile[]) {
+  return buildMarkdownTable(
     ['🗎 File', '☰ Lines', 'ᛘ Branches'],
     ['left', 'right', 'right'],
     lcovResults.map((file) => [
@@ -66,8 +67,15 @@ export const convertTestresultsToMarkdown = (
       percentage(file.branchesHit, file.branchesFound),
     ]),
   );
+}
 
-  return [
+export const convertTestresultsToMarkdown = (
+  xmlFilename: string,
+  jUnitResults: TestSuites,
+  lcovResults: LcovFile[],
+  lcovSummary: LcovSummary,
+) =>
+  [
     ...markdownTitle('Test Results', 1),
     `Results from \`${
       extractFilename(xmlFilename)
@@ -75,12 +83,11 @@ export const convertTestresultsToMarkdown = (
     '',
     ...markdownTitle('Summary', 2),
     ...markdownTitle('Test Results', 3),
-    ...testResultSummary,
+    ...getTestResultSummary(jUnitResults),
     ...markdownTitle('Code Coverage', 3),
-    ...codeCoverageSummary,
+    ...getCodeCoverageSummary(lcovSummary),
     ...markdownTitle('Detailed Test Results', 2),
-    ...testDetails,
+    ...getTestDetails(jUnitResults),
     ...markdownTitle('Detailed Code Coverage', 2),
-    ...codeCoverageDetails,
+    ...getCodeCoverageDetails(lcovResults),
   ].join('\n');
-};

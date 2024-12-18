@@ -19,9 +19,9 @@ export const convertTestresultsToManifest = (
     testsFailed: (jUnitResults.failures + jUnitResults.errors).toLocaleString(),
     testsSkipped: skipped.toLocaleString(),
     testPercentage: percentage(success, jUnitResults.tests),
-    testHash: 'TODO',
+    testHash: 'TODO', // todo: implement this
   };
-  // todo: the idea is that the hash can be calcualed when the report is formed and that when the report is formed again the hash is the same.
+  // todo: the idea is that the hash can be calculated when the report is formed and that when the report is formed again the hash is the same.
   // The hash should not depend for the time of the report generation and timing related results in the report.
   return JSON.stringify(result, null, 2);
 };

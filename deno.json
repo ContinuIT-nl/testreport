@@ -14,7 +14,14 @@
     "test_deno_check_disabled": "deno run -RW ./src/mod.ts --check test_data/deno_disabled/testreport.json",
     "test_deno_check_failed": "deno run -RW ./src/mod.ts --check test_data/deno_failed/testreport.json",
     "test_deno": "deno task test_deno_success && deno task test_deno_disabled && deno task test_deno_failed",
-    "test_deno_check": "deno task test_deno_check_success && deno task test_deno_check_disabled && deno task test_deno_check_failed"
+    "test_deno_check": "deno task test_deno_check_success && deno task test_deno_check_disabled && deno task test_deno_check_failed",
+    "test_jest": "deno run -RW ./src/mod.ts test_data/jest/testreport.json",
+    "test_jest_check": "deno run -RW ./src/mod.ts --check test_data/jest/testreport.json",
+    "test_vitest": "deno run -RW ./src/mod.ts test_data/vitest/testreport.json",
+    "test_vitest_check": "deno run -RW ./src/mod.ts --check test_data/vitest/testreport.json",
+    "test_all": "deno task test_deno && deno task test_jest && deno task test_vitest",
+    "test_all_check": "deno task test_deno_check && deno task test_jest_check && deno task test_vitest_check",
+    "test_prepare": "mkdir -p test_output && mkdir -p test_output/deno_success && mkdir -p test_output/deno_disabled && mkdir -p test_output/deno_failed && mkdir -p test_output/jest && mkdir -p test_output/vitest"
   },
   "imports": {
     "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^1.0.0",
