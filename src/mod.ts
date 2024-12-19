@@ -1,6 +1,12 @@
 import { createTestReport } from './createTestReport.ts';
-import { exit, getArguments } from './utilities/dependencies.ts';
 import { checkTestReport } from './checkTestReport.ts';
+import * as process from 'node:process';
+
+type GetArguments = () => string[];
+type Exit = (code: number) => void;
+
+const getArguments: GetArguments = () => process.argv.slice(2);
+const exit: Exit = (code: number) => process.exit(code);
 
 if (import.meta.main) {
   const args = getArguments();

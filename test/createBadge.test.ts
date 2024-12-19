@@ -1,5 +1,5 @@
 import { assertEquals } from '@std/assert';
-import { createBadgeSvg, getWidthVerdana110 } from '../src/createBadgeSvg.ts';
+import { createBadgeSvg, getWidthVerdana110 } from '../src/utilities/createBadgeSvg.ts';
 
 Deno.test('getWidth', () => {
   assertEquals(getWidthVerdana110('x'), 65);

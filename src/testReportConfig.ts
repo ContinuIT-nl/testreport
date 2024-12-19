@@ -5,6 +5,15 @@ const defaultFailedColor = '#900';
 const defaultDisabledColor = '#880';
 const defaultLabelColor = '#555';
 export const testReportConfigSchema = z.object({
+  /**
+   * Schema version.
+   */
+  $schema: z.string().default(
+    'https://github.com/ContinuIT-nl/testreport/blob/main/configSchema/testReportConfigSchema.json',
+  ),
+  /**
+   * Test results configuration.
+   */
   test_results: z.object({
     /**
      * Array of file paths to JUnit test result files.

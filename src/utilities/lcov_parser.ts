@@ -55,7 +55,7 @@ export const lcovParser = (lcov: string): LcovFile[] => {
       currentFile.title = data[0];
     },
     'SF': (data: string[]) => {
-      // Filename is a fullpath, but what's needed is a path relative to the root.
+      // Filename is a fullpath (Deno), but what's needed is a path relative to the root.
       currentFile.filename = extractFilename(data[0]);
     },
 

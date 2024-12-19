@@ -1,5 +1,5 @@
 import { buildMarkdownTable, markdownTitle } from '../src/utilities/markdownUtils.ts';
-import { extractFilename } from '../src/utilities/miscUtils.ts';
+import { exportOutput, extractFilename } from '../src/utilities/miscUtils.ts';
 import { assertEquals } from '@std/assert';
 
 const testTable = [
@@ -31,4 +31,16 @@ Deno.test('extractFilename', () => {
   assertEquals(extractFilename('test\\markdownUtils.ts'), 'markdownUtils.ts');
   assertEquals(extractFilename('ok'), 'ok');
   assertEquals(extractFilename(''), '');
+});
+
+Deno.test('exportOutput', async () => {
+  // empty filename means nothing is saved
+  await exportOutput(undefined, () => 'test');
+  await exportOutput('', () => 'test');
+
+  //
+  const filename = 'test_results/test_results.txt';
+  await exportOutput(filename, () => 'test');
+  const file = await Deno.readTextFile(filename);
+  assertEquals(file, 'test');
 });

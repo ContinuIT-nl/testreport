@@ -3,19 +3,26 @@ import { createLcovSummary, type LcovFile, lcovParser, type LcovSummary } from '
 import { convertTestresultsToMarkdown } from './testReportToMarkdown.ts';
 import { convertTestresultsToManifest } from './testReportToManifest.ts';
 import { type TestReportConfig, testReportConfigSchema } from './testReportConfig.ts';
-import { createBadgeSvg } from './createBadgeSvg.ts';
-import { readFile, writeFile } from './utilities/dependencies.ts';
+import { createBadgeSvg } from './utilities/createBadgeSvg.ts';
+import { readFile } from './utilities/dependencies.ts';
+import { exportOutput } from './utilities/miscUtils.ts';
 
 async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites> {
   // Load all JUnit files and convert and merge them
   const jUnitParser = createJUnitParser();
+  const result: TestSuites = { name: '', tests: 0, failures: 0, errors: 0, time: 0, testSuites: [] };
 
   const junitData: TestSuites[] = [];
   for (const junitFilename of reportConfig.test_results.junit) {
-    // todo: read error means an error
-    const junitBytes = await readFile(junitFilename);
-    const xmlData = new TextDecoder().decode(junitBytes);
-    junitData.push(jUnitParser(xmlData));
+    try {
+      const junitBytes = await readFile(junitFilename);
+      const xmlData = new TextDecoder().decode(junitBytes);
+      junitData.push(jUnitParser(xmlData));
+    } catch (_error) {
+      // Notify error by adding a test suite with 1 test and 1 error
+      result.tests++;
+      result.errors++;
+    }
   }
   // Combine all JUnit data
   return junitData.reduce((acc, data) => {
@@ -25,21 +32,31 @@ async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites>
     acc.time += data.time;
     acc.testSuites.push(...data.testSuites);
     return acc;
-  }, { name: '', tests: 0, failures: 0, errors: 0, time: 0, testSuites: [] });
+  }, result);
 }
 
-// todo: handle total === 0
 function createTestBadge(jUnitData: TestSuites, reportConfig: TestReportConfig): string {
+  // Collect data
   const total = jUnitData.tests;
   const disabled = jUnitData.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
   const errors = jUnitData.errors + jUnitData.failures;
   const passed = total - disabled - errors;
-  const status = passed === total
+
+  const status = total === 0
+    ? 'no tests'
+    : passed === total
     ? `${passed}/${total} passed`
     : errors
     ? `${errors}/${total} failed`
     : `${disabled}/${total} disabled`;
-  const color = passed === total ? '#3C1' : errors ? '#900' : '#880'; // todo: constants
+
+  const color = total === 0
+    ? reportConfig.constants.test_message_color_failed
+    : passed === total
+    ? reportConfig.constants.test_message_color_ok
+    : errors
+    ? reportConfig.constants.test_message_color_failed
+    : reportConfig.constants.test_message_color_disabled;
 
   return createBadgeSvg({
     label: reportConfig.constants.test_label,
@@ -55,11 +72,8 @@ function createCoverageBadge(lcovSummary: LcovSummary, reportConfig: TestReportC
   const coverageByBranches = lcovSummary.branchesFound
     ? (lcovSummary.branchesHit / lcovSummary.branchesFound) * 100
     : undefined;
-  const coveragePercentage = coverageByBranches === undefined
-    ? coverageByLines
-    : coverageByLines === undefined
-    ? coverageByBranches
-    : Math.min(coverageByLines, coverageByBranches);
+  const coverages = [coverageByLines, coverageByBranches].filter((c) => c !== undefined);
+  const coveragePercentage = coverages.length === 0 ? undefined : Math.min(...coverages);
   const coveragePercentageText = coveragePercentage !== undefined ? `${coveragePercentage.toFixed(1)}%` : 'N/A';
 
   return createBadgeSvg({
@@ -91,13 +105,6 @@ async function loadLcovData(lcovFilenames: string[]): Promise<LcovFile[]> {
     }
   }
   return lcovDatas;
-}
-
-async function exportOutput(filename: string | undefined, createData: () => string) {
-  if (!filename) return;
-  const utf8Encoder = new TextEncoder();
-  const dataBytes = utf8Encoder.encode(createData());
-  await writeFile(filename, dataBytes);
 }
 
 export async function createTestReport(reportDefinitionFilename: string) {

@@ -1,0 +1,18 @@
+{
+  "$schema": "../configSchema/testReportConfigSchema.json",
+  "test_results": {
+    "junit": ["test_results/junit.xml"],
+    "coverage": ["test_results/cov.lcov"]
+  },
+  "output": {
+    "markdown": "test_results/test_results.md",
+    "manifest": "test_results/test_results.json",
+    "testBadge": "test_results/test_badge.svg",
+    "coverageBadge": "test_results/coverage_badge.svg"
+  },
+  "constants": {
+    "test_label": "tests",
+    "coverage_label": "coverage",
+    "coverage_threshold": 99
+  }
+}

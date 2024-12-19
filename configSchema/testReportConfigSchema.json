@@ -1,0 +1,131 @@
+{
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "default": "https://github.com/ContinuIT-nl/testreport/blob/main/configSchema/testReportConfigSchema.json"
+    },
+    "test_results": {
+      "type": "object",
+      "properties": {
+        "junit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coverage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "junit",
+        "coverage"
+      ],
+      "additionalProperties": false
+    },
+    "constants": {
+      "type": "object",
+      "properties": {
+        "test_label": {
+          "type": "string",
+          "default": "tests"
+        },
+        "test_label_color": {
+          "type": "string",
+          "default": "#555"
+        },
+        "test_message_color_ok": {
+          "type": "string",
+          "default": "#3C1"
+        },
+        "test_message_color_failed": {
+          "type": "string",
+          "default": "#900"
+        },
+        "test_message_color_disabled": {
+          "type": "string",
+          "default": "#880"
+        },
+        "test_rounded": {
+          "type": "boolean",
+          "default": true
+        },
+        "coverage_label": {
+          "type": "string",
+          "default": "coverage"
+        },
+        "coverage_label_color": {
+          "type": "string",
+          "default": "#555"
+        },
+        "coverage_message_color_ok": {
+          "type": "string",
+          "default": "#3C1"
+        },
+        "coverage_message_color_failed": {
+          "type": "string",
+          "default": "#900"
+        },
+        "coverage_message_color_disabled": {
+          "type": "string",
+          "default": "#880"
+        },
+        "coverage_rounded": {
+          "type": "boolean",
+          "default": true
+        },
+        "coverage_threshold": {
+          "type": "number",
+          "default": 80
+        }
+      },
+      "additionalProperties": false,
+      "default": {
+        "test_label": "tests",
+        "test_label_color": "#555",
+        "test_message_color_ok": "#3C1",
+        "test_message_color_failed": "#900",
+        "test_message_color_disabled": "#880",
+        "test_rounded": true,
+        "coverage_label": "coverage",
+        "coverage_label_color": "#555",
+        "coverage_message_color_ok": "#3C1",
+        "coverage_message_color_failed": "#900",
+        "coverage_message_color_disabled": "#880",
+        "coverage_rounded": true,
+        "coverage_threshold": 80
+      }
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "markdown": {
+          "type": "string"
+        },
+        "manifest": {
+          "type": "string"
+        },
+        "testBadge": {
+          "type": "string"
+        },
+        "coverageBadge": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "manifest"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "test_results",
+    "output"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -4,3 +4,4 @@ coverage/
 test_output/
 .vscode/launch.json
 .vscode/settings.json
+test_results/test_results.txt
