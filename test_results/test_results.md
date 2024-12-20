@@ -15,7 +15,7 @@ Results from `testReport.json` contains 4 testsuites with 15 tests:
 
 | ☰ Lines | ᛘ Branches |
 | ------: | ---------: |
-|  100.0% |     100.0% |
+|   99.6% |      98.7% |
 
 ## Detailed Test Results
 
@@ -51,4 +51,4 @@ Results from `testReport.json` contains 4 testsuites with 15 tests:
 | `junit_parser.ts`         |  100.0% |            |
 | `lcov_parser.ts`          |  100.0% |     100.0% |
 | `markdownUtils.ts`        |  100.0% |     100.0% |
-| `miscUtils.ts`            |  100.0% |     100.0% |
+| `miscUtils.ts`            |   87.0% |      85.7% |

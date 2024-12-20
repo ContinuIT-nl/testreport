@@ -1,7 +1,7 @@
 {
   "source": "./test_results/testReport.json",
-  "codeCoverageLinesPercentage": "100.0%",
-  "codeCoverageBranchesPercentage": "100.0%",
+  "codeCoverageLinesPercentage": "99.6%",
+  "codeCoverageBranchesPercentage": "98.7%",
   "tests": "15",
   "testsPassed": "15",
   "testsFailed": "0",

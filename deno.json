@@ -29,7 +29,10 @@
     "semiColons": true,
     "singleQuote": true,
     "proseWrap": "preserve",
-    "useTabs": false
+    "useTabs": false,
+    "exclude": [
+      "test_results/**/*"
+    ]
   },
   "lint": {
   }

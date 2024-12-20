@@ -1,11 +1,10 @@
-import { readFile } from 'node:fs/promises';
 import { type TestReportConfig, testReportConfigSchema } from './testReportConfig.ts';
 import { type LcovFile, lcovParser, type LcovSummary } from './utilities/lcov_parser.ts';
 import { createJUnitParser, type TestSuites } from './utilities/junit_parser.ts';
+import { readTextFile } from './utilities/miscUtils.ts';
 
 async function loadReportConfig(reportDefinitionFilename: string): Promise<TestReportConfig> {
-  const reportConfigBytes = await readFile(reportDefinitionFilename);
-  const reportConfigText = new TextDecoder().decode(reportConfigBytes);
+  const reportConfigText = await readTextFile(reportDefinitionFilename);
   return testReportConfigSchema.parse(JSON.parse(reportConfigText));
 }
 
@@ -13,8 +12,7 @@ async function loadLcovData(lcovFilenames: string[]): Promise<LcovFile[]> {
   const lcovDatas: LcovFile[] = [];
   for (const lcovFilename of lcovFilenames) {
     try {
-      const lcovBytes = await readFile(lcovFilename);
-      const lcovData = new TextDecoder().decode(lcovBytes);
+      const lcovData = await readTextFile(lcovFilename);
       lcovDatas.push(...lcovParser(lcovData));
     } catch (error) {
       console.error(`Error reading LCOV file ${lcovFilename}: ${error}`);
@@ -31,8 +29,7 @@ async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites>
   const junitData: TestSuites[] = [];
   for (const junitFilename of reportConfig.test_results.junit) {
     try {
-      const junitBytes = await readFile(junitFilename);
-      const xmlData = new TextDecoder().decode(junitBytes);
+      const xmlData = await readTextFile(junitFilename);
       junitData.push(jUnitParser(xmlData));
     } catch (_error) {
       // Notify error by adding a test suite with 1 test and 1 error
