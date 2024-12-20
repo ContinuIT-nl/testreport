@@ -2,14 +2,8 @@ import { createTestReport } from './createTestReport.ts';
 import { checkTestReport } from './checkTestReport.ts';
 import * as process from 'node:process';
 
-type GetArguments = () => string[];
-type Exit = (code: number) => void;
-
-const getArguments: GetArguments = () => process.argv.slice(2);
-const exit: Exit = (code: number) => process.exit(code);
-
 if (import.meta.main) {
-  const args = getArguments();
+  const args = process.argv.slice(2);
   console.log(args.join(', '));
   const check = args.includes('--check');
   const configFile = args[0];
@@ -21,6 +15,6 @@ if (import.meta.main) {
     }
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
-    exit(1);
+    process.exit(1);
   }
 }
