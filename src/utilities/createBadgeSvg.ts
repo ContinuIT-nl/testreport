@@ -142,7 +142,7 @@ const verdanaWidthsBase64 = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnKzJaRnh
 
 const widths = atob(verdanaWidthsBase64).split('').map((c) => c.charCodeAt(0));
 const missingWidth = widths['x'.charCodeAt(0)];
-// todo: collect info from kern table to get kerning information
+// Future: collect info from kern table to get kerning information
 
 export const getWidthVerdana110 = (str: string) => {
   let i = 0;

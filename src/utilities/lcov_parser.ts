@@ -55,7 +55,7 @@ export const lcovParser = (lcov: string): LcovFile[] => {
       currentFile.title = data[0];
     },
     'SF': (data: string[]) => {
-      // Filename is a fullpath (Deno), but what's needed is a path relative to the root.
+      // Deno emits a fullpath instead of a path from the root of the repository.
       currentFile.filename = extractFilename(data[0]);
     },
 
@@ -117,24 +117,3 @@ export const lcovParser = (lcov: string): LcovFile[] => {
   }
   return result;
 };
-
-export const createLcovSummary = (lcov: LcovFile[]): LcovSummary =>
-  lcov.reduce(
-    (acc, file) => {
-      acc.functionsHit += file.functionsHit;
-      acc.functionsFound += file.functionsFound;
-      acc.branchesFound += file.branchesFound;
-      acc.branchesHit += file.branchesHit;
-      acc.linesFound += file.linesFound;
-      acc.linesHit += file.linesHit;
-      return acc;
-    },
-    {
-      functionsHit: 0,
-      functionsFound: 0,
-      branchesFound: 0,
-      branchesHit: 0,
-      linesFound: 0,
-      linesHit: 0,
-    } satisfies LcovSummary,
-  );
