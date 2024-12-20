@@ -1,5 +1,6 @@
 import type { TestCaseState, TestSuites } from './utilities/junit_parser.ts';
 import type { LcovFile, LcovSummary } from './utilities/lcov_parser.ts';
+import type { GetTestReportDataResult } from './testReportData.ts';
 import { buildMarkdownTable, markdownTitle } from './utilities/markdownUtils.ts';
 import { extractFilename, percentage } from './utilities/miscUtils.ts';
 
@@ -70,25 +71,24 @@ function getCodeCoverageDetails(lcovResults: LcovFile[]) {
   );
 }
 
-export const convertTestresultsToMarkdown = (
-  xmlFilename: string,
-  jUnitResults: TestSuites,
-  lcovResults: LcovFile[],
-  lcovSummary: LcovSummary,
-) =>
+const testResulsHeaderLine = (data: GetTestReportDataResult) => [
+  `Results from \`${
+    extractFilename(data.reportDefinitionFilename)
+  }\` contains ${data.jUnitData.testSuites.length} testsuites with ${data.jUnitData.tests} tests:`,
+  '',
+];
+
+export const convertTestresultsToMarkdown = (data: GetTestReportDataResult) =>
   [
-    ...markdownTitle('Test Results', 1),
-    `Results from \`${
-      extractFilename(xmlFilename)
-    }\` contains ${jUnitResults.testSuites.length} testsuites with ${jUnitResults.tests} tests:`,
-    '',
-    ...markdownTitle('Summary', 2),
-    ...markdownTitle('Test Results', 3),
-    ...getTestResultSummary(jUnitResults),
-    ...markdownTitle('Code Coverage', 3),
-    ...getCodeCoverageSummary(lcovSummary),
-    ...markdownTitle('Detailed Test Results', 2),
-    ...getTestDetails(jUnitResults),
-    ...markdownTitle('Detailed Code Coverage', 2),
-    ...getCodeCoverageDetails(lcovResults),
-  ].join('\n');
+    markdownTitle('Test Results', 1),
+    testResulsHeaderLine(data),
+    markdownTitle('Summary', 2),
+    markdownTitle('Test Results', 3),
+    getTestResultSummary(data.jUnitData),
+    markdownTitle('Code Coverage', 3),
+    getCodeCoverageSummary(data.lcovSummary),
+    markdownTitle('Detailed Test Results', 2),
+    getTestDetails(data.jUnitData),
+    markdownTitle('Detailed Code Coverage', 2),
+    getCodeCoverageDetails(data.lcovDatas),
+  ].flat().join('\n');

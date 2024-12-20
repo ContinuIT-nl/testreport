@@ -60,17 +60,12 @@ function createCoverageBadge(lcovSummary: LcovSummary, reportConfig: TestReportC
 }
 
 export async function createTestReport(reportDefinitionFilename: string) {
-  const { reportConfig, jUnitData, lcovDatas, lcovSummary } = await getTestReportData(reportDefinitionFilename);
-
-  // Create the outputs
+  const data = await getTestReportData(reportDefinitionFilename);
+  await exportOutput(data.reportConfig.output.markdown, () => convertTestresultsToMarkdown(data));
+  await exportOutput(data.reportConfig.output.manifest, () => convertTestresultsToManifest(data));
+  await exportOutput(data.reportConfig.output.testBadge, () => createTestBadge(data.jUnitData, data.reportConfig));
   await exportOutput(
-    reportConfig.output.markdown,
-    () => convertTestresultsToMarkdown(reportDefinitionFilename, jUnitData, lcovDatas, lcovSummary),
+    data.reportConfig.output.coverageBadge,
+    () => createCoverageBadge(data.lcovSummary, data.reportConfig),
   );
-  await exportOutput(
-    reportConfig.output.manifest,
-    () => convertTestresultsToManifest(reportDefinitionFilename, jUnitData, lcovDatas, lcovSummary),
-  );
-  await exportOutput(reportConfig.output.testBadge, () => createTestBadge(jUnitData, reportConfig));
-  await exportOutput(reportConfig.output.coverageBadge, () => createCoverageBadge(lcovSummary, reportConfig));
 }

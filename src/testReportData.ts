@@ -70,7 +70,15 @@ function createLcovSummary(lcov: LcovFile[]): LcovSummary {
   );
 }
 
-export async function getTestReportData(reportDefinitionFilename: string) {
+export type GetTestReportDataResult = {
+  reportDefinitionFilename: string;
+  reportConfig: TestReportConfig;
+  lcovDatas: LcovFile[];
+  lcovSummary: LcovSummary;
+  jUnitData: TestSuites;
+};
+
+export async function getTestReportData(reportDefinitionFilename: string): Promise<GetTestReportDataResult> {
   const reportConfig = await loadReportConfig(reportDefinitionFilename);
   const lcovDatas = await loadLcovData(reportConfig.test_results.coverage);
   const lcovSummary = createLcovSummary(lcovDatas);
