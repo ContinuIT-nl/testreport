@@ -1,4 +1,4 @@
-import { readFile } from './utilities/dependencies.ts';
+import { readFile } from 'node:fs/promises';
 import { type TestReportConfig, testReportConfigSchema } from './testReportConfig.ts';
 import { type LcovFile, lcovParser, type LcovSummary } from './utilities/lcov_parser.ts';
 import { createJUnitParser, type TestSuites } from './utilities/junit_parser.ts';

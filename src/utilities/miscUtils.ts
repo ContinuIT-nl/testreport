@@ -1,4 +1,4 @@
-import { writeFile } from './dependencies.ts';
+import { writeFile } from 'node:fs/promises';
 
 export const percentage = (value: number, total: number) => value ? `${((value / total) * 100).toFixed(1)}%` : '';
 

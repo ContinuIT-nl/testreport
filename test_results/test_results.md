@@ -48,7 +48,6 @@ Results from `testReport.json` contains 4 testsuites with 15 tests:
 | `testReportToManifest.ts` |  100.0% |            |
 | `testReportToMarkdown.ts` |  100.0% |     100.0% |
 | `createBadgeSvg.ts`       |  100.0% |     100.0% |
-| `dependencies.ts`         |  100.0% |            |
 | `junit_parser.ts`         |  100.0% |            |
 | `lcov_parser.ts`          |  100.0% |     100.0% |
 | `markdownUtils.ts`        |  100.0% |     100.0% |
