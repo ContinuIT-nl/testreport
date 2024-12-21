@@ -1,3 +1,4 @@
+import { assert } from '@std/assert';
 import { createTestReport } from '../src/createTestReport.ts';
 
 Deno.test('testReport_deno_success', async () => {
@@ -30,7 +31,17 @@ Deno.test('testReport_no_tests', async () => {
   console.log(testReport);
 });
 
-Deno.test('testReport_tests_invalid', async () => {
-  const testReport = await createTestReport('./test_data/no_tests/testreport_invalid.json');
+Deno.test('testReport_tests_invalid_input', async () => {
+  const testReport = await createTestReport('./test_data/no_tests/testreport_invalid_input.json');
   console.log(testReport);
+});
+
+Deno.test('testReport_tests_invalid_output', async () => {
+  try {
+    const testReport = await createTestReport('./test_data/no_tests/testreport_invalid_output.json');
+    console.log(testReport);
+  } catch (e) {
+    assert(e instanceof Error);
+    assert(e.message.includes('Error writing file'));
+  }
 });
