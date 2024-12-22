@@ -1,4 +1,4 @@
-import { assertEquals } from '@std/assert';
+import { assert, assertEquals } from '@std/assert';
 import { createBadgeSvg, getWidthVerdana110 } from '../src/utilities/createBadgeSvg.ts';
 
 Deno.test('getWidth', () => {
@@ -16,7 +16,8 @@ Deno.test('createBadge', () => {
     messageColor: '#3C1',
     rounded: true,
   });
-  console.log(badge);
+  assert(badge.includes('tests'), 'badge should contain tests');
+  assert(badge.includes('100%'), 'badge should contain 100%');
 });
 
 Deno.test('createBadge_no_message', () => {
@@ -25,5 +26,5 @@ Deno.test('createBadge_no_message', () => {
     labelColor: '#555',
     rounded: true,
   });
-  console.log(badge_no_message);
+  assert(badge_no_message.includes('tests'), 'badge_no_message should contain tests');
 });

@@ -6,6 +6,7 @@ import { readTextFile } from './utilities/miscUtils.ts';
 async function loadReportConfig(reportDefinitionFilename: string): Promise<TestReportConfig> {
   const reportConfigText = await readTextFile(reportDefinitionFilename);
   return testReportConfigSchema.parse(JSON.parse(reportConfigText));
+  // todo: nice error message when pasing fails
 }
 
 async function loadLcovData(lcovFilenames: string[]): Promise<LcovFile[]> {

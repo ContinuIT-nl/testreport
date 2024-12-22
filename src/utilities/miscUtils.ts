@@ -23,7 +23,7 @@ export async function readTextFile(filename: string): Promise<string> {
   try {
     const fileBytes = await readFile(filename);
     return new TextDecoder().decode(fileBytes);
-  } catch (error) {
+  } catch (error) { // Create a nice exception text
     throw new ReadTextFileError(`Error reading file ${filename}: ${(error as Error).message}`);
   }
 }

@@ -61,8 +61,9 @@ function createCoverageBadge(lcovSummary: LcovSummary, reportConfig: TestReportC
 
 export async function createTestReport(reportDefinitionFilename: string) {
   const data = await getTestReportData(reportDefinitionFilename);
+  const manifest = convertTestresultsToManifest(data);
   await exportOutput(data.reportConfig.output.markdown, () => convertTestresultsToMarkdown(data));
-  await exportOutput(data.reportConfig.output.manifest, () => convertTestresultsToManifest(data));
+  await exportOutput(data.reportConfig.output.manifest, () => JSON.stringify(manifest, null, 2));
   await exportOutput(data.reportConfig.output.testBadge, () => createTestBadge(data.jUnitData, data.reportConfig));
   await exportOutput(
     data.reportConfig.output.coverageBadge,
