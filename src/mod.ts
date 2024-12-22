@@ -1,12 +1,28 @@
 import { createTestReport } from './createTestReport.ts';
 import { checkTestReport } from './checkTestReport.ts';
+import { parseArgs } from '@std/cli/parse-args';
 import * as process from 'node:process';
 
 if (import.meta.main) {
-  const args = process.argv.slice(2);
-  console.log(args.join(', '));
-  const check = args.includes('--check');
-  const configFile = args[0];
+  const args = parseArgs(process.argv.slice(2), {
+    alias: {
+      c: 'check',
+      h: 'help',
+    },
+  });
+  const check = !!args.check;
+  if (!!args.help || args._?.length !== 1) {
+    console.log(`
+Usage:
+  test-report [options] <config-file>
+
+Options:
+  -c, --check  Check the test report. If omitted, the test report is created.
+  -h, --help   Show help.
+`);
+    process.exit(1);
+  }
+  const configFile = `${args._[0]}`;
   try {
     if (check) {
       await checkTestReport(configFile);
