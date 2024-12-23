@@ -1,6 +1,5 @@
 import { getTestReportData } from './testReportData.ts';
 import { convertTestresultsToManifest } from './testReportToManifest.ts';
-//import { equal } from './utilities/equal.ts';
 import { equal } from '@std/assert';
 import { readTextFile } from './utilities/miscUtils.ts';
 

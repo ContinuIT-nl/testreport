@@ -4,14 +4,16 @@ import { parseArgs } from '@std/cli/parse-args';
 import * as process from 'node:process';
 
 if (import.meta.main) {
+  // Parse arguments
   const args = parseArgs(process.argv.slice(2), {
     alias: {
       c: 'check',
       h: 'help',
     },
   });
-  const check = !!args.check;
-  if (!!args.help || args._?.length !== 1) {
+
+  // Show help?
+  if (args.help || args._?.length !== 1) {
     console.log(`
 Usage:
   test-report [options] <config-file>
@@ -22,13 +24,12 @@ Options:
 `);
     process.exit(1);
   }
-  const configFile = `${args._[0]}`;
+
+  // And execute
   try {
-    if (check) {
-      await checkTestReport(configFile);
-    } else {
-      await createTestReport(configFile);
-    }
+    const configFile = `${args._[0]}`;
+    const check = !!args.check;
+    await (check ? checkTestReport : createTestReport)(configFile);
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exit(1);

@@ -1,7 +1,6 @@
 import { buildMarkdownTable, markdownTitle } from '../src/utilities/markdownUtils.ts';
 import { exportOutput, extractFilename } from '../src/utilities/miscUtils.ts';
 import { assertEquals } from '@std/assert';
-import { equal } from '../src/utilities/equal.ts';
 
 const testTable = [
   ['Header 1', 'Header 2', 'Header 3'],
@@ -44,57 +43,4 @@ Deno.test('exportOutput', async () => {
   await exportOutput(filename, () => 'test');
   const file = await Deno.readTextFile(filename);
   assertEquals(file, 'test');
-});
-
-// todo: test equal
-Deno.test('equal', () => {
-  // simple types
-  assertEquals(equal(1, 1), true);
-  assertEquals(equal(1, 2), false);
-  assertEquals(equal(null, null), true);
-  assertEquals(equal(null, undefined), false);
-  assertEquals(equal(undefined, undefined), true);
-  assertEquals(equal(undefined, null), false);
-  assertEquals(equal(true, true), true);
-  assertEquals(equal(true, false), false);
-  assertEquals(equal('a', 'a'), true);
-  assertEquals(equal('a', 'b'), false);
-  assertEquals(equal(1, '1'), false);
-  assertEquals(equal(1, 1.1), false);
-
-  // Arrays
-  assertEquals(equal([1, 2, 3], [1, 2, 3]), true);
-  assertEquals(equal([1, 2, 3], [1, 2, 4]), false);
-  assertEquals(equal([1, 2, 3], [1, 2, 3, 4]), false);
-  assertEquals(equal([1, 2, 3], [1, 2, 3, 4]), false);
-
-  // Dates
-  const now = new Date();
-  assertEquals(equal(now, now), true);
-  assertEquals(equal(now, now.getTime()), false);
-  assertEquals(equal(now, new Date(now.getTime() + 1)), false);
-
-  // Objects
-  assertEquals(equal({ a: 1 }, { a: 1 }), true);
-  assertEquals(equal({ a: 1 }, { a: 2 }), false);
-  assertEquals(equal({ a: 1 }, { a: 1, b: 2 }), false);
-  assertEquals(equal({ a: 1, b: 2 }, { a: 1 }), false);
-  assertEquals(equal({ a: 1, b: 2 }, { c: 1 }), false);
-
-  // unequal types
-  assertEquals(equal(1, '1'), false);
-  assertEquals(equal(1, 1.1), false);
-  assertEquals(equal(1, null), false);
-  assertEquals(equal(null, undefined), false);
-  assertEquals(equal(undefined, null), false);
-  assertEquals(equal(true, 'true'), false);
-  assertEquals(equal(true, 1), false);
-  assertEquals(equal(true, 0), false);
-  assertEquals(equal(true, false), false);
-  assertEquals(equal(true, { a: 1 }), false);
-  assertEquals(equal(true, [1, 2, 3]), false);
-  assertEquals(equal(true, new Date()), false);
-  assertEquals(equal({ a: 1 }, 1), false);
-  assertEquals(equal([1, 2, 3], 1), false);
-  assertEquals(equal(new Date(), 1), false);
 });

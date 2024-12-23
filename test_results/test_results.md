@@ -1,6 +1,6 @@
 # Test Results
 
-Results from `testReport.json` contains 4 testsuites with 17 tests:
+Results from `testReport.json` contains 4 testsuites with 16 tests:
 
 ## Summary
 
@@ -8,7 +8,7 @@ Results from `testReport.json` contains 4 testsuites with 17 tests:
 
 | ☑ Tests | ✅ Success | ❌ Failures/Errors | ⚠️ Skipped |
 | ------: | --------: | ----------------: | ---------: |
-|      17 |        17 |                 0 |          0 |
+|      16 |        16 |                 0 |          0 |
 |         |           |                   |            |
 
 ### Code Coverage
@@ -37,7 +37,6 @@ Results from `testReport.json` contains 4 testsuites with 17 tests:
 | `utilities.test.ts`        | markdownTitle                   | ✅     |
 | `utilities.test.ts`        | extractFilename                 | ✅     |
 | `utilities.test.ts`        | exportOutput                    | ✅     |
-| `utilities.test.ts`        | equal                           | ✅     |
 
 ## Detailed Code Coverage
 
@@ -50,7 +49,6 @@ Results from `testReport.json` contains 4 testsuites with 17 tests:
 | `testReportToManifest.ts` |  100.0% |            |
 | `testReportToMarkdown.ts` |  100.0% |     100.0% |
 | `createBadgeSvg.ts`       |  100.0% |     100.0% |
-| `equal.ts`                |  100.0% |     100.0% |
 | `junit_parser.ts`         |  100.0% |            |
 | `lcov_parser.ts`          |  100.0% |     100.0% |
 | `markdownUtils.ts`        |  100.0% |     100.0% |
