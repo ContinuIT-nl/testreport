@@ -2,7 +2,8 @@ import type { TestCaseState, TestSuites } from './utilities/junit_parser.ts';
 import type { LcovFile, LcovSummary } from './utilities/lcov_parser.ts';
 import type { GetTestReportDataResult } from './testReportData.ts';
 import { buildMarkdownTable, markdownTitle } from './utilities/markdownUtils.ts';
-import { extractFilename, percentage } from './utilities/miscUtils.ts';
+import { percentage } from './utilities/miscUtils.ts';
+import { basename } from '@std/path';
 
 const testState = (state: TestCaseState) => state === 'PASSED' ? '✅' : state === 'FAILED' ? '❌' : '⚠️';
 
@@ -45,7 +46,7 @@ function getTestDetails(jUnitResults: TestSuites) {
   for (const testSuite of jUnitResults.testSuites) {
     for (const testCase of testSuite.testCases) {
       testDetailRows.push([
-        `\`${extractFilename(testSuite.name)}\``,
+        `\`${basename(testSuite.name)}\``,
         testCase.name,
         testState(testCase.state),
       ]);
@@ -73,7 +74,7 @@ function getCodeCoverageDetails(lcovResults: LcovFile[]) {
 
 const testResulsHeaderLine = (data: GetTestReportDataResult) => [
   `Results from \`${
-    extractFilename(data.reportDefinitionFilename)
+    basename(data.reportDefinitionFilename)
   }\` contains ${data.jUnitData.testSuites.length} testsuites with ${data.jUnitData.tests} tests:`,
   '',
 ];

@@ -1,4 +1,4 @@
-import { extractFilename } from './miscUtils.ts';
+import { basename } from '@std/path';
 
 export type LcovFile = {
   title: string;
@@ -56,7 +56,7 @@ export const lcovParser = (lcov: string): LcovFile[] => {
     },
     'SF': (data: string[]) => {
       // Deno emits a fullpath instead of a path from the root of the repository.
-      currentFile.filename = extractFilename(data[0]);
+      currentFile.filename = basename(data[0]);
     },
 
     // Function stats

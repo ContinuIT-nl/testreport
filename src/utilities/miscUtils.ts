@@ -2,9 +2,6 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 export const percentage = (value: number, total: number) => value ? `${((value / total) * 100).toFixed(1)}%` : '';
 
-// todo: use @std:path
-export const extractFilename = (filename: string) => filename.replace(/\\/g, '/').split('/').at(-1)!;
-
 class WriteTextFileError extends Error {}
 class ReadTextFileError extends Error {}
 

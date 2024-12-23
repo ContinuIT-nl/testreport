@@ -26,7 +26,6 @@ Deno.test('testReport_no_tests', async () => {
 });
 
 Deno.test('testReport_tests_invalid_input', async () => {
-  // TODO: fix this test
   await createTestReport('./test_data/no_tests/testreport_invalid_input.json');
 });
 

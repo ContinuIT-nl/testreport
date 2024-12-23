@@ -1,6 +1,6 @@
 # Test Results
 
-Results from `testReport.json` contains 4 testsuites with 16 tests:
+Results from `testReport.json` contains 4 testsuites with 15 tests:
 
 ## Summary
 
@@ -8,7 +8,7 @@ Results from `testReport.json` contains 4 testsuites with 16 tests:
 
 | ☑ Tests | ✅ Success | ❌ Failures/Errors | ⚠️ Skipped |
 | ------: | --------: | ----------------: | ---------: |
-|      16 |        16 |                 0 |          0 |
+|      15 |        15 |                 0 |          0 |
 |         |           |                   |            |
 
 ### Code Coverage
@@ -35,7 +35,6 @@ Results from `testReport.json` contains 4 testsuites with 16 tests:
 | `createTestReport.test.ts` | testReport_tests_invalid_output | ✅     |
 | `utilities.test.ts`        | buildMarkdownTable              | ✅     |
 | `utilities.test.ts`        | markdownTitle                   | ✅     |
-| `utilities.test.ts`        | extractFilename                 | ✅     |
 | `utilities.test.ts`        | exportOutput                    | ✅     |
 
 ## Detailed Code Coverage
