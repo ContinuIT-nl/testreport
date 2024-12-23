@@ -1,6 +1,6 @@
 # Test Results
 
-Results from `testReport.json` contains 4 testsuites with 15 tests:
+Results from `testReport.json` contains 4 testsuites with 17 tests:
 
 ## Summary
 
@@ -8,8 +8,8 @@ Results from `testReport.json` contains 4 testsuites with 15 tests:
 
 | ☑ Tests | ✅ Success | ❌ Failures/Errors | ⚠️ Skipped |
 | ------: | --------: | ----------------: | ---------: |
-|      15 |        15 |                 0 |          0 |
-|         |           |                   |            |
+|      17 |        17 |                 0 |          0 |
+|         |      0.0% |                   |            |
 
 ### Code Coverage
 
@@ -36,19 +36,21 @@ Results from `testReport.json` contains 4 testsuites with 15 tests:
 | `utilities.test.ts`        | buildMarkdownTable              | ✅     |
 | `utilities.test.ts`        | markdownTitle                   | ✅     |
 | `utilities.test.ts`        | exportOutput                    | ✅     |
+| `utilities.test.ts`        | percentage                      | ✅     |
+| `utilities.test.ts`        | percentageNoZero                | ✅     |
 
 ## Detailed Code Coverage
 
 | 🗎 File                   | ☰ Lines | ᛘ Branches |
 | :------------------------ | ------: | ---------: |
-| `checkTestReport.ts`      |  100.0% |            |
+| `checkTestReport.ts`      |  100.0% |        N/A |
 | `createTestReport.ts`     |  100.0% |     100.0% |
-| `testReportConfig.ts`     |  100.0% |            |
+| `testReportConfig.ts`     |  100.0% |        N/A |
 | `testReportData.ts`       |  100.0% |     100.0% |
-| `testReportToManifest.ts` |  100.0% |            |
+| `testReportToManifest.ts` |  100.0% |     100.0% |
 | `testReportToMarkdown.ts` |  100.0% |     100.0% |
 | `createBadgeSvg.ts`       |  100.0% |     100.0% |
-| `junit_parser.ts`         |  100.0% |            |
+| `junit_parser.ts`         |  100.0% |        N/A |
 | `lcov_parser.ts`          |  100.0% |     100.0% |
 | `markdownUtils.ts`        |  100.0% |     100.0% |
 | `miscUtils.ts`            |  100.0% |     100.0% |

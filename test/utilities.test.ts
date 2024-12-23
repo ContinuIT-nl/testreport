@@ -1,5 +1,5 @@
 import { buildMarkdownTable, markdownTitle } from '../src/utilities/markdownUtils.ts';
-import { exportOutput } from '../src/utilities/miscUtils.ts';
+import { exportOutput, percentageNoZero, percentage } from '../src/utilities/miscUtils.ts';
 import { assertEquals } from '@std/assert';
 
 const testTable = [
@@ -36,4 +36,16 @@ Deno.test('exportOutput', async () => {
   await exportOutput(filename, () => 'test');
   const file = await Deno.readTextFile(filename);
   assertEquals(file, 'test');
+});
+
+Deno.test('percentage', () => {
+  assertEquals(percentage(1, 10), '10.0%');
+  assertEquals(percentage(0, 10), '0.0%');
+  assertEquals(percentage(1, 0), 'N/A');
+});
+
+Deno.test('percentageNoZero', () => {
+  assertEquals(percentageNoZero(1, 10), '10.0%');
+  assertEquals(percentageNoZero(0, 10), '');
+  assertEquals(percentageNoZero(1, 0), 'N/A');
 });

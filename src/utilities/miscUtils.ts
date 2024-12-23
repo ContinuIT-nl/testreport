@@ -1,6 +1,16 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
-export const percentage = (value: number, total: number) => value ? `${((value / total) * 100).toFixed(1)}%` : '';
+const invalidPercentage = 'N/A';
+
+export const percentageNoZero = (value: number, total: number) => {
+  if (!total) return invalidPercentage;
+  return value ? `${(value * 100 / total).toFixed(1)}%` : '';
+};
+
+export const percentage = (value: number, total: number) => {
+  if (!total) return invalidPercentage;
+  return `${(value * 100 / total).toFixed(1)}%`;
+};
 
 class WriteTextFileError extends Error {}
 class ReadTextFileError extends Error {}

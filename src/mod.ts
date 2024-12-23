@@ -29,7 +29,9 @@ Options:
   try {
     const configFile = `${args._[0]}`;
     const check = !!args.check;
-    await (check ? checkTestReport : createTestReport)(configFile);
+    const result = await (check ? checkTestReport : createTestReport)(configFile) ?? false;
+    // todo: createTestReport should return a boolean if all is successful
+    process.exit(result ? 0 : 1);
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exit(1);
