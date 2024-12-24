@@ -12,8 +12,9 @@ export const percentage = (value: number, total: number) => {
   return `${(value * 100 / total).toFixed(1)}%`;
 };
 
-class WriteTextFileError extends Error {}
-class ReadTextFileError extends Error {}
+export class TextFileError extends Error {}
+export class WriteTextFileError extends TextFileError {}
+export class ReadTextFileError extends TextFileError {}
 
 export async function exportOutput(filename: string | undefined, createData: () => string) {
   if (!filename) return;

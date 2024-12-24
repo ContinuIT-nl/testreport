@@ -1,7 +1,7 @@
 {
   "test_results": {
-    "junit": [],
-    "coverage": []
+    "junit": ["test_data/invalid_output/junit.xml"],
+    "coverage": ["test_data/invalid_output/lcov.info"]
   },
   "output": {
     "markdown": "test_output/invalid_folder/no_tests_results.md",

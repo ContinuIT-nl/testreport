@@ -47,6 +47,7 @@ Results from `testReport.json` contains 4 testsuites with 17 tests:
 | `createTestReport.ts`     |  100.0% |     100.0% |
 | `testReportConfig.ts`     |  100.0% |        N/A |
 | `testReportData.ts`       |  100.0% |     100.0% |
+| `testReportToBadges.ts`   |  100.0% |     100.0% |
 | `testReportToManifest.ts` |  100.0% |     100.0% |
 | `testReportToMarkdown.ts` |  100.0% |     100.0% |
 | `createBadgeSvg.ts`       |  100.0% |     100.0% |

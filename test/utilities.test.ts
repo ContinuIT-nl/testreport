@@ -1,5 +1,5 @@
 import { buildMarkdownTable, markdownTitle } from '../src/utilities/markdownUtils.ts';
-import { exportOutput, percentageNoZero, percentage } from '../src/utilities/miscUtils.ts';
+import { exportOutput, percentage, percentageNoZero } from '../src/utilities/miscUtils.ts';
 import { assertEquals } from '@std/assert';
 
 const testTable = [
