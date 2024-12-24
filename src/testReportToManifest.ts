@@ -1,9 +1,9 @@
 import { basename } from '@std/path';
 import { percentage, percentageNoZero } from './utilities/miscUtils.ts';
-import type { GetTestReportDataResult } from './testReportData.ts';
+import { getTestReportData, type GetTestReportDataResult } from './testReportData.ts';
 
-export const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
-  const { config, jUnitData, lcovSummary } = data;
+const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
+  const { config, jUnitData, lcovDatas, lcovSummary } = data;
 
   const test_total = jUnitData.tests;
   const test_skipped = jUnitData.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
@@ -49,7 +49,7 @@ export const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
     coverage_status,
 
     // Code coverage details
-    coverage_details: data.lcovDatas.map((file) => ({
+    coverage_details: lcovDatas.map((file) => ({
       name: file.filename,
       lines_total: file.linesFound,
       lines_hit: file.linesHit,
@@ -62,3 +62,10 @@ export const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
 };
 
 export type Manifest = ReturnType<typeof convertTestresultsToManifest>;
+
+export const getConfigAndManifest = async (source: string) => {
+  const data = await getTestReportData(source);
+  const config = data.config;
+  const manifest = convertTestresultsToManifest(data);
+  return { config, manifest };
+};

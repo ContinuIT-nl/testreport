@@ -99,19 +99,19 @@
       "state": "PASSED"
     }
   ],
-  "coverage_lines_total": 698,
-  "coverage_lines_hit": 698,
+  "coverage_lines_total": 701,
+  "coverage_lines_hit": 701,
   "coverage_lines_percentage": "100.0%",
-  "coverage_branches_total": 79,
-  "coverage_branches_hit": 79,
+  "coverage_branches_total": 80,
+  "coverage_branches_hit": 80,
   "coverage_branches_percentage": "100.0%",
   "coverage_percentage": "100.0%",
   "coverage_status": "ok",
   "coverage_details": [
     {
       "name": "checkTestReport.ts",
-      "lines_total": 11,
-      "lines_hit": 11,
+      "lines_total": 9,
+      "lines_hit": 9,
       "lines_percentage": "100.0%",
       "branches_total": 0,
       "branches_hit": 0,
@@ -119,8 +119,8 @@
     },
     {
       "name": "createTestReport.ts",
-      "lines_total": 13,
-      "lines_hit": 13,
+      "lines_total": 11,
+      "lines_hit": 11,
       "lines_percentage": "100.0%",
       "branches_total": 2,
       "branches_hit": 2,
@@ -155,11 +155,11 @@
     },
     {
       "name": "testReportToManifest.ts",
-      "lines_total": 48,
-      "lines_hit": 48,
+      "lines_total": 55,
+      "lines_hit": 55,
       "lines_percentage": "100.0%",
-      "branches_total": 16,
-      "branches_hit": 16,
+      "branches_total": 17,
+      "branches_hit": 17,
       "branches_percentage": "100.0%"
     },
     {
