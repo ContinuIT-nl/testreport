@@ -1,6 +1,6 @@
 # Test Results
 
-Results from `testReport.json` contains 4 testsuites with 18 tests:
+Results from `./test_results/testReport.json` contains 5 testsuites with 22 tests:
 
 ## Summary
 
@@ -8,14 +8,14 @@ Results from `testReport.json` contains 4 testsuites with 18 tests:
 
 | ☑ Tests | ✅ Success | ❌ Failures/Errors | ⚠️ Skipped |
 | ------: | --------: | ----------------: | ---------: |
-|      18 |        18 |                 0 |          0 |
+|      22 |        22 |                 0 |          0 |
 |         |      0.0% |                   |            |
 
 ### Code Coverage
 
 | ☰ Lines | ᛘ Branches |
 | ------: | ---------: |
-|  100.0% |     100.0% |
+|   99.6% |      96.6% |
 
 ## Detailed Test Results
 
@@ -34,6 +34,10 @@ Results from `testReport.json` contains 4 testsuites with 18 tests:
 | `./test/createTestReport.test.ts` | testReport_tests_invalid_definition | ✅     |
 | `./test/createTestReport.test.ts` | testReport_tests_invalid_input      | ✅     |
 | `./test/createTestReport.test.ts` | testReport_tests_invalid_output     | ✅     |
+| `./test/execute.test.ts`          | execute help                        | ✅     |
+| `./test/execute.test.ts`          | execute create                      | ✅     |
+| `./test/execute.test.ts`          | execute create invalidConfig        | ✅     |
+| `./test/execute.test.ts`          | execute check                       | ✅     |
 | `./test/utilities.test.ts`        | buildMarkdownTable                  | ✅     |
 | `./test/utilities.test.ts`        | markdownTitle                       | ✅     |
 | `./test/utilities.test.ts`        | exportOutput                        | ✅     |
@@ -46,6 +50,7 @@ Results from `testReport.json` contains 4 testsuites with 18 tests:
 | :------------------------ | ------: | ---------: |
 | `checkTestReport.ts`      |  100.0% |        N/A |
 | `createTestReport.ts`     |  100.0% |     100.0% |
+| `execute.ts`              |   87.5% |      62.5% |
 | `testReportConfig.ts`     |  100.0% |        N/A |
 | `testReportData.ts`       |  100.0% |     100.0% |
 | `testReportToBadges.ts`   |  100.0% |     100.0% |

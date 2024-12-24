@@ -1,9 +1,8 @@
-import { basename } from '@std/path';
 import { percentage, percentageNoZero } from './utilities/miscUtils.ts';
 import { getTestReportData, type GetTestReportDataResult } from './testReportData.ts';
 
 const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
-  const { config, jUnitData, lcovDatas, lcovSummary } = data;
+  const { source, config, jUnitData, lcovDatas, lcovSummary } = data;
 
   const test_total = jUnitData.tests;
   const test_skipped = jUnitData.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
@@ -22,7 +21,7 @@ const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
 
   return {
     // Source
-    source: basename(data.source),
+    source,
 
     // Test results
     testsuites_total: jUnitData.testSuites.length,
