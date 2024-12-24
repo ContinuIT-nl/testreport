@@ -1,6 +1,6 @@
 # Test Results
 
-Results from `testReport.json` contains 4 testsuites with 17 tests:
+Results from `testReport.json` contains 4 testsuites with 18 tests:
 
 ## Summary
 
@@ -8,7 +8,7 @@ Results from `testReport.json` contains 4 testsuites with 17 tests:
 
 | ☑ Tests | ✅ Success | ❌ Failures/Errors | ⚠️ Skipped |
 | ------: | --------: | ----------------: | ---------: |
-|      17 |        17 |                 0 |          0 |
+|      18 |        18 |                 0 |          0 |
 |         |      0.0% |                   |            |
 
 ### Code Coverage
@@ -19,25 +19,26 @@ Results from `testReport.json` contains 4 testsuites with 17 tests:
 
 ## Detailed Test Results
 
-| ✓✓ Test Suite              | ☑ Test                          | State |
-| -------------------------- | ------------------------------- | ----- |
-| `checkTestReport.test.ts`  | checkTestReport                 | ✅     |
-| `createBadge.test.ts`      | getWidth                        | ✅     |
-| `createBadge.test.ts`      | createBadge                     | ✅     |
-| `createBadge.test.ts`      | createBadge_no_message          | ✅     |
-| `createTestReport.test.ts` | testReport_deno_success         | ✅     |
-| `createTestReport.test.ts` | testReport_deno_failed          | ✅     |
-| `createTestReport.test.ts` | testReport_deno_disabled        | ✅     |
-| `createTestReport.test.ts` | testReport_jest                 | ✅     |
-| `createTestReport.test.ts` | testReport_vitest               | ✅     |
-| `createTestReport.test.ts` | testReport_no_tests             | ✅     |
-| `createTestReport.test.ts` | testReport_tests_invalid_input  | ✅     |
-| `createTestReport.test.ts` | testReport_tests_invalid_output | ✅     |
-| `utilities.test.ts`        | buildMarkdownTable              | ✅     |
-| `utilities.test.ts`        | markdownTitle                   | ✅     |
-| `utilities.test.ts`        | exportOutput                    | ✅     |
-| `utilities.test.ts`        | percentage                      | ✅     |
-| `utilities.test.ts`        | percentageNoZero                | ✅     |
+| ✓✓ Test Suite              | ☑ Test                              | State |
+| -------------------------- | ----------------------------------- | ----- |
+| `checkTestReport.test.ts`  | checkTestReport                     | ✅     |
+| `createBadge.test.ts`      | getWidth                            | ✅     |
+| `createBadge.test.ts`      | createBadge                         | ✅     |
+| `createBadge.test.ts`      | createBadge_no_message              | ✅     |
+| `createTestReport.test.ts` | testReport_deno_success             | ✅     |
+| `createTestReport.test.ts` | testReport_deno_failed              | ✅     |
+| `createTestReport.test.ts` | testReport_deno_disabled            | ✅     |
+| `createTestReport.test.ts` | testReport_jest                     | ✅     |
+| `createTestReport.test.ts` | testReport_vitest                   | ✅     |
+| `createTestReport.test.ts` | testReport_no_tests                 | ✅     |
+| `createTestReport.test.ts` | testReport_tests_invalid_definition | ✅     |
+| `createTestReport.test.ts` | testReport_tests_invalid_input      | ✅     |
+| `createTestReport.test.ts` | testReport_tests_invalid_output     | ✅     |
+| `utilities.test.ts`        | buildMarkdownTable                  | ✅     |
+| `utilities.test.ts`        | markdownTitle                       | ✅     |
+| `utilities.test.ts`        | exportOutput                        | ✅     |
+| `utilities.test.ts`        | percentage                          | ✅     |
+| `utilities.test.ts`        | percentageNoZero                    | ✅     |
 
 ## Detailed Code Coverage
 

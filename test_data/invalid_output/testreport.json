@@ -4,9 +4,9 @@
     "coverage": ["test_data/invalid_output/lcov.info"]
   },
   "output": {
-    "markdown": "test_output/invalid_folder/no_tests_results.md",
-    "manifest": "test_output/invalid_folder/no_tests_manifest.json",
-    "testBadge": "test_output/invalid_folder/no_tests_test_badge.svg",
-    "coverageBadge": "test_output/invalid_folder/no_tests_coverage_badge.svg"
+    "markdown": "test_output/invalid_folder/results.md",
+    "manifest": "test_output/invalid_folder/manifest.json",
+    "testBadge": "test_output/invalid_folder/test_badge.svg",
+    "coverageBadge": "test_output/invalid_folder/coverage_badge.svg"
   }
 }
