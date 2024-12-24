@@ -71,23 +71,17 @@ function createLcovSummary(lcov: LcovFile[]): LcovSummary {
 }
 
 export type GetTestReportDataResult = {
-  reportDefinitionFilename: string;
-  reportConfig: TestReportConfig;
+  source: string;
+  config: TestReportConfig;
   lcovDatas: LcovFile[];
   lcovSummary: LcovSummary;
   jUnitData: TestSuites;
 };
 
-export async function getTestReportData(reportDefinitionFilename: string): Promise<GetTestReportDataResult> {
-  const reportConfig = await loadReportConfig(reportDefinitionFilename);
-  const lcovDatas = await loadLcovData(reportConfig.test_results.coverage);
+export async function getTestReportData(source: string): Promise<GetTestReportDataResult> {
+  const config = await loadReportConfig(source);
+  const lcovDatas = await loadLcovData(config.test_results.coverage);
   const lcovSummary = createLcovSummary(lcovDatas);
-  const jUnitData = await getJUnitData(reportConfig);
-  return {
-    reportDefinitionFilename,
-    reportConfig,
-    lcovDatas,
-    lcovSummary,
-    jUnitData,
-  };
+  const jUnitData = await getJUnitData(config);
+  return { source, config, lcovDatas, lcovSummary, jUnitData };
 }

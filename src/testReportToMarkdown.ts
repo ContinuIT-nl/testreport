@@ -1,18 +1,12 @@
-import type { TestCaseState, TestSuites } from './utilities/junit_parser.ts';
-import type { LcovFile, LcovSummary } from './utilities/lcov_parser.ts';
-import type { GetTestReportDataResult } from './testReportData.ts';
+import type { TestCaseState } from './utilities/junit_parser.ts';
+import type { Manifest } from './testReportToManifest.ts';
 import { buildMarkdownTable, markdownTitle } from './utilities/markdownUtils.ts';
-import { percentage } from './utilities/miscUtils.ts';
-import { basename } from '@std/path';
+import { percentage, percentageNoZero } from './utilities/miscUtils.ts';
 
 const testState = (state: TestCaseState) => state === 'PASSED' ? '✅' : state === 'FAILED' ? '❌' : '⚠️';
 
-function getTestResultSummary(jUnitResults: TestSuites) {
-  const skipped = jUnitResults.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
-  const success = jUnitResults.tests - jUnitResults.failures - jUnitResults.errors - skipped;
-
-  // Testresult summary
-  return buildMarkdownTable(
+const getTestResultSummary = (manifest: Manifest) =>
+  buildMarkdownTable(
     [
       '☑ Tests',
       `${testState('PASSED')} Success`,
@@ -21,75 +15,57 @@ function getTestResultSummary(jUnitResults: TestSuites) {
     ],
     ['right', 'right', 'right', 'right'],
     [[
-      jUnitResults.tests.toLocaleString(),
-      success.toLocaleString(),
-      (jUnitResults.failures + jUnitResults.errors).toLocaleString(),
-      skipped.toLocaleString(),
-    ], ['', percentage(skipped, jUnitResults.tests), '', '']],
+      manifest.test_total.toLocaleString(),
+      manifest.test_passed.toLocaleString(),
+      manifest.test_failed.toLocaleString(),
+      manifest.test_skipped.toLocaleString(),
+    ], ['', percentage(manifest.test_skipped, manifest.test_total), '', '']],
   );
-}
 
-function getCodeCoverageSummary(lcovSummary: LcovSummary) {
-  return buildMarkdownTable(
+const getCodeCoverageSummary = (manifest: Manifest) =>
+  buildMarkdownTable(
     ['☰ Lines', 'ᛘ Branches'],
     ['right', 'right'],
     [[
-      percentage(lcovSummary.linesHit, lcovSummary.linesFound),
-      percentage(lcovSummary.branchesHit, lcovSummary.branchesFound),
+      percentageNoZero(manifest.coverage_lines_hit, manifest.coverage_lines_total),
+      percentageNoZero(manifest.coverage_branches_hit, manifest.coverage_branches_total),
     ]],
   );
-}
 
-function getTestDetails(jUnitResults: TestSuites) {
-  const testDetailRows: string[][] = [];
-
-  for (const testSuite of jUnitResults.testSuites) {
-    for (const testCase of testSuite.testCases) {
-      testDetailRows.push([
-        `\`${basename(testSuite.name)}\``,
-        testCase.name,
-        testState(testCase.state),
-      ]);
-    }
-  }
-
-  return buildMarkdownTable(
+const getTestDetails = (manifest: Manifest) =>
+  buildMarkdownTable(
     ['✓✓ Test Suite', '☑ Test', 'State'],
     ['default', 'default', 'default'],
-    testDetailRows,
+    manifest.test_details.map((row) => [`\`${row.suite}\``, row.test, testState(row.state)]),
   );
-}
 
-function getCodeCoverageDetails(lcovResults: LcovFile[]) {
-  return buildMarkdownTable(
+const getCodeCoverageDetails = (manifest: Manifest) =>
+  buildMarkdownTable(
     ['🗎 File', '☰ Lines', 'ᛘ Branches'],
     ['left', 'right', 'right'],
-    lcovResults.map((file) => [
-      `\`${file.filename}\``,
-      percentage(file.linesHit, file.linesFound),
-      percentage(file.branchesHit, file.branchesFound),
+    manifest.coverage_details.map((file) => [
+      `\`${file.name}\``,
+      percentageNoZero(file.lines_hit, file.lines_total),
+      percentageNoZero(file.branches_hit, file.branches_total),
     ]),
   );
-}
 
-const testResulsHeaderLine = (data: GetTestReportDataResult) => [
-  `Results from \`${
-    basename(data.reportDefinitionFilename)
-  }\` contains ${data.jUnitData.testSuites.length} testsuites with ${data.jUnitData.tests} tests:`,
+const testResulsHeaderLine = (manifest: Manifest) => [
+  `Results from \`${manifest.source}\` contains ${manifest.testsuites_total} testsuites with ${manifest.test_total} tests:`,
   '',
 ];
 
-export const convertTestresultsToMarkdown = (data: GetTestReportDataResult) =>
+export const convertTestresultsToMarkdown = (manifest: Manifest) =>
   [
     markdownTitle('Test Results', 1),
-    testResulsHeaderLine(data),
+    testResulsHeaderLine(manifest),
     markdownTitle('Summary', 2),
     markdownTitle('Test Results', 3),
-    getTestResultSummary(data.jUnitData),
+    getTestResultSummary(manifest),
     markdownTitle('Code Coverage', 3),
-    getCodeCoverageSummary(data.lcovSummary),
+    getCodeCoverageSummary(manifest),
     markdownTitle('Detailed Test Results', 2),
-    getTestDetails(data.jUnitData),
+    getTestDetails(manifest),
     markdownTitle('Detailed Code Coverage', 2),
-    getCodeCoverageDetails(data.lcovDatas),
+    getCodeCoverageDetails(manifest),
   ].flat().join('\n');

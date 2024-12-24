@@ -1,8 +1,9 @@
+import { basename } from '@std/path';
 import { percentage, percentageNoZero } from './utilities/miscUtils.ts';
 import type { GetTestReportDataResult } from './testReportData.ts';
 
 export const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
-  const { reportConfig, jUnitData, lcovSummary } = data;
+  const { config, jUnitData, lcovSummary } = data;
 
   const test_total = jUnitData.tests;
   const test_skipped = jUnitData.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
@@ -17,10 +18,14 @@ export const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
   const coverages = [coverage_lines, coverage_branches].filter((c) => c !== undefined);
   const coverage_percentage = coverages.length !== 0 ? `${Math.min(...coverages).toFixed(1)}%` : 'N/A';
   const coverage = coverages.length !== 0 ? Math.min(...coverages) : 0;
-  const coverage_status = coverage >= reportConfig.constants.coverage_threshold ? 'ok' : 'failed';
+  const coverage_status = coverage >= config.constants.coverage_threshold ? 'ok' : 'failed';
 
   return {
+    // Source
+    source: basename(data.source),
+
     // Test results
+    testsuites_total: jUnitData.testSuites.length,
     test_total,
     test_passed,
     test_failed,
@@ -28,9 +33,9 @@ export const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
     test_status,
     test_percentage: percentage(test_passed, test_total),
 
-    // Test results details todo: better here
+    // Test results details
     test_details: jUnitData.testSuites.map((suite) =>
-      suite.testCases.map((test) => [suite.name, test.name, test.state])
+      suite.testCases.map((test) => ({ suite: suite.name, test: test.name, state: test.state }))
     ).flat(),
 
     // Code coverage

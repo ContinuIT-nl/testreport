@@ -23,7 +23,7 @@ export async function exportOutput(filename: string | undefined, createData: () 
     const dataBytes = utf8Encoder.encode(createData());
     await writeFile(filename, dataBytes);
   } catch (error) {
-    throw new WriteTextFileError(`Error writing file ${filename}`, { cause: error});
+    throw new WriteTextFileError(`Error writing file ${filename}`, { cause: error });
   }
 }
 
