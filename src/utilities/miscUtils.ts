@@ -23,15 +23,16 @@ export async function exportOutput(filename: string | undefined, createData: () 
     const dataBytes = utf8Encoder.encode(createData());
     await writeFile(filename, dataBytes);
   } catch (error) {
-    throw new WriteTextFileError(`Error writing file ${filename}: ${(error as Error).message}`);
+    throw new WriteTextFileError(`Error writing file ${filename}`, { cause: error});
   }
 }
 
 export async function readTextFile(filename: string): Promise<string> {
   try {
     const fileBytes = await readFile(filename);
-    return new TextDecoder().decode(fileBytes);
-  } catch (error) { // Create a nice exception text
-    throw new ReadTextFileError(`Error reading file ${filename}: ${(error as Error).message}`);
+    const utf8decoder = new TextDecoder();
+    return utf8decoder.decode(fileBytes);
+  } catch (error) {
+    throw new ReadTextFileError(`Error reading file ${filename}`, { cause: error });
   }
 }
