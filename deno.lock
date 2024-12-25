@@ -2,7 +2,7 @@
   "version": "4",
   "specifiers": {
     "jsr:@continuit/xmlscanner@1": "1.0.0",
-    "jsr:@std/assert@^1.0.9": "1.0.9",
+    "jsr:@std/assert@^1.0.10": "1.0.10",
     "jsr:@std/cli@^1.0.9": "1.0.9",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/path@^1.0.8": "1.0.8",
@@ -15,8 +15,8 @@
     "@continuit/xmlscanner@1.0.0": {
       "integrity": "3efc4c235eaa8e82518641c47e4e1fae95029b379a2e7e9054453f3620ce7a33"
     },
-    "@std/assert@1.0.9": {
-      "integrity": "a9f0c611a869cc791b26f523eec54c7e187aab7932c2c8e8bea0622d13680dcd",
+    "@std/assert@1.0.10": {
+      "integrity": "59b5cbac5bd55459a19045d95cc7c2ff787b4f8527c0dd195078ff6f9481fbb3",
       "dependencies": [
         "jsr:@std/internal"
       ]
@@ -54,7 +54,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@continuit/xmlscanner@1",
-      "jsr:@std/assert@^1.0.9",
+      "jsr:@std/assert@^1.0.10",
       "jsr:@std/cli@^1.0.9",
       "jsr:@std/path@^1.0.8",
       "npm:zod@^3.24.1"

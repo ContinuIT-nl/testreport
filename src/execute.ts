@@ -20,15 +20,15 @@ export const execute = async (cmdLineArguments: string[]): Promise<number> => {
   if (args.help || !configFile) {
     console.log(`
 Usage:
-  test-report [options] <config-file>
+  testreport [options] <config-file>
 
 Options:
   -c, --check  Check the test report. If omitted, the test report is created.
   -h, --help   Show help.
 
 Example:
-  test-report -c test-report.json
-  test-report test-report.json
+  testreport -c test-report.json
+  testreport test-report.json
 `);
     return 0;
   }
@@ -37,9 +37,9 @@ Example:
   try {
     console.log(`Executing ${check ? 'check' : 'create'} test report for ${configFile}`);
     const command: Command = check ? checkTestReport : createTestReport;
-    // Convert success to 0, failure to 1 as exit code
     const result = await command(configFile);
     console.log(`${check ? 'Check' : 'Create'} test report ${result ? 'succeeded' : 'failed'}`);
+    // Convert success to 0, failure to 1 as exit code
     return result ? 0 : 1;
   } catch (error) {
     console.error((error as Error).message);

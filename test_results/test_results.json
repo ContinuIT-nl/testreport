@@ -1,5 +1,5 @@
 {
-  "source": "./test_results/testReport.json",
+  "source": "./test_results/testreport.json",
   "testsuites_total": 5,
   "test_total": 23,
   "test_passed": 23,

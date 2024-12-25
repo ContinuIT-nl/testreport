@@ -1,11 +1,11 @@
 # testreport
 
 [![JSR](https://jsr.io/badges/@continuit/testreport)](https://jsr.io/@continuit/testreport)
-[![NPM](https://img.shields.io/npm/v/@continuit/testreport?logo=npm)](https://www.npmjs.com/package/@continuit/testreport)
 [![ci](https://github.com/ContinuIT-nl/testreport/actions/workflows/ci.yml/badge.svg)](https://github.com/ContinuIT-nl/testreport/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This utility creates a test report from a JUnit XML file and a LCOV file.
+This utility creates a test report from a JUnit XML file and a LCOV file or checks if a test report is up to date with the current test results.
+
 It has two modes of operation:
 
 - Create a test report and badges from a JUnit XML file and a LCOV file.
@@ -19,10 +19,10 @@ This can be used to ensure that the test report is updated with the current test
 
 ## Usage
 
-| Platform | Command                              |
-| -------- | ------------------------------------ |
-| npm      | `npm install @continuit/testreport`  |
-| deno     | `deno add jsr:@continuit/testreport` |
+| Platform | Command                                                 |
+| -------- | ------------------------------------------------------- |
+| npm      | `npm install @continuit/testreport` (not yet available) |
+| deno     | `deno add jsr:@continuit/testreport`                    |
 
 For other platforms see [jsr.io](https://jsr.io/packages/@continuit/testreport) for more information.
 
@@ -41,6 +41,13 @@ Create a test report definition file, for example `testreport.json`:
     "manifest": "testresults/manifest.json",
     "testBadge": "testresults/test_badge.svg",
     "coverageBadge": "testresults/coverage_badge.svg"
+  },
+  "constants": {
+    "test_label": "tests",
+    "test_label_color": "#555",
+    "test_message_color_ok": "#3C1",
+    "test_message_color_failed": "#900",
+    "test_message_color_disabled": "#880"
   }
 }
 ```
@@ -164,8 +171,8 @@ export default defineConfig({
     },
     environment: 'node',
     globals: true,
-    include: ['**/*.test.mjs'],
-    exclude: ['node_modules', 'dist'],
+    include: [...],
+    exclude: [...],
     reporters: ['junit'],
     outputFile: 'test-results.xml',
   },

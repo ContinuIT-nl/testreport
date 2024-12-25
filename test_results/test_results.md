@@ -1,6 +1,6 @@
 # Test Results
 
-Results from `./test_results/testReport.json` contains 5 testsuites with 23 tests:
+Results from `./test_results/testreport.json` contains 5 testsuites with 23 tests:
 
 ## Summary
 
