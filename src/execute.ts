@@ -13,8 +13,11 @@ export const execute = async (cmdLineArguments: string[]): Promise<number> => {
     },
   });
 
+  const check = !!args.check;
+  const configFile = check ? args.check : args._[0];
+
   // Show help?
-  if (args.help || args._?.length !== 1) {
+  if (args.help || !configFile) {
     console.log(`
 Usage:
   test-report [options] <config-file>
@@ -22,18 +25,24 @@ Usage:
 Options:
   -c, --check  Check the test report. If omitted, the test report is created.
   -h, --help   Show help.
+
+Example:
+  test-report -c test-report.json
+  test-report test-report.json
 `);
     return 0;
   }
 
   // Perform requested action
   try {
-    const configFile = `${args._[0]}`;
-    const command: Command = args.check ? checkTestReport : createTestReport;
+    console.log(`Executing ${check ? 'check' : 'create'} test report for ${configFile}`);
+    const command: Command = check ? checkTestReport : createTestReport;
     // Convert success to 0, failure to 1 as exit code
-    return await command(configFile) ? 0 : 1;
+    const result = await command(configFile);
+    console.log(`${check ? 'Check' : 'Create'} test report ${result ? 'succeeded' : 'failed'}`);
+    return result ? 0 : 1;
   } catch (error) {
-    console.error(error instanceof Error ? error.message : String(error));
+    console.error((error as Error).message);
     return 1;
   }
 };

@@ -15,7 +15,7 @@ async function loadLcovData(lcovFilenames: string[]): Promise<LcovFile[]> {
       const lcovData = await readTextFile(lcovFilename);
       lcovDatas.push(...lcovParser(lcovData));
     } catch (error) {
-      console.error(`Error reading LCOV file ${lcovFilename}: ${error}`);
+      console.error((error as Error).message);
     }
   }
   return lcovDatas;

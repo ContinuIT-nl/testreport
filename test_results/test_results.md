@@ -1,6 +1,6 @@
 # Test Results
 
-Results from `./test_results/testReport.json` contains 5 testsuites with 22 tests:
+Results from `./test_results/testReport.json` contains 5 testsuites with 23 tests:
 
 ## Summary
 
@@ -8,14 +8,14 @@ Results from `./test_results/testReport.json` contains 5 testsuites with 22 test
 
 | ☑ Tests | ✅ Success | ❌ Failures/Errors | ⚠️ Skipped |
 | ------: | --------: | ----------------: | ---------: |
-|      22 |        22 |                 0 |          0 |
+|      23 |        23 |                 0 |          0 |
 |         |      0.0% |                   |            |
 
 ### Code Coverage
 
 | ☰ Lines | ᛘ Branches |
 | ------: | ---------: |
-|   99.6% |      96.6% |
+|  100.0% |     100.0% |
 
 ## Detailed Test Results
 
@@ -38,6 +38,7 @@ Results from `./test_results/testReport.json` contains 5 testsuites with 22 test
 | `./test/execute.test.ts`          | execute create                      | ✅     |
 | `./test/execute.test.ts`          | execute create invalidConfig        | ✅     |
 | `./test/execute.test.ts`          | execute check                       | ✅     |
+| `./test/execute.test.ts`          | execute check unequal               | ✅     |
 | `./test/utilities.test.ts`        | buildMarkdownTable                  | ✅     |
 | `./test/utilities.test.ts`        | markdownTitle                       | ✅     |
 | `./test/utilities.test.ts`        | exportOutput                        | ✅     |
@@ -50,7 +51,7 @@ Results from `./test_results/testReport.json` contains 5 testsuites with 22 test
 | :------------------------ | ------: | ---------: |
 | `checkTestReport.ts`      |  100.0% |        N/A |
 | `createTestReport.ts`     |  100.0% |     100.0% |
-| `execute.ts`              |   87.5% |      62.5% |
+| `execute.ts`              |  100.0% |     100.0% |
 | `testReportConfig.ts`     |  100.0% |        N/A |
 | `testReportData.ts`       |  100.0% |     100.0% |
 | `testReportToBadges.ts`   |  100.0% |     100.0% |

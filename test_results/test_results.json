@@ -1,8 +1,8 @@
 {
   "source": "./test_results/testReport.json",
   "testsuites_total": 5,
-  "test_total": 22,
-  "test_passed": 22,
+  "test_total": 23,
+  "test_passed": 23,
   "test_failed": 0,
   "test_skipped": 0,
   "test_status": "passed",
@@ -94,6 +94,11 @@
       "state": "PASSED"
     },
     {
+      "suite": "./test/execute.test.ts",
+      "test": "execute check unequal",
+      "state": "PASSED"
+    },
+    {
       "suite": "./test/utilities.test.ts",
       "test": "buildMarkdownTable",
       "state": "PASSED"
@@ -119,14 +124,14 @@
       "state": "PASSED"
     }
   ],
-  "coverage_lines_total": 725,
-  "coverage_lines_hit": 722,
-  "coverage_lines_percentage": "99.6%",
-  "coverage_branches_total": 89,
-  "coverage_branches_hit": 86,
-  "coverage_branches_percentage": "96.6%",
-  "coverage_percentage": "96.6%",
-  "coverage_status": "failed",
+  "coverage_lines_total": 729,
+  "coverage_lines_hit": 729,
+  "coverage_lines_percentage": "100.0%",
+  "coverage_branches_total": 98,
+  "coverage_branches_hit": 98,
+  "coverage_branches_percentage": "100.0%",
+  "coverage_percentage": "100.0%",
+  "coverage_status": "ok",
   "coverage_details": [
     {
       "name": "checkTestReport.ts",
@@ -148,12 +153,12 @@
     },
     {
       "name": "execute.ts",
-      "lines_total": 24,
-      "lines_hit": 21,
-      "lines_percentage": "87.5%",
-      "branches_total": 8,
-      "branches_hit": 5,
-      "branches_percentage": "62.5%"
+      "lines_total": 28,
+      "lines_hit": 28,
+      "lines_percentage": "100.0%",
+      "branches_total": 17,
+      "branches_hit": 17,
+      "branches_percentage": "100.0%"
     },
     {
       "name": "testReportConfig.ts",
