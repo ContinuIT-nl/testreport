@@ -25,15 +25,15 @@ Results from `./test_results/testreport.json` contains 5 testsuites with 23 test
 | `./test/createBadge.test.ts`      | getWidth                            | ✅     |
 | `./test/createBadge.test.ts`      | createBadge                         | ✅     |
 | `./test/createBadge.test.ts`      | createBadge_no_message              | ✅     |
-| `./test/createTestReport.test.ts` | testReport_deno_success             | ✅     |
-| `./test/createTestReport.test.ts` | testReport_deno_failed              | ✅     |
-| `./test/createTestReport.test.ts` | testReport_deno_disabled            | ✅     |
-| `./test/createTestReport.test.ts` | testReport_jest                     | ✅     |
-| `./test/createTestReport.test.ts` | testReport_vitest                   | ✅     |
-| `./test/createTestReport.test.ts` | testReport_no_tests                 | ✅     |
-| `./test/createTestReport.test.ts` | testReport_tests_invalid_definition | ✅     |
-| `./test/createTestReport.test.ts` | testReport_tests_invalid_input      | ✅     |
-| `./test/createTestReport.test.ts` | testReport_tests_invalid_output     | ✅     |
+| `./test/createTestReport.test.ts` | testreport_deno_success             | ✅     |
+| `./test/createTestReport.test.ts` | testreport_deno_failed              | ✅     |
+| `./test/createTestReport.test.ts` | testreport_deno_disabled            | ✅     |
+| `./test/createTestReport.test.ts` | testreport_jest                     | ✅     |
+| `./test/createTestReport.test.ts` | testreport_vitest                   | ✅     |
+| `./test/createTestReport.test.ts` | testreport_no_tests                 | ✅     |
+| `./test/createTestReport.test.ts` | testreport_tests_invalid_definition | ✅     |
+| `./test/createTestReport.test.ts` | testreport_tests_invalid_input      | ✅     |
+| `./test/createTestReport.test.ts` | testreport_tests_invalid_output     | ✅     |
 | `./test/execute.test.ts`          | execute help                        | ✅     |
 | `./test/execute.test.ts`          | execute create                      | ✅     |
 | `./test/execute.test.ts`          | execute create invalidConfig        | ✅     |

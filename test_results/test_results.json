@@ -30,47 +30,47 @@
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_deno_success",
+      "test": "testreport_deno_success",
       "state": "PASSED"
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_deno_failed",
+      "test": "testreport_deno_failed",
       "state": "PASSED"
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_deno_disabled",
+      "test": "testreport_deno_disabled",
       "state": "PASSED"
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_jest",
+      "test": "testreport_jest",
       "state": "PASSED"
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_vitest",
+      "test": "testreport_vitest",
       "state": "PASSED"
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_no_tests",
+      "test": "testreport_no_tests",
       "state": "PASSED"
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_tests_invalid_definition",
+      "test": "testreport_tests_invalid_definition",
       "state": "PASSED"
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_tests_invalid_input",
+      "test": "testreport_tests_invalid_input",
       "state": "PASSED"
     },
     {
       "suite": "./test/createTestReport.test.ts",
-      "test": "testReport_tests_invalid_output",
+      "test": "testreport_tests_invalid_output",
       "state": "PASSED"
     },
     {
