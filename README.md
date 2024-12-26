@@ -2,6 +2,8 @@
 
 [![JSR](https://jsr.io/badges/@continuit/testreport)](https://jsr.io/@continuit/testreport)
 [![ci](https://github.com/ContinuIT-nl/testreport/actions/workflows/ci.yml/badge.svg)](https://github.com/ContinuIT-nl/testreport/actions/workflows/ci.yml)
+[![test](./test_results/test_badge.svg)](./test_results/test_results.md)
+[![coverage](./test_results/coverage_badge.svg)](./test_results/test_results.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This utility creates a test report from a JUnit XML file and a LCOV file or checks if a test report is up to date with the current test results.
@@ -78,13 +80,13 @@ This whole section is optional. It contains the constants for generating the bad
 | --------------------------------- | ------- | ------------- |
 | `test_label`                      | string  | "tests"       |
 | `test_label_color`                | string  | "#555"        |
-| `test_message_color_ok`           | string  | "#3C1"        |
+| `test_message_color_ok`           | string  | "#2EBE4E"     |
 | `test_message_color_failed`       | string  | "#900"        |
 | `test_message_color_disabled`     | string  | "#880"        |
 | `test_rounded`                    | boolean | true          |
 | `coverage_label`                  | string  | "coverage"    |
 | `coverage_label_color`            | string  | "#555"        |
-| `coverage_message_color_ok`       | string  | "#3C1"        |
+| `coverage_message_color_ok`       | string  | "#2EBE4E"     |
 | `coverage_message_color_failed`   | string  | "#900"        |
 | `coverage_message_color_disabled` | string  | "#880"        |
 | `coverage_rounded`                | boolean | true          |
@@ -96,6 +98,10 @@ Run the testreport utility:
 
 ```bash
 testreport testreport.json
+
+or
+
+deno run -RW jsr:@continuit/testreport testreport.json
 ```
 
 In the above example the test report will be created in the `testresults` folder.

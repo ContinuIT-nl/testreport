@@ -1,6 +1,6 @@
 import { z } from 'npm:zod';
 
-const defaultOKColor = '#3C1';
+const defaultOKColor = '#2EBE4E';
 const defaultFailedColor = '#900';
 const defaultDisabledColor = '#880';
 const defaultLabelColor = '#555';
