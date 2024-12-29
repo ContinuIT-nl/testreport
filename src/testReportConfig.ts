@@ -7,7 +7,6 @@ const defaultLabelColor = '#555';
 
 const styleSchema = z.union([z.literal('flat'), z.literal('rectangle')]).default('flat');
 
-
 const testBadgeSchema = z.object({
   output: z.string(),
   label: z.string().default('tests'),
@@ -16,7 +15,7 @@ const testBadgeSchema = z.object({
   color_ok: z.string().default(defaultOKColor),
   color_none: z.string().default(defaultDisabledColor),
   color_disabled: z.string().default(defaultDisabledColor),
-  color_failed: z.string().default(defaultFailedColor)
+  color_failed: z.string().default(defaultFailedColor),
 });
 
 const coverageBadgeSchema = z.object({
@@ -24,14 +23,14 @@ const coverageBadgeSchema = z.object({
   label: z.string().default('coverage'),
   color_label: z.string().default(defaultLabelColor),
   style: styleSchema,
-  levels: z.array(z.object({ 
-    threshold: z.number(), 
-    color: z.string() 
+  levels: z.array(z.object({
+    threshold: z.number(),
+    color: z.string(),
   })).default([
     { threshold: 99, color: defaultOKColor },
     { threshold: 90, color: defaultDisabledColor },
-    { threshold: 0, color: defaultFailedColor }
-  ])
+    { threshold: 0, color: defaultFailedColor },
+  ]),
 });
 
 export const testReportConfigSchema = z.object({
@@ -41,30 +40,30 @@ export const testReportConfigSchema = z.object({
   $schema: z.string().default(
     'https://github.com/ContinuIT-nl/testreport/blob/main/configSchema/testReportConfigSchema.json',
   ),
-  
+
   input: z.object({
     junit: z.array(z.string()),
-    coverage: z.array(z.string())
+    coverage: z.array(z.string()),
   }),
-  
+
   limits: z.object({
     test_percentage_failed: z.number().default(0),
     test_percentage_disabled: z.number().default(0),
-    coverage_percentage_minimal: z.number().default(90)
+    coverage_percentage_minimal: z.number().default(90),
   }).optional(),
-  
-  manifest: z.object({ 
-    output: z.string() 
+
+  manifest: z.object({
+    output: z.string(),
   }).optional(),
-  
-  markdown: z.object({ 
-    output: z.string(), 
-    badges: z.boolean().default(true) 
+
+  markdown: z.object({
+    output: z.string(),
+    badges: z.boolean().default(true),
   }).optional(),
-  
+
   testBadge: testBadgeSchema.optional(),
 
-  coverageBadge: coverageBadgeSchema.optional()
+  coverageBadge: coverageBadgeSchema.optional(),
 });
 
 /**

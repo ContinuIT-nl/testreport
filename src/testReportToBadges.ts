@@ -1,4 +1,4 @@
-import type { CoverageBadgeConfig, TestBadgeConfig, TestReportConfig } from './testReportConfig.ts';
+import type { CoverageBadgeConfig, TestBadgeConfig } from './testReportConfig.ts';
 import type { Manifest } from './testReportToManifest.ts';
 import { createBadgeSvg } from './utilities/createBadgeSvg.ts';
 
