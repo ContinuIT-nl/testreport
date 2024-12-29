@@ -1,13 +1,13 @@
-import type { TestReportConfig } from './testReportConfig.ts';
+import type { CoverageBadgeConfig, TestBadgeConfig, TestReportConfig } from './testReportConfig.ts';
 import type { Manifest } from './testReportToManifest.ts';
 import { createBadgeSvg } from './utilities/createBadgeSvg.ts';
 
-export function createTestBadge(reportConfig: TestReportConfig, manifest: Manifest): string {
+export function createTestBadge(config: TestBadgeConfig, manifest: Manifest): string {
   const messageColor = {
-    'no tests': reportConfig.constants.test_message_color_failed,
-    failed: reportConfig.constants.test_message_color_failed,
-    skipped: reportConfig.constants.test_message_color_disabled,
-    passed: reportConfig.constants.test_message_color_ok,
+    'no tests': config.color_none,
+    failed: config.color_failed,
+    skipped: config.color_disabled,
+    passed: config.color_ok,
   }[manifest.test_status];
 
   const message = {
@@ -18,21 +18,20 @@ export function createTestBadge(reportConfig: TestReportConfig, manifest: Manife
   }[manifest.test_status];
 
   return createBadgeSvg({
-    label: reportConfig.constants.test_label,
+    label: config.label,
     message,
-    labelColor: reportConfig.constants.test_label_color,
+    labelColor: config.color_label,
     messageColor,
-    rounded: reportConfig.constants.test_rounded,
+    rounded: config.style === 'flat',
   });
 }
 
-export const createCoverageBadge = (reportConfig: TestReportConfig, manifest: Manifest): string =>
+export const createCoverageBadge = (config: CoverageBadgeConfig, manifest: Manifest): string =>
+  // Derive color
   createBadgeSvg({
-    label: reportConfig.constants.coverage_label,
+    label: config.label,
     message: manifest.coverage_percentage,
-    labelColor: reportConfig.constants.coverage_label_color,
-    messageColor: manifest.coverage_status === 'ok'
-      ? reportConfig.constants.coverage_message_color_ok
-      : reportConfig.constants.coverage_message_color_failed,
-    rounded: reportConfig.constants.coverage_rounded,
+    labelColor: config.color_label,
+    messageColor: manifest.coverage_color,
+    rounded: config.style === 'flat',
   });

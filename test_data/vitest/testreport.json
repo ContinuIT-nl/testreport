@@ -1,12 +1,22 @@
 {
-  "test_results": {
+  "input": {
     "junit": ["test_data/vitest/report.xml"],
     "coverage": ["test_data/vitest/lcov.info"]
   },
-  "output": {
-    "markdown": "test_output/vitest/vitest_test_results.md",
-    "manifest": "test_output/vitest/vitest_manifest.json",
-    "testBadge": "test_output/vitest/vitest_test_badge.svg",
-    "coverageBadge": "test_output/vitest/vitest_coverage_badge.svg"
+  "limits": {
+    "coverage_percentage_minimal": 80
+  },
+  "manifest": {
+    "output": "test_output/vitest/results.json"
+  },
+  "markdown": {
+    "output": "test_output/vitest/results.md",
+    "badges": true
+  },
+  "testBadge": {
+    "output": "test_output/vitest/test_badge.svg"
+  },
+  "coverageBadge": {
+    "output": "test_output/vitest/coverage_badge.svg"
   }
 }

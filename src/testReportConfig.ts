@@ -4,6 +4,36 @@ const defaultOKColor = '#2EBE4E';
 const defaultFailedColor = '#900';
 const defaultDisabledColor = '#880';
 const defaultLabelColor = '#555';
+
+const styleSchema = z.union([z.literal('flat'), z.literal('rectangle')]).default('flat');
+
+
+const testBadgeSchema = z.object({
+  output: z.string(),
+  label: z.string().default('tests'),
+  color_label: z.string().default(defaultLabelColor),
+  style: styleSchema,
+  color_ok: z.string().default(defaultOKColor),
+  color_none: z.string().default(defaultDisabledColor),
+  color_disabled: z.string().default(defaultDisabledColor),
+  color_failed: z.string().default(defaultFailedColor)
+});
+
+const coverageBadgeSchema = z.object({
+  output: z.string(),
+  label: z.string().default('coverage'),
+  color_label: z.string().default(defaultLabelColor),
+  style: styleSchema,
+  levels: z.array(z.object({ 
+    threshold: z.number(), 
+    color: z.string() 
+  })).default([
+    { threshold: 99, color: defaultOKColor },
+    { threshold: 90, color: defaultDisabledColor },
+    { threshold: 0, color: defaultFailedColor }
+  ])
+});
+
 export const testReportConfigSchema = z.object({
   /**
    * Schema version.
@@ -11,129 +41,36 @@ export const testReportConfigSchema = z.object({
   $schema: z.string().default(
     'https://github.com/ContinuIT-nl/testreport/blob/main/configSchema/testReportConfigSchema.json',
   ),
-  /**
-   * Test results configuration.
-   */
-  test_results: z.object({
-    /**
-     * Array of file paths to JUnit test result files.
-     */
+  
+  input: z.object({
     junit: z.array(z.string()),
-    /**
-     * Array of file paths to coverage result files.
-     */
-    coverage: z.array(z.string()),
+    coverage: z.array(z.string())
   }),
-  constants: z.object({
-    /**
-     * Label for the test badge.
-     * Default value is 'tests'.
-     */
-    test_label: z.string().default('tests'),
-    /**
-     * Label color for the test badge when disabled.
-     * Default value is '#555'.
-     */
-    test_label_color: z.string().default(defaultLabelColor),
-    /**
-     * Message color for the test badge.
-     * Default value is '#3C1'.
-     */
-    test_message_color_ok: z.string().default(defaultOKColor),
-    /**
-     * Message color for the test badge when failed.
-     * Default value is '#900'.
-     */
-    test_message_color_failed: z.string().default(defaultFailedColor),
-    /**
-     * Message color for the test badge when disabled.
-     * Default value is '#880'.
-     */
-    test_message_color_disabled: z.string().default(defaultDisabledColor),
-    /**
-     * Determines if the test badge should have rounded corners.
-     * Default value is true.
-     */
-    test_rounded: z.boolean().default(true),
+  
+  limits: z.object({
+    test_percentage_failed: z.number().default(0),
+    test_percentage_disabled: z.number().default(0),
+    coverage_percentage_minimal: z.number().default(90)
+  }).optional(),
+  
+  manifest: z.object({ 
+    output: z.string() 
+  }).optional(),
+  
+  markdown: z.object({ 
+    output: z.string(), 
+    badges: z.boolean().default(true) 
+  }).optional(),
+  
+  testBadge: testBadgeSchema.optional(),
 
-    /**
-     * Label for the coverage badge.
-     * Default value is 'coverage'.
-     */
-    coverage_label: z.string().default('coverage'),
-    /**
-     * Label color for the coverage badge.
-     * Default value is '#555'.
-     */
-    coverage_label_color: z.string().default(defaultLabelColor),
-    /**
-     * Message color for the coverage badge.
-     * Default value is '#3C1'.
-     */
-    coverage_message_color_ok: z.string().default(defaultOKColor),
-    /**
-     * Message color for the coverage badge when failed.
-     * Default value is '#900'.
-     */
-    coverage_message_color_failed: z.string().default(defaultFailedColor),
-    /**
-     * Message color for the coverage badge when disabled.
-     * Default value is '#880'.
-     */
-    coverage_message_color_disabled: z.string().default(defaultDisabledColor),
-    /**
-     * Determines if the coverage badge should have rounded corners.
-     * Default value is true.
-     */
-    coverage_rounded: z.boolean().default(true),
-    /**
-     * Threshold for the coverage badge to turn green.
-     * Default value is 80.
-     */
-    coverage_threshold: z.number().default(80),
-  }).default({
-    test_label: 'tests',
-    test_label_color: defaultLabelColor,
-    test_message_color_ok: defaultOKColor,
-    test_message_color_failed: defaultFailedColor,
-    test_message_color_disabled: defaultDisabledColor,
-    test_rounded: true,
-
-    coverage_label: 'coverage',
-    coverage_label_color: defaultLabelColor,
-    coverage_message_color_ok: defaultOKColor,
-    coverage_message_color_failed: defaultFailedColor,
-    coverage_message_color_disabled: defaultDisabledColor,
-    coverage_rounded: true,
-    coverage_threshold: 80,
-  }),
-  /**
-   * Output configuration for the test report.
-   */
-  output: z.object({
-    /**
-     * File path for the markdown output.
-     * This field is optional.
-     */
-    markdown: z.string().optional(),
-    /**
-     * File path for the manifest output.
-     */
-    manifest: z.string(),
-    /**
-     * File path for the test badge output.
-     * This field is optional.
-     */
-    testBadge: z.string().optional(),
-    /**
-     * File path for the coverage badge output.
-     * This field is optional.
-     */
-    coverageBadge: z.string().optional(),
-  }),
+  coverageBadge: coverageBadgeSchema.optional()
 });
 
 /**
  * Type definition for the test report configuration.
  */
 export type TestReportConfig = z.infer<typeof testReportConfigSchema>;
+
+export type CoverageBadgeConfig = z.infer<typeof coverageBadgeSchema>;
+export type TestBadgeConfig = z.infer<typeof testBadgeSchema>;

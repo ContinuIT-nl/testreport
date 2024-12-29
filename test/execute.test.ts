@@ -30,7 +30,7 @@ Deno.test('execute check unequal', async () => {
   // Sneaky: mutate state on disk
   await createTestReport(source);
   manifest.test_total++;
-  await exportOutput(config.output.manifest, () => JSON.stringify(manifest, null, 2));
+  await exportOutput(config.manifest?.output, () => JSON.stringify(manifest, null, 2));
   // The comparison should fail, returning 1
   const result = await execute(['--check', source]);
   assertEquals(result, 1);

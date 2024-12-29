@@ -1,12 +1,22 @@
 {
-  "test_results": {
+  "input": {
     "junit": ["test_data/deno_failed/junit.xml"],
     "coverage": ["test_data/deno_failed/cov.lcov"]
   },
-  "output": {
-    "markdown": "test_output/deno_failed/deno_test_results.md",
-    "manifest": "test_output/deno_failed/deno_manifest.json",
-    "testBadge": "test_output/deno_failed/deno_test_badge.svg",
-    "coverageBadge": "test_output/deno_failed/deno_coverage_badge.svg"
+  "limits": {
+    "coverage_percentage_minimal": 80
+  },
+  "manifest": {
+    "output": "test_output/deno_failed/results.json"
+  },
+  "markdown": {
+    "output": "test_output/deno_failed/results.md",
+    "badges": true
+  },
+  "testBadge": {
+    "output": "test_output/deno_failed/test_badge.svg"
+  },
+  "coverageBadge": {
+    "output": "test_output/deno_failed/coverage_badge.svg"
   }
 }

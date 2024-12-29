@@ -1,12 +1,22 @@
 {
-  "test_results": {
+  "input": {
     "junit": ["test_data/jest/report.xml"],
     "coverage": ["test_data/jest/lcov.info"]
   },
-  "output": {
-    "markdown": "test_output/jest/jest_test_results.md",
-    "manifest": "test_output/jest/jest_manifest.json",
-    "testBadge": "test_output/jest/jest_test_badge.svg",
-    "coverageBadge": "test_output/jest/jest_coverage_badge.svg"
+  "limits": {
+    "coverage_percentage_minimal": 80
+  },
+  "manifest": {
+    "output": "test_output/jest/results.json"
+  },
+  "markdown": {
+    "output": "test_output/jest/results.md",
+    "badges": true
+  },
+  "testBadge": {
+    "output": "test_output/jest/test_badge.svg"
+  },
+  "coverageBadge": {
+    "output": "test_output/jest/coverage_badge.svg"
   }
 }

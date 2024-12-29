@@ -15,7 +15,7 @@ Results from `./test_results/testreport.json` contains 5 testsuites with 23 test
 
 | ☰ Lines | ᛘ Branches |
 | ------: | ---------: |
-|  100.0% |     100.0% |
+|   99.1% |      96.1% |
 
 ## Detailed Test Results
 
@@ -49,13 +49,13 @@ Results from `./test_results/testreport.json` contains 5 testsuites with 23 test
 
 | 🗎 File                   | ☰ Lines | ᛘ Branches |
 | :------------------------ | ------: | ---------: |
-| `checkTestReport.ts`      |  100.0% |        N/A |
+| `checkTestReport.ts`      |   69.2% |            |
 | `createTestReport.ts`     |  100.0% |     100.0% |
 | `execute.ts`              |  100.0% |     100.0% |
 | `testReportConfig.ts`     |  100.0% |        N/A |
 | `testReportData.ts`       |  100.0% |     100.0% |
-| `testReportToBadges.ts`   |  100.0% |     100.0% |
-| `testReportToManifest.ts` |  100.0% |     100.0% |
+| `testReportToBadges.ts`   |  100.0% |        N/A |
+| `testReportToManifest.ts` |   94.8% |      85.0% |
 | `testReportToMarkdown.ts` |  100.0% |     100.0% |
 | `createBadgeSvg.ts`       |  100.0% |     100.0% |
 | `junit_parser.ts`         |  100.0% |        N/A |

@@ -1,12 +1,22 @@
 {
-  "test_results": {
+  "input": {
     "junit": [],
     "coverage": []
   },
-  "output": {
-    "markdown": "test_output/no_tests/no_tests_results.md",
-    "manifest": "test_output/no_tests/no_tests_manifest.json",
-    "testBadge": "test_output/no_tests/no_tests_test_badge.svg",
-    "coverageBadge": "test_output/no_tests/no_tests_coverage_badge.svg"
+  "limits": {
+    "coverage_percentage_minimal": 80
+  },
+  "manifest": {
+    "output": "test_output/no_tests/results.json"
+  },
+  "markdown": {
+    "output": "test_output/no_tests/results.md",
+    "badges": true
+  },
+  "testBadge": {
+    "output": "test_output/no_tests/test_badge.svg"
+  },
+  "coverageBadge": {
+    "output": "test_output/no_tests/coverage_badge.svg"
   }
 }

@@ -27,7 +27,7 @@ async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites>
   const result: TestSuites = { name: '', tests: 0, failures: 0, errors: 0, time: 0, testSuites: [] };
 
   const junitData: TestSuites[] = [];
-  for (const junitFilename of reportConfig.test_results.junit) {
+  for (const junitFilename of reportConfig.input.junit) {
     try {
       const xmlData = await readTextFile(junitFilename);
       junitData.push(jUnitParser(xmlData));
@@ -80,7 +80,7 @@ export type GetTestReportDataResult = {
 
 export async function getTestReportData(source: string): Promise<GetTestReportDataResult> {
   const config = await loadReportConfig(source);
-  const lcovDatas = await loadLcovData(config.test_results.coverage);
+  const lcovDatas = await loadLcovData(config.input.coverage);
   const lcovSummary = createLcovSummary(lcovDatas);
   const jUnitData = await getJUnitData(config);
   return { source, config, lcovDatas, lcovSummary, jUnitData };

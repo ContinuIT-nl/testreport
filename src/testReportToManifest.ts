@@ -17,7 +17,12 @@ const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
   const coverages = [coverage_lines, coverage_branches].filter((c) => c !== undefined);
   const coverage_percentage = coverages.length !== 0 ? `${Math.min(...coverages).toFixed(1)}%` : 'N/A';
   const coverage = coverages.length !== 0 ? Math.min(...coverages) : 0;
-  const coverage_status = coverage >= config.constants.coverage_threshold ? 'ok' : 'failed';
+
+  const levels = config.coverageBadge?.levels ?? [{ threshold: 0, color: '#555' }];
+  const coverage_color = levels.find((level) => level.threshold <= coverage)?.color ?? '#555';
+
+  const minimal = config.limits?.coverage_percentage_minimal ?? 0;
+  const coverage_status = coverage >= minimal ? 'ok' : 'failed';
 
   return {
     // Source
@@ -46,7 +51,7 @@ const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
     coverage_branches_percentage: percentageNoZero(lcovSummary.branchesHit, lcovSummary.branchesFound),
     coverage_percentage,
     coverage_status,
-
+    coverage_color,
     // Code coverage details
     coverage_details: lcovDatas.map((file) => ({
       name: file.filename,

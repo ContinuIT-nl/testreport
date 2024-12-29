@@ -124,31 +124,32 @@
       "state": "PASSED"
     }
   ],
-  "coverage_lines_total": 729,
-  "coverage_lines_hit": 729,
-  "coverage_lines_percentage": "100.0%",
-  "coverage_branches_total": 98,
+  "coverage_lines_total": 739,
+  "coverage_lines_hit": 732,
+  "coverage_lines_percentage": "99.1%",
+  "coverage_branches_total": 102,
   "coverage_branches_hit": 98,
-  "coverage_branches_percentage": "100.0%",
-  "coverage_percentage": "100.0%",
-  "coverage_status": "ok",
+  "coverage_branches_percentage": "96.1%",
+  "coverage_percentage": "96.1%",
+  "coverage_status": "failed",
+  "coverage_color": "#888800",
   "coverage_details": [
     {
       "name": "checkTestReport.ts",
-      "lines_total": 9,
+      "lines_total": 13,
       "lines_hit": 9,
-      "lines_percentage": "100.0%",
-      "branches_total": 0,
+      "lines_percentage": "69.2%",
+      "branches_total": 1,
       "branches_hit": 0,
-      "branches_percentage": "N/A"
+      "branches_percentage": ""
     },
     {
       "name": "createTestReport.ts",
       "lines_total": 12,
       "lines_hit": 12,
       "lines_percentage": "100.0%",
-      "branches_total": 3,
-      "branches_hit": 3,
+      "branches_total": 5,
+      "branches_hit": 5,
       "branches_percentage": "100.0%"
     },
     {
@@ -162,8 +163,8 @@
     },
     {
       "name": "testReportConfig.ts",
-      "lines_total": 48,
-      "lines_hit": 48,
+      "lines_total": 52,
+      "lines_hit": 52,
       "lines_percentage": "100.0%",
       "branches_total": 0,
       "branches_hit": 0,
@@ -180,21 +181,21 @@
     },
     {
       "name": "testReportToBadges.ts",
-      "lines_total": 32,
-      "lines_hit": 32,
+      "lines_total": 30,
+      "lines_hit": 30,
       "lines_percentage": "100.0%",
-      "branches_total": 2,
-      "branches_hit": 2,
-      "branches_percentage": "100.0%"
+      "branches_total": 0,
+      "branches_hit": 0,
+      "branches_percentage": "N/A"
     },
     {
       "name": "testReportToManifest.ts",
-      "lines_total": 54,
-      "lines_hit": 54,
-      "lines_percentage": "100.0%",
-      "branches_total": 17,
+      "lines_total": 58,
+      "lines_hit": 55,
+      "lines_percentage": "94.8%",
+      "branches_total": 20,
       "branches_hit": 17,
-      "branches_percentage": "100.0%"
+      "branches_percentage": "85.0%"
     },
     {
       "name": "testReportToMarkdown.ts",
