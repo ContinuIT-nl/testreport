@@ -19,6 +19,7 @@ const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
   const coverage = coverages.length !== 0 ? Math.min(...coverages) : 0;
 
   const levels = config.coverageBadge?.levels ?? [{ threshold: 0, color: '#555' }];
+  // todo: add test for following 2 lines
   const coverage_color = levels.find((level) => level.threshold <= coverage)?.color ?? '#555';
 
   const minimal = config.limits?.coverage_percentage_minimal ?? 0;

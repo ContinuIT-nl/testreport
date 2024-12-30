@@ -12,11 +12,5 @@
   "markdown": {
     "output": "test_output/no_tests/results.md",
     "badges": true
-  },
-  "testBadge": {
-    "output": "test_output/no_tests/test_badge.svg"
-  },
-  "coverageBadge": {
-    "output": "test_output/no_tests/coverage_badge.svg"
   }
 }

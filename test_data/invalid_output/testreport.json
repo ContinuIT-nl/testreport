@@ -15,8 +15,5 @@
   },
   "testBadge": {
     "output": "test_output/invalid_folder/test_badge.svg"
-  },
-  "coverageBadge": {
-    "output": "test_output/invalid_folder/coverage_badge.svg"
   }
 }

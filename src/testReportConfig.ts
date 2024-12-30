@@ -27,8 +27,8 @@ const coverageBadgeSchema = z.object({
     threshold: z.number(),
     color: z.string(),
   })).default([
-    { threshold: 99, color: defaultOKColor },
-    { threshold: 90, color: defaultDisabledColor },
+    { threshold: 80, color: defaultOKColor },
+    { threshold: 50, color: defaultDisabledColor },
     { threshold: 0, color: defaultFailedColor },
   ]),
 });

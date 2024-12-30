@@ -6,9 +6,6 @@
   "limits": {
     "coverage_percentage_minimal": 80
   },
-  "manifest": {
-    "output": "test_output/vitest/results.json"
-  },
   "markdown": {
     "output": "test_output/vitest/results.md",
     "badges": true
@@ -17,6 +14,7 @@
     "output": "test_output/vitest/test_badge.svg"
   },
   "coverageBadge": {
-    "output": "test_output/vitest/coverage_badge.svg"
+    "output": "test_output/vitest/coverage_badge.svg",
+    "levels": []
   }
 }

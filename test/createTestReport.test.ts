@@ -18,6 +18,7 @@ Deno.test('testreport_jest', async () => {
 });
 
 Deno.test('testreport_vitest', async () => {
+  // Test does not output manifest so no check can be done
   await createTestReport('./test_data/vitest/testreport.json');
 });
 
@@ -35,10 +36,13 @@ Deno.test('testreport_tests_invalid_definition', async () => {
 });
 
 Deno.test('testreport_tests_invalid_input', async () => {
+  // Test if input files cannot be read by passing an invalid path
   await createTestReport('./test_data/invalid_input/testreport.json');
 });
 
 Deno.test('testreport_tests_invalid_output', async () => {
+  // Test if output files cannot be written by passing an invalid path
+  // Also: we do not specify coverageBadge, to validate that code path
   try {
     await createTestReport('./test_data/invalid_output/testreport.json');
   } catch (e) {

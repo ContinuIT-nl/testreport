@@ -11,7 +11,7 @@
   },
   "markdown": {
     "output": "test_output/deno_disabled/deno_test_results.md",
-    "badges": true
+    "badges": false
   },
   "testBadge": {
     "output": "test_output/deno_disabled/test_badge.svg"

@@ -1,5 +1,5 @@
 {
-    "xx$schema": "../configSchema/testReportConfigSchema.json",
+    "$schema": "../configSchema/testReportConfigSchema.json",
     "input": {
         "junit": [
             "test_results/junit.xml"

@@ -2,6 +2,8 @@ import type { TestCaseState } from './utilities/junit_parser.ts';
 import type { Manifest } from './testReportToManifest.ts';
 import { buildMarkdownTable, markdownTitle } from './utilities/markdownUtils.ts';
 import { percentage, percentageNoZero } from './utilities/miscUtils.ts';
+import { createCoverageBadge, createTestBadge } from './testReportToBadges.ts';
+import { TestReportConfig } from './testReportConfig.ts';
 
 const testState = (state: TestCaseState) => state === 'PASSED' ? '✅' : state === 'FAILED' ? '❌' : '⚠️';
 
@@ -19,7 +21,7 @@ const getTestResultSummary = (manifest: Manifest) =>
       manifest.test_passed.toLocaleString(),
       manifest.test_failed.toLocaleString(),
       manifest.test_skipped.toLocaleString(),
-    ], ['', percentage(manifest.test_skipped, manifest.test_total), '', '']],
+    ], ['', percentage(manifest.test_passed, manifest.test_total), '', '']],
   );
 
 const getCodeCoverageSummary = (manifest: Manifest) =>
@@ -55,9 +57,24 @@ const testResulsHeaderLine = (manifest: Manifest) => [
   '',
 ];
 
-export const convertTestresultsToMarkdown = (manifest: Manifest) =>
+const badges = (config: TestReportConfig, manifest: Manifest) => {
+  if (config.markdown?.badges) {
+    const badges = [];
+    if (config.testBadge) {
+      badges.push(createTestBadge(config.testBadge, manifest));
+    }
+    if (config.coverageBadge) {
+      badges.push(createCoverageBadge(config.coverageBadge, manifest));
+    }
+    return badges.length > 0 ? [...badges, ''] : [];
+  }
+  return [];
+};
+
+export const convertTestresultsToMarkdown = (config: TestReportConfig, manifest: Manifest) =>
   [
     markdownTitle('Test Results', 1),
+    badges(config, manifest),
     testResulsHeaderLine(manifest),
     markdownTitle('Summary', 2),
     markdownTitle('Test Results', 3),
