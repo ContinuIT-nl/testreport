@@ -3,7 +3,7 @@ import type { Manifest } from './testReportToManifest.ts';
 import { buildMarkdownTable, markdownTitle } from './utilities/markdownUtils.ts';
 import { percentage, percentageNoZero } from './utilities/miscUtils.ts';
 import { createCoverageBadge, createTestBadge } from './testReportToBadges.ts';
-import { TestReportConfig } from './testReportConfig.ts';
+import type { TestReportConfig } from './testReportConfig.ts';
 
 const testState = (state: TestCaseState) => state === 'PASSED' ? '✅' : state === 'FAILED' ? '❌' : '⚠️';
 
