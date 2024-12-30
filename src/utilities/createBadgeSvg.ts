@@ -176,9 +176,11 @@ const bottom = 138;
 
 const emitText = (svg: string[], text: string, width: number, x: number) => {
   svg.push(
-    `<text x="${x + shift}" y="${bottom + shift}" textLength="${width}" fill="#000" opacity="0.1">${text}</text>`,
+    `<text x="${(x + shift).toFixed(0)}" y="${(bottom + shift).toFixed(0)}" textLength="${
+      width.toFixed(0)
+    }" fill="#000" opacity="0.1">${text}</text>`,
   );
-  svg.push(`<text x="${x}" y="${bottom}" textLength="${width}">${text}</text>`);
+  svg.push(`<text x="${x.toFixed(0)}" y="${bottom.toFixed(0)}" textLength="${width.toFixed(0)}">${text}</text>`);
 };
 
 export const createBadgeSvg = (options: BadgeSvgOptions) => {
@@ -192,24 +194,30 @@ export const createBadgeSvg = (options: BadgeSvgOptions) => {
   // svg header and title
   const svg = [
     '<svg xmlns="http://www.w3.org/2000/svg" role="img" ',
-    `width="${width * 0.1}" height="${height * 0.1}" `,
+    `width="${(width * 0.1).toFixed(1)}" height="${(height * 0.1).toFixed(0)}" `,
     `viewBox="0 0 ${width} ${height}" aria-label="${ariaLabel}">`,
     `<title>${ariaLabel}</title>`,
   ];
 
   // clip path to round the corners
   if (rounded) {
-    svg.push(`<g><clipPath id="r"><rect width="${width}" height="${height}" rx="30" fill="#fff"/></clipPath></g>`);
+    svg.push(
+      `<g><clipPath id="r"><rect width="${width.toFixed(0)}" height="${
+        height.toFixed(0)
+      }" rx="30" fill="#fff"/></clipPath></g>`,
+    );
   }
 
   // backgrounds
   svg.push(`<g clip-path="url(#r)">`);
-  svg.push(`<rect fill="${labelColor}" width="${labelWidth + 2 * margin}" height="${height}"/>`);
+  svg.push(
+    `<rect fill="${labelColor}" width="${(labelWidth + 2 * margin).toFixed(0)}" height="${height.toFixed(0)}"/>`,
+  );
   if (message) {
     svg.push(
-      `<rect fill="${messageColor}" x="${labelWidth + 2 * margin}" width="${
-        messageWidth + 2 * margin
-      }" height="${height}"/>`,
+      `<rect fill="${messageColor}" x="${(labelWidth + 2 * margin).toFixed(0)}" width="${
+        (messageWidth + 2 * margin).toFixed(0)
+      }" height="${height.toFixed(0)}"/>`,
     );
   }
   svg.push('</g>');

@@ -1,7 +1,12 @@
 import { encodeBase64 } from '@std/encoding/base64';
 import type { TestCaseState } from './utilities/junit_parser.ts';
 import type { Manifest } from './testReportToManifest.ts';
-import { buildMarkdownTable, markdownTitle } from './utilities/markdownUtils.ts';
+import {
+  buildMarkdownTable,
+  markdownCollapsibleEnd,
+  markdownCollapsibleTitle,
+  markdownTitle,
+} from './utilities/markdownUtils.ts';
 import { percentage, percentageNoZero } from './utilities/miscUtils.ts';
 import { createCoverageBadge, createTestBadge } from './testReportToBadges.ts';
 import type { TestReportConfig } from './testReportConfig.ts';
@@ -84,8 +89,10 @@ export const convertTestresultsToMarkdown = (config: TestReportConfig, manifest:
     getTestResultSummary(manifest),
     markdownTitle('Code Coverage', 3),
     getCodeCoverageSummary(manifest),
-    markdownTitle('Detailed Test Results', 2),
+    markdownCollapsibleTitle('Detailed Test Results', 2, config.markdown!.collapseDetails),
     getTestDetails(manifest),
-    markdownTitle('Detailed Code Coverage', 2),
+    markdownCollapsibleEnd(config.markdown!.collapseDetails),
+    markdownCollapsibleTitle('Detailed Code Coverage Results', 2, config.markdown!.collapseDetails),
     getCodeCoverageDetails(manifest),
+    markdownCollapsibleEnd(config.markdown!.collapseDetails),
   ].flat().join('\n');

@@ -59,6 +59,7 @@ export const testReportConfigSchema = z.object({
   markdown: z.object({
     output: z.string(),
     badges: z.boolean().default(true),
+    collapseDetails: z.boolean().default(false),
   }).optional(),
 
   testBadge: testBadgeSchema.optional(),

@@ -53,3 +53,8 @@ export const buildMarkdownTable = (headers: string[], alignment: Alignment[], da
 };
 
 export const markdownTitle = (title: string, level: number = 1) => [`${'#'.repeat(level)} ${title}`, ''];
+
+export const markdownCollapsibleTitle = (title: string, level: number = 1, collapsible: boolean = false) =>
+  collapsible ? ['<details>', `<summary>${title}</summary>`, ''] : [`${'#'.repeat(level)} ${title}`, ''];
+
+export const markdownCollapsibleEnd = (collapsible: boolean = false) => collapsible ? ['</details>', ''] : [];

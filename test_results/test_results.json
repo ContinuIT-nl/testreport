@@ -135,11 +135,11 @@
       "state": "PASSED"
     }
   ],
-  "coverage_lines_total": 775,
-  "coverage_lines_hit": 774,
+  "coverage_lines_total": 792,
+  "coverage_lines_hit": 791,
   "coverage_lines_percentage": "99.9%",
-  "coverage_branches_total": 124,
-  "coverage_branches_hit": 123,
+  "coverage_branches_total": 128,
+  "coverage_branches_hit": 127,
   "coverage_branches_percentage": "99.2%",
   "coverage_percentage": "99.2%",
   "coverage_status": "ok",
@@ -174,8 +174,8 @@
     },
     {
       "name": "testReportConfig.ts",
-      "lines_total": 52,
-      "lines_hit": 52,
+      "lines_total": 53,
+      "lines_hit": 53,
       "lines_percentage": "100.0%",
       "branches_total": 0,
       "branches_hit": 0,
@@ -210,8 +210,8 @@
     },
     {
       "name": "testReportToMarkdown.ts",
-      "lines_total": 74,
-      "lines_hit": 74,
+      "lines_total": 81,
+      "lines_hit": 81,
       "lines_percentage": "100.0%",
       "branches_total": 10,
       "branches_hit": 10,
@@ -219,8 +219,8 @@
     },
     {
       "name": "createBadgeSvg.ts",
-      "lines_total": 198,
-      "lines_hit": 198,
+      "lines_total": 204,
+      "lines_hit": 204,
       "lines_percentage": "100.0%",
       "branches_total": 17,
       "branches_hit": 17,
@@ -246,11 +246,11 @@
     },
     {
       "name": "markdownUtils.ts",
-      "lines_total": 47,
-      "lines_hit": 47,
+      "lines_total": 50,
+      "lines_hit": 50,
       "lines_percentage": "100.0%",
-      "branches_total": 11,
-      "branches_hit": 11,
+      "branches_total": 15,
+      "branches_hit": 15,
       "branches_percentage": "100.0%"
     },
     {

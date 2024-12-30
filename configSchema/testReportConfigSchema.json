@@ -66,6 +66,10 @@
         "badges": {
           "type": "boolean",
           "default": true
+        },
+        "collapseDetails": {
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -91,7 +95,7 @@
           "type": "string",
           "enum": [
             "flat",
-            "square"
+            "rectangle"
           ],
           "default": "flat"
         },
@@ -154,11 +158,11 @@
           },
           "default": [
             {
-              "threshold": 99,
+              "threshold": 80,
               "color": "#2EBE4E"
             },
             {
-              "threshold": 90,
+              "threshold": 50,
               "color": "#880"
             },
             {
