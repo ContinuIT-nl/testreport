@@ -1,3 +1,4 @@
+import { encodeBase64 } from '@std/encoding/base64';
 import type { TestCaseState } from './utilities/junit_parser.ts';
 import type { Manifest } from './testReportToManifest.ts';
 import { buildMarkdownTable, markdownTitle } from './utilities/markdownUtils.ts';
@@ -57,14 +58,16 @@ const testResulsHeaderLine = (manifest: Manifest) => [
   '',
 ];
 
+const encodeBadge = (name: string, badge: string) => `![${name}](data:image/svg+xml;base64,${encodeBase64(badge)})`;
+
 const badges = (config: TestReportConfig, manifest: Manifest) => {
   if (config.markdown?.badges) {
     const badges = [];
     if (config.testBadge) {
-      badges.push(createTestBadge(config.testBadge, manifest));
+      badges.push(encodeBadge('tests', createTestBadge(config.testBadge, manifest)));
     }
     if (config.coverageBadge) {
-      badges.push(createCoverageBadge(config.coverageBadge, manifest));
+      badges.push(encodeBadge('coverage', createCoverageBadge(config.coverageBadge, manifest)));
     }
     return badges.length > 0 ? [...badges, ''] : [];
   }

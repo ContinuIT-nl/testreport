@@ -129,8 +129,8 @@
       "state": "PASSED"
     }
   ],
-  "coverage_lines_total": 754,
-  "coverage_lines_hit": 753,
+  "coverage_lines_total": 756,
+  "coverage_lines_hit": 755,
   "coverage_lines_percentage": "99.9%",
   "coverage_branches_total": 120,
   "coverage_branches_hit": 119,
@@ -204,8 +204,8 @@
     },
     {
       "name": "testReportToMarkdown.ts",
-      "lines_total": 72,
-      "lines_hit": 72,
+      "lines_total": 74,
+      "lines_hit": 74,
       "lines_percentage": "100.0%",
       "branches_total": 10,
       "branches_hit": 10,
