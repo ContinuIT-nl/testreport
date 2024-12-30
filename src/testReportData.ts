@@ -8,20 +8,24 @@ async function loadReportConfig(reportDefinitionFilename: string): Promise<TestR
   return testReportConfigSchema.parse(JSON.parse(reportConfigText));
 }
 
-async function loadLcovData(lcovFilenames: string[]): Promise<LcovFile[]> {
+async function loadLcovData(lcovFilenames: string[], failures: Failure[]): Promise<LcovFile[]> {
   const lcovDatas: LcovFile[] = [];
   for (const lcovFilename of lcovFilenames) {
     try {
       const lcovData = await readTextFile(lcovFilename);
       lcovDatas.push(...lcovParser(lcovData));
     } catch (error) {
-      console.error((error as Error).message);
+      failures.push({
+        message: (error as Error).message,
+        file: lcovFilename,
+        type: 'lcov',
+      });
     }
   }
   return lcovDatas;
 }
 
-async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites> {
+async function getJUnitData(reportConfig: TestReportConfig, failures: Failure[]): Promise<TestSuites> {
   // Load all JUnit files and convert and merge them
   const jUnitParser = createJUnitParser();
   const result: TestSuites = { name: '', tests: 0, failures: 0, errors: 0, time: 0, testSuites: [] };
@@ -31,10 +35,12 @@ async function getJUnitData(reportConfig: TestReportConfig): Promise<TestSuites>
     try {
       const xmlData = await readTextFile(junitFilename);
       junitData.push(jUnitParser(xmlData));
-    } catch (_error) {
-      // Notify error by adding a test suite with 1 test and 1 error
-      result.tests++;
-      result.errors++;
+    } catch (error) {
+      failures.push({
+        message: (error as Error).message,
+        file: junitFilename,
+        type: 'junit',
+      });
     }
   }
   // Combine all JUnit data
@@ -70,18 +76,26 @@ function createLcovSummary(lcov: LcovFile[]): LcovSummary {
   );
 }
 
+type Failure = {
+  message: string;
+  file: string;
+  type: 'junit' | 'lcov' | 'write';
+};
+
 export type GetTestReportDataResult = {
   source: string;
   config: TestReportConfig;
   lcovDatas: LcovFile[];
   lcovSummary: LcovSummary;
   jUnitData: TestSuites;
+  failures: Failure[];
 };
 
 export async function getTestReportData(source: string): Promise<GetTestReportDataResult> {
+  const failures: Failure[] = [];
   const config = await loadReportConfig(source);
-  const lcovDatas = await loadLcovData(config.input.coverage);
+  const lcovDatas = await loadLcovData(config.input.coverage, failures);
   const lcovSummary = createLcovSummary(lcovDatas);
-  const jUnitData = await getJUnitData(config);
-  return { source, config, lcovDatas, lcovSummary, jUnitData };
+  const jUnitData = await getJUnitData(config, failures);
+  return { source, config, lcovDatas, lcovSummary, jUnitData, failures };
 }

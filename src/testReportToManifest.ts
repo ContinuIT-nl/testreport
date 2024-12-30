@@ -2,7 +2,7 @@ import { percentage, percentageNoZero } from './utilities/miscUtils.ts';
 import { getTestReportData, type GetTestReportDataResult } from './testReportData.ts';
 
 const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
-  const { source, config, jUnitData, lcovDatas, lcovSummary } = data;
+  const { source, config, jUnitData, lcovDatas, lcovSummary, failures } = data;
 
   const test_total = jUnitData.tests;
   const test_skipped = jUnitData.testSuites.reduce((acc, suite) => acc + suite.disabled, 0);
@@ -25,9 +25,12 @@ const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
   const minimal = config.limits?.coverage_percentage_minimal ?? 0;
   const coverage_status = coverage >= minimal ? 'ok' : 'failed';
 
+  // todo: process limits and add to failures
+
   return {
     // Source
     source,
+    failures,
 
     // Test results
     testsuites_total: jUnitData.testSuites.length,

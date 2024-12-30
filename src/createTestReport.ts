@@ -9,5 +9,10 @@ export async function createTestReport(source: string): Promise<boolean> {
   await exportOutput(config.manifest?.output, () => JSON.stringify(manifest, null, 2));
   await exportOutput(config.testBadge?.output, () => createTestBadge(config.testBadge!, manifest));
   await exportOutput(config.coverageBadge?.output, () => createCoverageBadge(config.coverageBadge!, manifest));
+  if (manifest.failures.length > 0) {
+    console.error('Creating test report failed:');
+    console.error(manifest.failures.join('\n'));
+    return false;
+  }
   return true;
 }

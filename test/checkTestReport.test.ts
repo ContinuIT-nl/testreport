@@ -15,3 +15,10 @@ Deno.test('checkTestReport_no_manifest', async () => {
   assertEquals(create, true);
   assertEquals(check, false);
 });
+
+Deno.test('checkTestReport_failure', async () => {
+  const create = await createTestReport('./test_data/invalid_input/testreport.json');
+  const check = await checkTestReport('./test_data/invalid_input/testreport.json');
+  assertEquals(create, false);
+  assertEquals(check, false);
+});
