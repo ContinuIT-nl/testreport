@@ -1,52 +1,52 @@
 {
-    "$schema": "../configSchema/testReportConfigSchema.json",
-    "input": {
-        "junit": [
-            "test_results/junit.xml"
-        ],
-        "coverage": [
-            "test_results/cov.lcov"
-        ]
-    },
-    "limits": {
-        "test_percentage_failed": 0,
-        "test_percentage_disabled": 0,
-        "coverage_percentage_minimal": 99
-    },
-    "manifest": {
-        "output": "test_results/test_results.json"
-    },
-    "markdown": {
-        "output": "test_results/test_results.md",
-        "badges": true,
-        "collapseDetails": true
-    },
-    "testBadge": {
-        "output": "test_results/test_badge.svg",
-        "label": "tests",
-        "style": "flat",
-        "color_ok": "#2EBE4E",
-        "color_none": "#888800",
-        "color_disabled": "#888800",
-        "color_failed": "#990000"
-    },
-    "coverageBadge": {
-        "output": "test_results/coverage_badge.svg",
-        "label": "coverage",
-        "style": "flat",
-        "levels": [
-            {
-                "threshold": 99,
-                "color": "#2EBE4E"
-            },
-            {
-                "threshold": 90,
-                "color": "#888800"
-            },
-            {
-                "threshold": 0,
-                "color": "#990000"
-            }
-        ]
-    }
+  "$schema": "./configSchema/testReportConfigSchema.json",
+  "input": {
+    "junit": [
+      "test_results/junit.xml"
+    ],
+    "coverage": [
+      "test_results/cov.lcov"
+    ]
+  },
+  "limits": {
+    "test_percentage_failed": 0,
+    "test_percentage_disabled": 0,
+    "coverage_percentage_minimal": 99
+  },
+  "manifest": {
+    "output": "test_results/test_results.json"
+  },
+  "markdown": {
+    "output": "test_results/test_results.md",
+    "badges": true,
+    "collapseDetails": true
+  },
+  "testBadge": {
+    "output": "test_results/test_badge.svg",
+    "label": "tests",
+    "style": "flat",
+    "color_ok": "#2EBE4E",
+    "color_none": "#888800",
+    "color_disabled": "#888800",
+    "color_failed": "#990000"
+  },
+  "coverageBadge": {
+    "output": "test_results/coverage_badge.svg",
+    "label": "coverage",
+    "style": "flat",
+    "levels": [
+      {
+        "threshold": 99,
+        "color": "#2EBE4E"
+      },
+      {
+        "threshold": 90,
+        "color": "#888800"
+      },
+      {
+        "threshold": 0,
+        "color": "#990000"
+      }
+    ]
+  }
 }
