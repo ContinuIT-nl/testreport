@@ -1,5 +1,5 @@
 {
-  "source": "./test_results/testreport.json",
+  "source": "./testreport.json",
   "failures": [],
   "testsuites_total": 5,
   "test_total": 25,
@@ -150,8 +150,8 @@
       "lines_total": 18,
       "lines_hit": 18,
       "lines_percentage": "100.0%",
-      "branches_total": 6,
-      "branches_hit": 6,
+      "branches_total": 5,
+      "branches_hit": 5,
       "branches_percentage": "100.0%"
     },
     {
@@ -159,8 +159,8 @@
       "lines_total": 17,
       "lines_hit": 17,
       "lines_percentage": "100.0%",
-      "branches_total": 13,
-      "branches_hit": 13,
+      "branches_total": 14,
+      "branches_hit": 14,
       "branches_percentage": "100.0%"
     },
     {

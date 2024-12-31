@@ -6,8 +6,8 @@
   "license": "MIT",
   "author": "ContinuIT BV, The Netherlands",
   "tasks": {
-    "test": "deno task test_prepare && deno test -RSW --coverage --clean --junit-path test_results/junit.xml && deno coverage --lcov --output=test_results/cov.lcov && deno coverage && deno run -RW ./src/mod.ts ./test_results/testreport.json",
-    "test_prepare": "rm -rf test_output && mkdir -p test_output && mkdir -p test_output/deno_success && mkdir -p test_output/deno_disabled && mkdir -p test_output/deno_failed && mkdir -p test_output/jest && mkdir -p test_output/vitest && mkdir -p test_output/no_tests && mkdir -p test_output/invalid_input && mkdir -p test_output/invalid_output",
+    "test": "deno task test_prepare && deno test -RSW --coverage --clean --junit-path test_results/junit.xml && deno coverage --lcov --output=test_results/cov.lcov && deno coverage && deno run -RW ./src/mod.ts ./testreport.json",
+    "test_prepare": "rm test_results/* && rm -rf test_output && mkdir -p test_output && mkdir -p test_output/deno_success && mkdir -p test_output/deno_disabled && mkdir -p test_output/deno_failed && mkdir -p test_output/jest && mkdir -p test_output/vitest && mkdir -p test_output/no_tests && mkdir -p test_output/invalid_input && mkdir -p test_output/invalid_output",
     "create_config_schema": "deno eval 'import { zodToJsonSchema } from \"npm:zod-to-json-schema\"; import { testReportConfigSchema } from \"./src/testReportConfig.ts\"; Deno.writeTextFileSync(\"./configSchema/testReportConfigSchema.json\", JSON.stringify(zodToJsonSchema(testReportConfigSchema), null, 2));'",
     "clean": "rm -rf test_output && rm -rf coverage"
   },
