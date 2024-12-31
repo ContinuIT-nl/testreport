@@ -34,74 +34,115 @@ Create a test report definition file, for example `testreport.json`:
 
 ```json
 {
-  "test_results": {
-    "junit": ["testdata/junit.xml"],
-    "coverage": ["testdata/cov.lcov"]
+  "$schema": "https://github.com/ContinuIT-nl/testreport/blob/main/configSchema/testReportConfigSchema.json",
+  "input": {
+    "junit": ["test_results/junit.xml"],
+    "coverage": ["test_results/cov.lcov"]
   },
-  "output": {
-    "markdown": "testresults/test_results.md",
-    "manifest": "testresults/manifest.json",
-    "testBadge": "testresults/test_badge.svg",
-    "coverageBadge": "testresults/coverage_badge.svg"
+  "limits": {
+    "test_percentage_failed": 0,
+    "test_percentage_disabled": 0,
+    "coverage_percentage_minimal": 80
   },
-  "constants": {
-    "test_label": "tests",
-    "test_label_color": "#555",
-    "test_message_color_ok": "#3C1",
-    "test_message_color_failed": "#900",
-    "test_message_color_disabled": "#880"
+  "manifest": {
+    "output": "test_results/test_results.json"
+  },
+  "markdown": {
+    "output": "test_results/test_results.md"
+  },
+  "testBadge": {
+    "output": "test_results/test_badge.svg",
+    "label": "tests",
+    "style": "flat",
+    "color_ok": "#2EBE4E",
+    "color_none": "#888800",
+    "color_disabled": "#888800",
+    "color_failed": "#990000"
+  },
+  "coverageBadge": {
+    "output": "test_results/coverage_badge.svg",
+    "label": "coverage",
+    "style": "flat",
+    "levels": [
+      { "threshold": 99, "color": "#2EBE4E" },
+      { "threshold": 90, "color": "#888800" },
+      { "threshold": 0, "color": "#990000" }
+    ]
   }
 }
 ```
 
-### `test_results`
+### `input`
 
 | Key        | Type     | Description                                        |
 | ---------- | -------- | -------------------------------------------------- |
 | `junit`    | string[] | The JUnit XML files to include in the test report. |
 | `coverage` | string[] | The LCOV files to include in the test report.      |
 
-### `output`
+### `limits`
 
-| Key             | Type   | Description                                    |
-| --------------- | ------ | ---------------------------------------------- |
-| `markdown`      | string | The path to the markdown file to create.       |
-| `manifest`      | string | The path to the manifest file to create.       |
-| `testBadge`     | string | The path to the test badge file to create.     |
-| `coverageBadge` | string | The path to the coverage badge file to create. |
+| Key                           | Type   | Description                                       | Default Value |
+| ----------------------------- | ------ | ------------------------------------------------- | ------------- |
+| `test_percentage_failed`      | number | The percentage of failed tests that is allowed.   | 0             |
+| `test_percentage_disabled`    | number | The percentage of disabled tests that is allowed. | 0             |
+| `coverage_percentage_minimal` | number | The minimum coverage percentage that is required. | 0             |
+
+### `manifest`
+
+| Key      | Type   | Description                              |
+| -------- | ------ | ---------------------------------------- |
+| `output` | string | The path to the manifest file to create. |
+
+### `markdown`
+
+| Key               | Type    | Description                              | Default Value |
+| ----------------- | ------- | ---------------------------------------- | ------------- |
+| `output`          | string  | The path to the markdown file to create. |               |
+| `badges`          | boolean | Whether to create badges.                | true          |
+| `collapseDetails` | boolean | Whether to collapse the details.         | false         |
+
+### `testBadge`
+
+| Key              | Type   | Description                                              | Default Value |
+| ---------------- | ------ | -------------------------------------------------------- | ------------- |
+| `output`         | string | The path to the test badge file to create.               |               |
+| `label`          | string | The label of the test badge.                             | "tests"       |
+| `style`          | string | The style of the test badge.                             | "flat"        |
+| `color_label`    | string | The color of the test badge label.                       | "#555"        |
+| `color_ok`       | string | The color of the test badge when the tests pass.         | "#2EBE4E"     |
+| `color_none`     | string | The color of the test badge when no tests are run.       | "#888800"     |
+| `color_disabled` | string | The color of the test badge when the tests are disabled. | "#888800"     |
+| `color_failed`   | string | The color of the test badge when the tests fail.         | "#990000"     |
+
+### `coverageBadge`
+
+| Key           | Type   | Description                                    | Default Value |
+| ------------- | ------ | ---------------------------------------------- | ------------- |
+| `output`      | string | The path to the coverage badge file to create. |               |
+| `label`       | string | The label of the coverage badge.               | "coverage"    |
+| `style`       | string | The style of the coverage badge.               | "flat"        |
+| `color_label` | string | The color of the coverage badge label.         | "#555"        |
+| `levels`      | array  | The levels of the coverage badge.              |               |
+
+### `levels`
+
+| Key         | Type   | Description                          | Default Value |
+| ----------- | ------ | ------------------------------------ | ------------- |
+| `threshold` | number | The threshold of the coverage badge. | 80            |
+| `color`     | string | The color of the coverage badge.     | "#2EBE4E"     |
 
 All output files are optional. If you want to perform the `--check` command, you need to provide at least the `manifest` file.
-
-### `constants`
-
-This whole section is optional. It contains the constants for generating the badges.
-
-| Key                               | Type    | Default Value |
-| --------------------------------- | ------- | ------------- |
-| `test_label`                      | string  | "tests"       |
-| `test_label_color`                | string  | "#555"        |
-| `test_message_color_ok`           | string  | "#2EBE4E"     |
-| `test_message_color_failed`       | string  | "#900"        |
-| `test_message_color_disabled`     | string  | "#880"        |
-| `test_rounded`                    | boolean | true          |
-| `coverage_label`                  | string  | "coverage"    |
-| `coverage_label_color`            | string  | "#555"        |
-| `coverage_message_color_ok`       | string  | "#2EBE4E"     |
-| `coverage_message_color_failed`   | string  | "#900"        |
-| `coverage_message_color_disabled` | string  | "#880"        |
-| `coverage_rounded`                | boolean | true          |
-| `coverage_threshold`              | number  | 80            |
-
-The `coverage_threshold` is the minimum coverage percentage that is required to pass the test.
 
 Run the testreport utility:
 
 ```bash
-testreport testreport.json
-
-or
-
 deno run -RW jsr:@continuit/testreport testreport.json
+```
+
+or if you use npm:
+
+```bash
+testreport testreport.json
 ```
 
 In the above example the test report will be created in the `testresults` folder.

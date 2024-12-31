@@ -49,7 +49,7 @@ export const testReportConfigSchema = z.object({
   limits: z.object({
     test_percentage_failed: z.number().default(0),
     test_percentage_disabled: z.number().default(0),
-    coverage_percentage_minimal: z.number().default(90),
+    coverage_percentage_minimal: z.number().default(0),
   }).optional(),
 
   manifest: z.object({
