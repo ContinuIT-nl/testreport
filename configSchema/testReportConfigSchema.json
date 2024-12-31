@@ -1,0 +1,186 @@
+{
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "default": "https://github.com/ContinuIT-nl/testreport/blob/main/configSchema/testReportConfigSchema.json"
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "junit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coverage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "junit",
+        "coverage"
+      ],
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "test_percentage_failed": {
+          "type": "number",
+          "default": 0
+        },
+        "test_percentage_disabled": {
+          "type": "number",
+          "default": 0
+        },
+        "coverage_percentage_minimal": {
+          "type": "number",
+          "default": 90
+        }
+      },
+      "additionalProperties": false
+    },
+    "manifest": {
+      "type": "object",
+      "properties": {
+        "output": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "additionalProperties": false
+    },
+    "markdown": {
+      "type": "object",
+      "properties": {
+        "output": {
+          "type": "string"
+        },
+        "badges": {
+          "type": "boolean",
+          "default": true
+        },
+        "collapseDetails": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "additionalProperties": false
+    },
+    "testBadge": {
+      "type": "object",
+      "properties": {
+        "output": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "default": "tests"
+        },
+        "color_label": {
+          "type": "string",
+          "default": "#555"
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "flat",
+            "rectangle"
+          ],
+          "default": "flat"
+        },
+        "color_ok": {
+          "type": "string",
+          "default": "#2EBE4E"
+        },
+        "color_none": {
+          "type": "string",
+          "default": "#880"
+        },
+        "color_disabled": {
+          "type": "string",
+          "default": "#880"
+        },
+        "color_failed": {
+          "type": "string",
+          "default": "#900"
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "additionalProperties": false
+    },
+    "coverageBadge": {
+      "type": "object",
+      "properties": {
+        "output": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "default": "coverage"
+        },
+        "color_label": {
+          "type": "string",
+          "default": "#555"
+        },
+        "style": {
+          "$ref": "#/properties/testBadge/properties/style"
+        },
+        "levels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "threshold": {
+                "type": "number"
+              },
+              "color": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "threshold",
+              "color"
+            ],
+            "additionalProperties": false
+          },
+          "default": [
+            {
+              "threshold": 80,
+              "color": "#2EBE4E"
+            },
+            {
+              "threshold": 50,
+              "color": "#880"
+            },
+            {
+              "threshold": 0,
+              "color": "#900"
+            }
+          ]
+        }
+      },
+      "required": [
+        "output"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "input"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

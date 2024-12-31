@@ -1,0 +1,22 @@
+{
+  "input": {
+    "junit": ["test_data/deno_disabled/junit.xml"],
+    "coverage": ["test_data/deno_disabled/cov.lcov"]
+  },
+  "limits": {
+    "coverage_percentage_minimal": 80
+  },
+  "manifest": {
+    "output": "test_output/deno_disabled/results.json"
+  },
+  "markdown": {
+    "output": "test_output/deno_disabled/deno_test_results.md",
+    "badges": false
+  },
+  "testBadge": {
+    "output": "test_output/deno_disabled/test_badge.svg"
+  },
+  "coverageBadge": {
+    "output": "test_output/deno_disabled/coverage_badge.svg"
+  }
+}

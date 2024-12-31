@@ -1,0 +1,43 @@
+{
+  "name": "@continuit/testreport",
+  "version": "0.1.0",
+  "description": "Generates a test report and badges from your test and coverage results. Allows checking the report in your CI pipeline.",
+  "repository": "https://github.com/ContinuIT-nl/testreport",
+  "license": "MIT",
+  "author": "ContinuIT BV, The Netherlands",
+  "tasks": {
+    "test": "deno task test_prepare && deno test -RSW --coverage --clean --junit-path test_results/junit.xml && deno coverage --lcov --output=test_results/cov.lcov && deno coverage && deno run -RW ./src/mod.ts ./testreport.json",
+    "test_prepare": "rm test_results/* && rm -rf test_output && mkdir -p test_output && mkdir -p test_output/deno_success && mkdir -p test_output/deno_disabled && mkdir -p test_output/deno_failed && mkdir -p test_output/jest && mkdir -p test_output/vitest && mkdir -p test_output/no_tests && mkdir -p test_output/invalid_input && mkdir -p test_output/invalid_output",
+    "create_config_schema": "deno eval 'import { zodToJsonSchema } from \"npm:zod-to-json-schema\"; import { testReportConfigSchema } from \"./src/testReportConfig.ts\"; Deno.writeTextFileSync(\"./configSchema/testReportConfigSchema.json\", JSON.stringify(zodToJsonSchema(testReportConfigSchema), null, 2));'",
+    "clean": "rm -rf test_output && rm -rf coverage"
+  },
+  "imports": {
+    "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^1.0.0",
+    "@std/assert": "jsr:@std/assert@^1.0.10",
+    "@std/cli": "jsr:@std/cli@^1.0.9",
+    "@std/encoding": "jsr:@std/encoding@^1.0.6",
+    "@std/path": "jsr:@std/path@^1.0.8",
+    "zod": "npm:zod@^3.24.1"
+  },
+  "exports": "./src/mod.ts",
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "src/**/*.ts"
+    ]
+  },
+  "fmt": {
+    "indentWidth": 2,
+    "lineWidth": 120,
+    "semiColons": true,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "useTabs": false,
+    "exclude": [
+      "test_results/**/*"
+    ]
+  },
+  "lint": {
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "input": {
+    "junit": ["test_data/deno_success/junit.xml"],
+    "coverage": ["test_data/deno_success/cov.lcov"]
+  },
+  "limits": {
+    "coverage_percentage_minimal": 80
+  },
+  "manifest": {
+    "output": "test_output/deno_success/results.json"
+  },
+  "markdown": {
+    "output": "test_output/deno_success/results.md",
+    "badges": true
+  },
+  "testBadge": {
+    "output": "test_output/deno_success/test_badge.svg"
+  },
+  "coverageBadge": {
+    "output": "test_output/deno_success/coverage_badge.svg"
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "source": "./testreport.json",
+  "failures": [],
+  "testsuites_total": 5,
+  "test_total": 25,
+  "test_passed": 25,
+  "test_failed": 0,
+  "test_skipped": 0,
+  "test_status": "passed",
+  "test_percentage": "100.0%",
+  "test_details": [
+    {
+      "suite": "./test/checkTestReport.test.ts",
+      "test": "checkTestReport",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/checkTestReport.test.ts",
+      "test": "checkTestReport_no_manifest",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/checkTestReport.test.ts",
+      "test": "checkTestReport_failure",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createBadge.test.ts",
+      "test": "getWidth",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createBadge.test.ts",
+      "test": "createBadge",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createBadge.test.ts",
+      "test": "createBadge_no_message",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_deno_success",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_deno_failed",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_deno_disabled",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_jest",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_vitest",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_no_tests",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_tests_invalid_definition",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_tests_invalid_input",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/createTestReport.test.ts",
+      "test": "testreport_tests_invalid_output",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/execute.test.ts",
+      "test": "execute help ",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/execute.test.ts",
+      "test": "execute create",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/execute.test.ts",
+      "test": "execute create invalidConfig",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/execute.test.ts",
+      "test": "execute check",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/execute.test.ts",
+      "test": "execute check unequal",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/utilities.test.ts",
+      "test": "buildMarkdownTable",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/utilities.test.ts",
+      "test": "markdownTitle",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/utilities.test.ts",
+      "test": "exportOutput",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/utilities.test.ts",
+      "test": "percentage",
+      "state": "PASSED"
+    },
+    {
+      "suite": "./test/utilities.test.ts",
+      "test": "percentageNoZero",
+      "state": "PASSED"
+    }
+  ],
+  "coverage_lines_total": 792,
+  "coverage_lines_hit": 791,
+  "coverage_lines_percentage": "99.9%",
+  "coverage_branches_total": 128,
+  "coverage_branches_hit": 127,
+  "coverage_branches_percentage": "99.2%",
+  "coverage_percentage": "99.2%",
+  "coverage_status": "ok",
+  "coverage_color": "#2EBE4E",
+  "coverage_details": [
+    {
+      "name": "checkTestReport.ts",
+      "lines_total": 18,
+      "lines_hit": 18,
+      "lines_percentage": "100.0%",
+      "branches_total": 5,
+      "branches_hit": 5,
+      "branches_percentage": "100.0%"
+    },
+    {
+      "name": "createTestReport.ts",
+      "lines_total": 17,
+      "lines_hit": 17,
+      "lines_percentage": "100.0%",
+      "branches_total": 14,
+      "branches_hit": 14,
+      "branches_percentage": "100.0%"
+    },
+    {
+      "name": "execute.ts",
+      "lines_total": 28,
+      "lines_hit": 28,
+      "lines_percentage": "100.0%",
+      "branches_total": 17,
+      "branches_hit": 17,
+      "branches_percentage": "100.0%"
+    },
+    {
+      "name": "testReportConfig.ts",
+      "lines_total": 53,
+      "lines_hit": 53,
+      "lines_percentage": "100.0%",
+      "branches_total": 0,
+      "branches_hit": 0,
+      "branches_percentage": "N/A"
+    },
+    {
+      "name": "testReportData.ts",
+      "lines_total": 77,
+      "lines_hit": 77,
+      "lines_percentage": "100.0%",
+      "branches_total": 8,
+      "branches_hit": 8,
+      "branches_percentage": "100.0%"
+    },
+    {
+      "name": "testReportToBadges.ts",
+      "lines_total": 30,
+      "lines_hit": 30,
+      "lines_percentage": "100.0%",
+      "branches_total": 0,
+      "branches_hit": 0,
+      "branches_percentage": "N/A"
+    },
+    {
+      "name": "testReportToManifest.ts",
+      "lines_total": 59,
+      "lines_hit": 58,
+      "lines_percentage": "98.3%",
+      "branches_total": 22,
+      "branches_hit": 21,
+      "branches_percentage": "95.5%"
+    },
+    {
+      "name": "testReportToMarkdown.ts",
+      "lines_total": 81,
+      "lines_hit": 81,
+      "lines_percentage": "100.0%",
+      "branches_total": 10,
+      "branches_hit": 10,
+      "branches_percentage": "100.0%"
+    },
+    {
+      "name": "createBadgeSvg.ts",
+      "lines_total": 204,
+      "lines_hit": 204,
+      "lines_percentage": "100.0%",
+      "branches_total": 17,
+      "branches_hit": 17,
+      "branches_percentage": "100.0%"
+    },
+    {
+      "name": "junit_parser.ts",
+      "lines_total": 71,
+      "lines_hit": 71,
+      "lines_percentage": "100.0%",
+      "branches_total": 0,
+      "branches_hit": 0,
+      "branches_percentage": "N/A"
+    },
+    {
+      "name": "lcov_parser.ts",
+      "lines_total": 72,
+      "lines_hit": 72,
+      "lines_percentage": "100.0%",
+      "branches_total": 6,
+      "branches_hit": 6,
+      "branches_percentage": "100.0%"
+    },
+    {
+      "name": "markdownUtils.ts",
+      "lines_total": 50,
+      "lines_hit": 50,
+      "lines_percentage": "100.0%",
+      "branches_total": 15,
+      "branches_hit": 15,
+      "branches_percentage": "100.0%"
+    },
+    {
+      "name": "miscUtils.ts",
+      "lines_total": 32,
+      "lines_hit": 32,
+      "lines_percentage": "100.0%",
+      "branches_total": 14,
+      "branches_hit": 14,
+      "branches_percentage": "100.0%"
+    }
+  ]
+}

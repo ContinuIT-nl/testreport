@@ -1,0 +1,20 @@
+{
+  "input": {
+    "junit": ["test_data/vitest/report.xml"],
+    "coverage": ["test_data/vitest/lcov.info"]
+  },
+  "limits": {
+    "coverage_percentage_minimal": 80
+  },
+  "markdown": {
+    "output": "test_output/vitest/results.md",
+    "badges": true
+  },
+  "testBadge": {
+    "output": "test_output/vitest/test_badge.svg"
+  },
+  "coverageBadge": {
+    "output": "test_output/vitest/coverage_badge.svg",
+    "levels": []
+  }
+}

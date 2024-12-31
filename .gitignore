@@ -1,0 +1,7 @@
+test_results/cov.lcov
+test_results/junit.xml
+coverage/
+test_output/
+.vscode/launch.json
+.vscode/settings.json
+test_results/test_results.txt
