@@ -22,10 +22,35 @@ const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
   // todo: add test for following 2 lines
   const coverage_color = levels.find((level) => level.threshold <= coverage)?.color ?? '#555';
 
-  const minimal = config.limits?.coverage_percentage_minimal ?? 0;
-  const coverage_status = coverage >= minimal ? 'ok' : 'failed';
+  const limits = config.limits ?? {
+    test_percentage_failed: 0,
+    test_percentage_disabled: 0,
+    coverage_percentage_minimal: 0,
+  };
 
-  // todo: process limits and add to failures
+  if (coverage < limits.coverage_percentage_minimal) {
+    failures.push({
+      type: 'coverage',
+      message: `Coverage is below the minimal threshold of ${limits.coverage_percentage_minimal}%`,
+      file: '',
+    });
+  }
+
+  if (test_failed > limits.test_percentage_failed * 0.01 * test_total) {
+    failures.push({
+      type: 'junit',
+      message: `Test failed is above the limit of ${limits.test_percentage_failed}%`,
+      file: '',
+    });
+  }
+
+  if (test_skipped > limits.test_percentage_disabled * 0.01 * test_total) {
+    failures.push({
+      type: 'test',
+      message: `Test skipped is above the limit of ${limits.test_percentage_disabled}%`,
+      file: '',
+    });
+  }
 
   return {
     // Source
@@ -54,7 +79,6 @@ const convertTestresultsToManifest = (data: GetTestReportDataResult) => {
     coverage_branches_hit: lcovSummary.branchesHit,
     coverage_branches_percentage: percentageNoZero(lcovSummary.branchesHit, lcovSummary.branchesFound),
     coverage_percentage,
-    coverage_status,
     coverage_color,
     // Code coverage details
     coverage_details: lcovDatas.map((file) => ({

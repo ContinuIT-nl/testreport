@@ -79,7 +79,7 @@ function createLcovSummary(lcov: LcovFile[]): LcovSummary {
 type Failure = {
   message: string;
   file: string;
-  type: 'junit' | 'lcov' | 'write';
+  type: 'junit' | 'lcov' | 'write' | 'coverage' | 'test';
 };
 
 export type GetTestReportDataResult = {

@@ -3,9 +3,6 @@
     "junit": ["test_data/deno_success/junit.xml"],
     "coverage": ["test_data/deno_success/cov.lcov"]
   },
-  "limits": {
-    "coverage_percentage_minimal": 80
-  },
   "manifest": {
     "output": "test_output/deno_success/results.json"
   },

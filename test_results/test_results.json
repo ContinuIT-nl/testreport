@@ -135,14 +135,13 @@
       "state": "PASSED"
     }
   ],
-  "coverage_lines_total": 792,
-  "coverage_lines_hit": 791,
-  "coverage_lines_percentage": "99.9%",
-  "coverage_branches_total": 128,
-  "coverage_branches_hit": 127,
-  "coverage_branches_percentage": "99.2%",
-  "coverage_percentage": "99.2%",
-  "coverage_status": "ok",
+  "coverage_lines_total": 815,
+  "coverage_lines_hit": 815,
+  "coverage_lines_percentage": "100.0%",
+  "coverage_branches_total": 129,
+  "coverage_branches_hit": 129,
+  "coverage_branches_percentage": "100.0%",
+  "coverage_percentage": "100.0%",
   "coverage_color": "#2EBE4E",
   "coverage_details": [
     {
@@ -201,12 +200,12 @@
     },
     {
       "name": "testReportToManifest.ts",
-      "lines_total": 59,
-      "lines_hit": 58,
-      "lines_percentage": "98.3%",
-      "branches_total": 22,
-      "branches_hit": 21,
-      "branches_percentage": "95.5%"
+      "lines_total": 82,
+      "lines_hit": 82,
+      "lines_percentage": "100.0%",
+      "branches_total": 23,
+      "branches_hit": 23,
+      "branches_percentage": "100.0%"
     },
     {
       "name": "testReportToMarkdown.ts",
