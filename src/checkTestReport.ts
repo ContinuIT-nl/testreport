@@ -10,7 +10,7 @@ export async function checkTestReport(source: string): Promise<boolean> {
   }
   if (manifestComputed.failures.length > 0) {
     console.error('Test report contains failures. Unable to check test report:');
-    console.error(manifestComputed.failures.join('\n'));
+    console.error(manifestComputed.failures.map((failure) => failure.message).join('\n'));
     return false;
   }
   const manifestFromFile = JSON.parse(await readTextFile(config.manifest?.output));
