@@ -1,7 +1,7 @@
 # Test Results
 
 ![tests](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHJvbGU9ImltZyIgd2lkdGg9IjEyMS45IiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMTIxOSAyMDAiIGFyaWEtbGFiZWw9InRlc3RzIDI1LzI1IHBhc3NlZCI+PHRpdGxlPnRlc3RzIDI1LzI1IHBhc3NlZDwvdGl0bGU+PGc+PGNsaXBQYXRoIGlkPSJyIj48cmVjdCB3aWR0aD0iMTIxOSIgaGVpZ2h0PSIyMDAiIHJ4PSIzMCIgZmlsbD0iI2ZmZiIvPjwvY2xpcFBhdGg+PC9nPjxnIGNsaXAtcGF0aD0idXJsKCNyKSI+PHJlY3QgZmlsbD0iIzU1NSIgd2lkdGg9IjM2NiIgaGVpZ2h0PSIyMDAiLz48cmVjdCBmaWxsPSIjMkVCRTRFIiB4PSIzNjYiIHdpZHRoPSI4NTMiIGhlaWdodD0iMjAwIi8+PC9nPjxnIGFyaWEtaGlkZGVuPSJ0cnVlIiBmaWxsPSIjZmZmIiBmb250LWZhbWlseT0iVmVyZGFuYSxEZWphVnUgU2FucyxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExMCI+PHRleHQgeD0iNjAiIHk9IjE0OCIgdGV4dExlbmd0aD0iMjY2IiBmaWxsPSIjMDAwIiBvcGFjaXR5PSIwLjEiPnRlc3RzPC90ZXh0Pjx0ZXh0IHg9IjUwIiB5PSIxMzgiIHRleHRMZW5ndGg9IjI2NiI+dGVzdHM8L3RleHQ+PHRleHQgeD0iNDIxIiB5PSIxNDgiIHRleHRMZW5ndGg9Ijc1MyIgZmlsbD0iIzAwMCIgb3BhY2l0eT0iMC4xIj4yNS8yNSBwYXNzZWQ8L3RleHQ+PHRleHQgeD0iNDExIiB5PSIxMzgiIHRleHRMZW5ndGg9Ijc1MyI+MjUvMjUgcGFzc2VkPC90ZXh0PjwvZz48L3N2Zz4=)
-![coverage](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHJvbGU9ImltZyIgd2lkdGg9IjEwNy4zIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMTA3MyAyMDAiIGFyaWEtbGFiZWw9ImNvdmVyYWdlIDk5LjIlIj48dGl0bGU+Y292ZXJhZ2UgOTkuMiU8L3RpdGxlPjxnPjxjbGlwUGF0aCBpZD0iciI+PHJlY3Qgd2lkdGg9IjEwNzMiIGhlaWdodD0iMjAwIiByeD0iMzAiIGZpbGw9IiNmZmYiLz48L2NsaXBQYXRoPjwvZz48ZyBjbGlwLXBhdGg9InVybCgjcikiPjxyZWN0IGZpbGw9IiM1NTUiIHdpZHRoPSI2MDMiIGhlaWdodD0iMjAwIi8+PHJlY3QgZmlsbD0iIzJFQkU0RSIgeD0iNjAzIiB3aWR0aD0iNDcwIiBoZWlnaHQ9IjIwMCIvPjwvZz48ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9IlZlcmRhbmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMTAiPjx0ZXh0IHg9IjYwIiB5PSIxNDgiIHRleHRMZW5ndGg9IjUwMyIgZmlsbD0iIzAwMCIgb3BhY2l0eT0iMC4xIj5jb3ZlcmFnZTwvdGV4dD48dGV4dCB4PSI1MCIgeT0iMTM4IiB0ZXh0TGVuZ3RoPSI1MDMiPmNvdmVyYWdlPC90ZXh0Pjx0ZXh0IHg9IjY1OCIgeT0iMTQ4IiB0ZXh0TGVuZ3RoPSIzNzAiIGZpbGw9IiMwMDAiIG9wYWNpdHk9IjAuMSI+OTkuMiU8L3RleHQ+PHRleHQgeD0iNjQ4IiB5PSIxMzgiIHRleHRMZW5ndGg9IjM3MCI+OTkuMiU8L3RleHQ+PC9nPjwvc3ZnPg==)
+![coverage](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHJvbGU9ImltZyIgd2lkdGg9IjExNC4zIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMTE0MyAyMDAiIGFyaWEtbGFiZWw9ImNvdmVyYWdlIDEwMC4wJSI+PHRpdGxlPmNvdmVyYWdlIDEwMC4wJTwvdGl0bGU+PGc+PGNsaXBQYXRoIGlkPSJyIj48cmVjdCB3aWR0aD0iMTE0MyIgaGVpZ2h0PSIyMDAiIHJ4PSIzMCIgZmlsbD0iI2ZmZiIvPjwvY2xpcFBhdGg+PC9nPjxnIGNsaXAtcGF0aD0idXJsKCNyKSI+PHJlY3QgZmlsbD0iIzU1NSIgd2lkdGg9IjYwMyIgaGVpZ2h0PSIyMDAiLz48cmVjdCBmaWxsPSIjMkVCRTRFIiB4PSI2MDMiIHdpZHRoPSI1NDAiIGhlaWdodD0iMjAwIi8+PC9nPjxnIGFyaWEtaGlkZGVuPSJ0cnVlIiBmaWxsPSIjZmZmIiBmb250LWZhbWlseT0iVmVyZGFuYSxEZWphVnUgU2FucyxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExMCI+PHRleHQgeD0iNjAiIHk9IjE0OCIgdGV4dExlbmd0aD0iNTAzIiBmaWxsPSIjMDAwIiBvcGFjaXR5PSIwLjEiPmNvdmVyYWdlPC90ZXh0Pjx0ZXh0IHg9IjUwIiB5PSIxMzgiIHRleHRMZW5ndGg9IjUwMyI+Y292ZXJhZ2U8L3RleHQ+PHRleHQgeD0iNjU4IiB5PSIxNDgiIHRleHRMZW5ndGg9IjQ0MCIgZmlsbD0iIzAwMCIgb3BhY2l0eT0iMC4xIj4xMDAuMCU8L3RleHQ+PHRleHQgeD0iNjQ4IiB5PSIxMzgiIHRleHRMZW5ndGg9IjQ0MCI+MTAwLjAlPC90ZXh0PjwvZz48L3N2Zz4=)
 
 Results from `./testreport.json` contains 5 testsuites with 25 tests:
 
@@ -18,7 +18,7 @@ Results from `./testreport.json` contains 5 testsuites with 25 tests:
 
 | ☰ Lines | ᛘ Branches |
 | ------: | ---------: |
-|   99.9% |      99.2% |
+|  100.0% |     100.0% |
 
 <details>
 <summary>Detailed Test Results</summary>
@@ -64,7 +64,7 @@ Results from `./testreport.json` contains 5 testsuites with 25 tests:
 | `testReportConfig.ts`     |  100.0% |        N/A |
 | `testReportData.ts`       |  100.0% |     100.0% |
 | `testReportToBadges.ts`   |  100.0% |        N/A |
-| `testReportToManifest.ts` |   98.3% |      95.5% |
+| `testReportToManifest.ts` |  100.0% |     100.0% |
 | `testReportToMarkdown.ts` |  100.0% |     100.0% |
 | `createBadgeSvg.ts`       |  100.0% |     100.0% |
 | `junit_parser.ts`         |  100.0% |        N/A |

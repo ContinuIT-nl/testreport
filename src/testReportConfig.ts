@@ -1,4 +1,4 @@
-import { z } from 'npm:zod';
+import { z } from 'zod';
 
 const defaultOKColor = '#2EBE4E';
 const defaultFailedColor = '#900';
