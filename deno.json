@@ -1,6 +1,6 @@
 {
   "name": "@continuit/testreport",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generates a test report and badges from your test and coverage results. Allows checking the report in your CI pipeline.",
   "keywords": [
     "test",
