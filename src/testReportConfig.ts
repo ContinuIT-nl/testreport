@@ -73,7 +73,7 @@ export const testReportConfigSchema = object({
 
   markdown: optional(object({
     output: string(),
-    badges: optional(boolean(), true),
+    badges: optional(boolean(), false),
     collapseDetails: optional(boolean(), false),
   })),
 
