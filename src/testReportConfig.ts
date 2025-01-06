@@ -1,76 +1,95 @@
-import { z } from 'zod';
+import {
+  array,
+  boolean,
+  type InferOutput,
+  literal,
+  number,
+  object,
+  optional,
+  parse,
+  string,
+  union,
+} from '@valibot/valibot';
 
 const defaultOKColor = '#2EBE4E';
 const defaultFailedColor = '#900';
 const defaultDisabledColor = '#880';
 const defaultLabelColor = '#555';
 
-const styleSchema = z.union([z.literal('flat'), z.literal('rectangle')]).default('flat');
+const styleSchema = optional(union([literal('flat'), literal('rectangle')]), 'flat');
 
-const testBadgeSchema = z.object({
-  output: z.string(),
-  label: z.string().default('tests'),
-  color_label: z.string().default(defaultLabelColor),
-  style: styleSchema,
-  color_ok: z.string().default(defaultOKColor),
-  color_none: z.string().default(defaultDisabledColor),
-  color_disabled: z.string().default(defaultDisabledColor),
-  color_failed: z.string().default(defaultFailedColor),
+const testBadgeSchema = object({
+  output: string(),
+  label: optional(string(), 'tests'),
+  color_label: optional(string(), defaultLabelColor),
+  style: optional(styleSchema, 'flat'),
+  color_ok: optional(string(), defaultOKColor),
+  color_none: optional(string(), defaultDisabledColor),
+  color_disabled: optional(string(), defaultDisabledColor),
+  color_failed: optional(string(), defaultFailedColor),
 });
 
-const coverageBadgeSchema = z.object({
-  output: z.string(),
-  label: z.string().default('coverage'),
-  color_label: z.string().default(defaultLabelColor),
-  style: styleSchema,
-  levels: z.array(z.object({
-    threshold: z.number(),
-    color: z.string(),
-  })).default([
-    { threshold: 80, color: defaultOKColor },
-    { threshold: 50, color: defaultDisabledColor },
-    { threshold: 0, color: defaultFailedColor },
-  ]),
+const coverageBadgeSchema = object({
+  output: string(),
+  label: optional(string(), 'coverage'),
+  color_label: optional(string(), defaultLabelColor),
+  style: optional(styleSchema, 'flat'),
+  levels: optional(
+    array(object({
+      threshold: number(),
+      color: string(),
+    })),
+    [
+      { threshold: 80, color: defaultOKColor },
+      { threshold: 50, color: defaultDisabledColor },
+      { threshold: 0, color: defaultFailedColor },
+    ],
+  ),
 });
 
-export const testReportConfigSchema = z.object({
+export const testReportConfigSchema = object({
   /**
    * Schema version.
    */
-  $schema: z.string().default(
-    'https://github.com/ContinuIT-nl/testreport/blob/main/configSchema/testReportConfigSchema.json',
+  $schema: optional(
+    string(),
+    'https://raw.githubusercontent.com/ContinuIT-nl/testreport/refs/heads/main/configSchema/testReportConfigSchema.json',
   ),
 
-  input: z.object({
-    junit: z.array(z.string()),
-    coverage: z.array(z.string()),
+  input: object({
+    junit: array(string()),
+    coverage: array(string()),
   }),
 
-  limits: z.object({
-    test_percentage_failed: z.number().default(0),
-    test_percentage_disabled: z.number().default(0),
-    coverage_percentage_minimal: z.number().default(0),
-  }).optional(),
+  limits: optional(object({
+    test_percentage_failed: optional(number(), 0),
+    test_percentage_disabled: optional(number(), 0),
+    coverage_percentage_minimal: optional(number(), 0),
+  })),
 
-  manifest: z.object({
-    output: z.string(),
-  }).optional(),
+  manifest: optional(object({
+    output: string(),
+  })),
 
-  markdown: z.object({
-    output: z.string(),
-    badges: z.boolean().default(true),
-    collapseDetails: z.boolean().default(false),
-  }).optional(),
+  markdown: optional(object({
+    output: string(),
+    badges: optional(boolean(), false),
+    collapseDetails: optional(boolean(), false),
+  })),
 
-  testBadge: testBadgeSchema.optional(),
+  testBadge: optional(testBadgeSchema),
 
-  coverageBadge: coverageBadgeSchema.optional(),
+  coverageBadge: optional(coverageBadgeSchema),
 });
 
 /**
  * Type definition for the test report configuration.
  */
-export type TestReportConfig = z.infer<typeof testReportConfigSchema>;
+export type TestReportConfig = InferOutput<typeof testReportConfigSchema>;
 
-export type CoverageBadgeConfig = z.infer<typeof coverageBadgeSchema>;
-export type TestBadgeConfig = z.infer<typeof testBadgeSchema>;
+export type CoverageBadgeConfig = InferOutput<typeof coverageBadgeSchema>;
+export type TestBadgeConfig = InferOutput<typeof testBadgeSchema>;
+
+export function parseTestReportConfig(configText: string) {
+  return parse(testReportConfigSchema, JSON.parse(configText));
+}

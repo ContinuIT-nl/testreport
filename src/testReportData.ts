@@ -1,11 +1,11 @@
-import { type TestReportConfig, testReportConfigSchema } from './testReportConfig.ts';
+import { parseTestReportConfig, type TestReportConfig } from './testReportConfig.ts';
 import { type LcovFile, lcovParser, type LcovSummary } from './utilities/lcov_parser.ts';
 import { createJUnitParser, type TestSuites } from './utilities/junit_parser.ts';
 import { readTextFile } from './utilities/miscUtils.ts';
 
 async function loadReportConfig(reportDefinitionFilename: string): Promise<TestReportConfig> {
   const reportConfigText = await readTextFile(reportDefinitionFilename);
-  return testReportConfigSchema.parse(JSON.parse(reportConfigText));
+  return parseTestReportConfig(reportConfigText);
 }
 
 async function loadLcovData(lcovFilenames: string[], failures: Failure[]): Promise<LcovFile[]> {

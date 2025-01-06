@@ -21,10 +21,10 @@ This can be used to ensure that the test report is updated with the current test
 
 ## Usage
 
-| Platform | Command                                                 |
-| -------- | ------------------------------------------------------- |
-| npm      | `npm install @continuit/testreport` (not yet available) |
-| deno     | `deno add jsr:@continuit/testreport`                    |
+| Platform | Command                              |
+| -------- | ------------------------------------ |
+| npm      | `npm install @continuit/testreport`  |
+| deno     | `deno add jsr:@continuit/testreport` |
 
 For other platforms see [jsr.io](https://jsr.io/packages/@continuit/testreport) for more information.
 
@@ -34,7 +34,7 @@ Create a test report definition file, for example `testreport.json`:
 
 ```json
 {
-  "$schema": "https://github.com/ContinuIT-nl/testreport/blob/main/configSchema/testReportConfigSchema.json",
+  "$schema": "https://raw.githubusercontent.com/ContinuIT-nl/testreport/refs/heads/main/configSchema/testReportConfigSchema.json",
   "input": {
     "junit": ["test_results/junit.xml"],
     "coverage": ["test_results/cov.lcov"]

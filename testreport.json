@@ -18,7 +18,6 @@
   },
   "markdown": {
     "output": "test_results/test_results.md",
-    "badges": true,
     "collapseDetails": true
   },
   "testBadge": {
