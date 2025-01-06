@@ -21,10 +21,10 @@ This can be used to ensure that the test report is updated with the current test
 
 ## Usage
 
-| Platform | Command                                                 |
-| -------- | ------------------------------------------------------- |
-| npm      | `npm install @continuit/testreport` (not yet available) |
-| deno     | `deno add jsr:@continuit/testreport`                    |
+| Platform | Command                              |
+| -------- | ------------------------------------ |
+| npm      | `npm install @continuit/testreport`  |
+| deno     | `deno add jsr:@continuit/testreport` |
 
 For other platforms see [jsr.io](https://jsr.io/packages/@continuit/testreport) for more information.
 
