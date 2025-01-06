@@ -11,7 +11,10 @@
     "junit",
     "badge"
   ],
-  "repository": "https://github.com/ContinuIT-nl/testreport",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ContinuIT-nl/testreport.git"
+  },
   "license": "MIT",
   "author": "ContinuIT BV, The Netherlands",
   "tasks": {
@@ -34,7 +37,8 @@
     "include": [
       "LICENSE",
       "README.md",
-      "src/**/*.ts"
+      "src/**/*.ts",
+      "test_results/*.svg"
     ]
   },
   "fmt": {
