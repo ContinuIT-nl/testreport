@@ -66,17 +66,15 @@ const testResulsHeaderLine = (manifest: Manifest) => [
 const encodeBadge = (name: string, badge: string) => `![${name}](data:image/svg+xml;base64,${encodeBase64(badge)})`;
 
 const badges = (config: TestReportConfig, manifest: Manifest) => {
-  if (config.markdown?.badges) {
-    const badges = [];
-    if (config.testBadge) {
-      badges.push(encodeBadge('tests', createTestBadge(config.testBadge, manifest)));
-    }
-    if (config.coverageBadge) {
-      badges.push(encodeBadge('coverage', createCoverageBadge(config.coverageBadge, manifest)));
-    }
-    return badges.length > 0 ? [...badges, ''] : [];
+  if (!config.markdown?.badges) return [];
+  const badges = [];
+  if (config.testBadge) {
+    badges.push(encodeBadge('tests', createTestBadge(config.testBadge, manifest)));
   }
-  return [];
+  if (config.coverageBadge) {
+    badges.push(encodeBadge('coverage', createCoverageBadge(config.coverageBadge, manifest)));
+  }
+  return badges.length > 0 ? [...badges, ''] : [];
 };
 
 export const convertTestresultsToMarkdown = (config: TestReportConfig, manifest: Manifest) =>
