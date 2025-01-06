@@ -1,6 +1,9 @@
 import * as process from 'node:process';
 import { execute } from './execute.ts';
 
-if (import.meta.main) {
-  process.exit(await execute(process.argv.slice(2)));
-}
+execute(process.argv.slice(2)).then((exitCode) => {
+  process.exit(exitCode);
+}).catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
