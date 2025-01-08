@@ -41,7 +41,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@continuit'
 
-      - name: Dry run build npm package 
+      - name: Dry run build npm package
         run: deno task publish_npm_dry
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
