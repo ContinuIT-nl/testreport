@@ -24,7 +24,8 @@
     "build": "deno run -A build.ts",
     "all": "deno lint && deno fmt && deno check ./src/mod.ts && deno task test && deno task build && deno fmt",
     "publish_jsr": "deno publish",
-    "publish_npm": "deno task build && deno fmt && cd npm && npm publish --public"
+    "publish_npm": "deno task build && deno fmt && cd npm && npm publish --public",
+    "publish_npm_dry": "deno task build && deno fmt && cd npm && npm publish --dry-run"
   },
   "imports": {
     "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^1.0.0",

@@ -34,5 +34,15 @@ jobs:
       - name: Run tests, coverage, create test report and badges
         run: deno task test
 
-      - name: Try to build npm package
-        run: deno task build
+      - name: Setup Node / NPM
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@continuit'
+
+      - name: Build npm package
+        run: deno task publish_npm_dry
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
