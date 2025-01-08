@@ -11,9 +11,11 @@
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/path@^1.0.6": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
+    "jsr:@valibot/to-json-schema@0.2.1": "0.2.1",
     "jsr:@valibot/valibot@~0.42.1": "0.42.1",
     "npm:@types/node@*": "22.5.4",
-    "npm:esbuild@0.20.2": "0.20.2"
+    "npm:esbuild@0.20.2": "0.20.2",
+    "npm:valibot@0.42": "0.42.1"
   },
   "jsr": {
     "@continuit/xmlscanner@1.0.0": {
@@ -47,6 +49,12 @@
     },
     "@std/path@1.0.8": {
       "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
+    },
+    "@valibot/to-json-schema@0.2.1": {
+      "integrity": "db91ae91e6873d0f9da9bdd78b8b2c87ccad1768218db99b07b711ae3d04a4a8",
+      "dependencies": [
+        "npm:valibot"
+      ]
     },
     "@valibot/valibot@0.42.1": {
       "integrity": "ba0f6f7964aaeec0e4b1f793d575061f325ae6254cbb9d7ff01fb65068a0a23b"
@@ -158,6 +166,9 @@
     },
     "undici-types@6.19.8": {
       "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
+    },
+    "valibot@0.42.1": {
+      "integrity": "sha512-3keXV29Ar5b//Hqi4MbSdV7lfVp6zuYLZuA9V1PvQUsXqogr+u5lvLPLk3A4f74VUXDnf/JfWMN6sB+koJ/FFw=="
     }
   },
   "workspace": {

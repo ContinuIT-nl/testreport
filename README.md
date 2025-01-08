@@ -1,6 +1,7 @@
 # testreport
 
 [![JSR](https://jsr.io/badges/@continuit/testreport)](https://jsr.io/@continuit/testreport)
+[![NPM](https://img.shields.io/npm/v/@continuit/testreport?logo=npm)](https://www.npmjs.com/package/@continuit/testreport)
 [![ci](https://github.com/ContinuIT-nl/testreport/actions/workflows/ci.yml/badge.svg)](https://github.com/ContinuIT-nl/testreport/actions/workflows/ci.yml)
 [![test](./test_results/test_badge.svg)](./test_results/test_results.md)
 [![coverage](./test_results/coverage_badge.svg)](./test_results/test_results.md)

@@ -33,3 +33,6 @@ jobs:
 
       - name: Run tests, coverage, create test report and badges
         run: deno task test
+
+      - name: Try to build npm package
+        run: deno task build
