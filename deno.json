@@ -22,7 +22,9 @@
     "test_prepare": "rm -rf test_output && mkdir -p test_output && mkdir -p test_output/deno_success && mkdir -p test_output/deno_disabled && mkdir -p test_output/deno_failed && mkdir -p test_output/jest && mkdir -p test_output/vitest && mkdir -p test_output/no_tests && mkdir -p test_output/invalid_input && mkdir -p test_output/invalid_output",
     "clean": "rm -rf test_output && rm -rf coverage",
     "build": "deno run -A build.ts",
-    "all": "deno lint && deno fmt && deno check ./src/mod.ts && deno task test && deno task build && deno fmt"
+    "all": "deno lint && deno fmt && deno check ./src/mod.ts && deno task test && deno task build && deno fmt",
+    "publish_jsr": "deno publish",
+    "publish_npm": "deno task build && cd npm && npm publish --public"
   },
   "imports": {
     "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^1.0.0",
