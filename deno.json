@@ -21,11 +21,11 @@
     "test": "deno task test_prepare && deno test -RSW --coverage --clean --junit-path test_results/junit.xml && deno coverage --lcov --output=test_results/cov.lcov && deno coverage && deno run -RW ./src/mod.ts ./testreport.json",
     "test_prepare": "rm -rf test_output && mkdir -p test_output && mkdir -p test_output/deno_success && mkdir -p test_output/deno_disabled && mkdir -p test_output/deno_failed && mkdir -p test_output/jest && mkdir -p test_output/vitest && mkdir -p test_output/no_tests && mkdir -p test_output/invalid_input && mkdir -p test_output/invalid_output",
     "clean": "rm -rf test_output && rm -rf coverage",
-    "build": "deno run -A build.ts",
-    "all": "deno lint && deno fmt && deno check ./src/mod.ts && deno task test && deno task build && deno fmt",
+    "build": "deno run -A build.ts && deno fmt",
+    "all": "deno lint && deno fmt && deno check ./src/mod.ts && deno task test && deno task build",
     "publish_jsr": "deno publish",
-    "publish_npm": "deno task build && deno fmt && cd npm && npm publish --public",
-    "publish_npm_dry": "deno task build && deno fmt && cd npm && npm publish --dry-run"
+    "publish_npm": "deno task build && cd npm && npm publish --public",
+    "publish_npm_dry": "deno task build && cd npm && npm publish --dry-run"
   },
   "imports": {
     "@continuit/xmlscanner": "jsr:@continuit/xmlscanner@^1.0.0",
